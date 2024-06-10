@@ -1,0 +1,11 @@
+@import "@/app/styles/variables.scss";
+
+.text-style {
+  color: $primary-grey;
+  @apply font-normal text-lg text-right mt-[70px] mr-[81px];
+
+  .link {
+    color: $primary-blue;
+    @apply font-medium text-red-700;
+  }
+}

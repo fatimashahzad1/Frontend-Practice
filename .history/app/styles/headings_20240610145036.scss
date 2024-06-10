@@ -1,0 +1,10 @@
+@import "@/app/styles/variables.scss";
+
+.main-heading {
+  @apply text-3xl font-bold text-black;
+}
+
+.paragraph-heading {
+  color: $primary-grey;
+  @apply font-normal text-lg max-w-[411px] mt-[10px] mb-9;
+}

@@ -1,0 +1,10 @@
+@import "./variables.scss";
+
+.text-style {
+  @apply font-normal text-lg text-right;
+
+  .link {
+    color: $primary-color;
+    @apply font-medium;
+  }
+}

@@ -1,0 +1,7 @@
+.text-style {
+  @apply font-normal text-lg text-right mt-[70px] mr-[81px] text-primaryGrey;
+
+  .link {
+    @apply font-medium text-primaryBlue;
+  }
+}

@@ -1,0 +1,19 @@
+// $primary-color: #64ff00;
+.home {
+  padding: 30px;
+  background-color: red;
+
+  &__header {
+    h1 {
+      color: blue;
+    }
+  }
+
+  &__main {
+    padding: 30px;
+    background: rgb(240, 240, 200);
+    p {
+      color: red;
+    }
+  }
+}
