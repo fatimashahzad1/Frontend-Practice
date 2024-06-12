@@ -3,5 +3,9 @@
 }
 
 .paragraph-heading {
-  @apply font-normal text-lg max-sm:text-sm max-w-[411px] h-[56px] overflow-hidden text-ellipsis  mt-[10px] mb-[35px] text-primaryGrey max-sm:text-center max-sm:max-w-[323px] max-sm:h-[40px];
+  @apply font-normal text-lg max-sm:text-sm max-w-[411px] h-[56px] overflow-hidden text-ellipsis mt-[10px] mb-[35px] text-primaryGrey max-sm:text-center max-sm:max-w-[323px] max-sm:h-[40px];
+}
+
+.input-label {
+  @apply text-[#696F79] text-base font-medium;
 }

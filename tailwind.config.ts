@@ -20,6 +20,8 @@ const config: Config = {
       },
       boxShadow: {
         custom: "0 2px 14px 1px rgb(0 0 0 / 0.06)",
+        input: "0 4px 13px 1px rgb(0 0 0 / 0.11)",
+        google: "0 4px 10px 0px rgb(0 0 0 / 0.08)",
       },
     },
   },

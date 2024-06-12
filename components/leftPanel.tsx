@@ -6,7 +6,7 @@ import check from "@/public/assets/circleCheckFull.png";
 
 const LeftPanel = () => {
   return (
-    <div className="max-sm:hidden w-[47%] h-screen bg-[url('/assets/background.png')] bg-cover bg-no-repeat">
+    <div className="max-sm:hidden w-[47%] h-[1130px] bg-[url('/assets/background.png')] bg-cover bg-no-repeat">
       <Image
         src={logo}
         alt=""
@@ -17,7 +17,7 @@ const LeftPanel = () => {
         alt=""
         className="max-w-[28px] ml-[82px] mt-[236px]"
       />
-      <p className="mt-10 max-w-[473px] h-[190px] overflow-y-hidden text-ellipsis max-md:whitespace-nowrap font-normal text-xl ml-[82px] mr-[111px] text-white">
+      <p className="mt-10 max-w-[473px] h-[190px] overflow-y-hidden text-ellipsis font-normal text-xl ml-[82px] mr-[111px] text-white">
         The passage experienced a surge in popularity during the 1960s when
         Letraset used it on their dry-transfer sheets, and again during the 90s
         as desktop publishers bundled the text with their software.
