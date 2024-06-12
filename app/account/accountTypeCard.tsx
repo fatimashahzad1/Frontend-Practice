@@ -14,7 +14,7 @@ const AccountTypeCard = ({ type }: AccountTypeCardProps) => {
   return (
     <Link
       href="/account"
-      className="max-w-[426px] h-[108px] bg-white shadow-custom rounded-md hover:bg-hoverBlue p-7 hover:border-primaryBlue hover:border-[1px] flex flex-row justify-center items-center mb-7"
+      className=" h-[108px] max-sm:max-w-[335px] sm:w-full bg-white shadow-custom rounded-md hover:bg-hoverBlue p-7 hover:border-primaryBlue hover:border-[1px] flex flex-row justify-center items-center mb-7"
       onMouseEnter={() => {
         setHovered(true);
       }}
@@ -23,7 +23,7 @@ const AccountTypeCard = ({ type }: AccountTypeCardProps) => {
       }}
     >
       <div
-        className={`h-[52px] w-[52px] ${
+        className={`min-h-[52px] min-w-[52px] max-sm:min-w-[40px] max-sm:min-h-[40px] ${
           hovered
             ? "bg-[url('/assets/Polygon1.png')]"
             : "bg-[url('/assets/Polygon2.png')]"

@@ -1,7 +1,7 @@
 .main-heading {
-  @apply text-3xl font-bold text-black;
+  @apply text-3xl max-sm:text-xl font-bold text-black;
 }
 
 .paragraph-heading {
-  @apply font-normal text-lg max-w-[411px] mt-[10px] mb-[35px] text-primaryGrey;
+  @apply font-normal text-lg max-sm:text-sm max-w-[411px] h-[56px] overflow-hidden text-ellipsis  mt-[10px] mb-[35px] text-primaryGrey max-sm:text-center max-sm:max-w-[323px] max-sm:h-[40px];
 }
