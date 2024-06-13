@@ -2,9 +2,14 @@ import Link from "next/link";
 import React from "react";
 import { IoIosArrowBack } from "react-icons/io";
 
-const Header = () => {
+interface HeaderProps {
+  stepNumber: string;
+  stepName: string;
+}
+
+const Header = ({ stepName, stepNumber }: HeaderProps) => {
   return (
-    <div className="ml-12 mr-20  mt-16 mb-24 flex flex-row justify-between max-sm:mx-5">
+    <div className="ml-12 mr-20 mt-16 mb-24 flex flex-row justify-between max-sm:mx-5">
       <Link
         href="/register"
         className=" flex flex-row items-center gap-2 text-primaryGrey font-semibold text-base"
@@ -13,9 +18,11 @@ const Header = () => {
         Back
       </Link>
       <div className="">
-        <div className="text-[#BDBDBD] text-sm font-medium">STEP 01/03</div>
+        <div className="text-[#BDBDBD] text-sm font-medium">
+          STEP {stepNumber}/03
+        </div>
         <div className="text-primaryGrey text-base font-semibold">
-          Personal Info.
+          {stepName}
         </div>
       </div>
     </div>

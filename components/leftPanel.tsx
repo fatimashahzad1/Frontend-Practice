@@ -6,7 +6,7 @@ import check from "@/public/assets/circleCheckFull.png";
 
 const LeftPanel = () => {
   return (
-    <div className="max-sm:hidden w-[47%] h-[1130px] bg-[url('/assets/background.png')] bg-cover bg-no-repeat">
+    <div className="max-sm:hidden w-[47%] h-[1200px] bg-[url('/assets/background.png')] bg-cover bg-no-repeat">
       <Image
         src={logo}
         alt=""
