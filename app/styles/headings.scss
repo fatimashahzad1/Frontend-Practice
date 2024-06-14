@@ -1,5 +1,5 @@
 @mixin paragraph {
-  @apply font-normal text-lg max-sm:text-sm max-w-[411px] overflow-hidden text-ellipsis text-primaryGrey max-sm:text-center max-sm:max-w-[323px];
+  @apply font-normal text-lg max-sm:text-sm max-w-[411px] overflow-hidden text-ellipsis text-[#696F79] max-sm:text-center max-sm:max-w-[323px];
 }
 .main-heading {
   @apply text-3xl max-sm:text-xl font-bold text-black;
