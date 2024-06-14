@@ -87,6 +87,7 @@ const Input = ({
         placeholder={placeholder}
         {...register}
         content="<h1>gr</h1>"
+        name={name}
       />
       {error && <span className="text-red-600">{error.message}</span>}
     </div>

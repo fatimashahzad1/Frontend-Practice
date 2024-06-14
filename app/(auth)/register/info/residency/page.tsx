@@ -1,6 +1,7 @@
 import LeftPanel from "@/components/leftPanel";
 import React from "react";
 import RegisterTemplate from "../../registerTemplate";
+import ResidencyForm from "./residencyForm";
 
 const Residency = () => {
   return (
@@ -11,7 +12,9 @@ const Residency = () => {
         text="For the purpose of industry regulation, your details are required."
         stepNumber="02"
         stepName="Residency Info."
-      ></RegisterTemplate>
+      >
+        <ResidencyForm />
+      </RegisterTemplate>
     </div>
   );
 };
