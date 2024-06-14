@@ -1,5 +1,5 @@
 @mixin paragraph {
-  @apply font-normal text-lg max-sm:text-sm max-w-[411px] overflow-hidden text-ellipsis mt-[10px] text-primaryGrey max-sm:text-center max-sm:max-w-[323px];
+  @apply font-normal text-lg max-sm:text-sm max-w-[411px] overflow-hidden text-ellipsis text-primaryGrey max-sm:text-center max-sm:max-w-[323px];
 }
 .main-heading {
   @apply text-3xl max-sm:text-xl font-bold text-black;
@@ -11,10 +11,10 @@
 
 .paragraph-heading {
   @include paragraph;
-  @apply h-[56px] mb-[35px] max-sm:h-[40px];
+  @apply h-[56px] mb-[35px] max-sm:h-[40px] mt-[10px];
 }
 
 .paragraph-heading-login {
   @include paragraph;
-  @apply h-[28px] mb-4;
+  @apply mb-4 mt-6;
 }

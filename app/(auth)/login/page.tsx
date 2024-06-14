@@ -1,7 +1,5 @@
 import LeftPanel from "@/components/leftPanel";
 import React from "react";
-import ResidencyForm from "../register/info/residency/residencyForm";
-import RegisterTemplate from "../register/registerTemplate";
 import LoginForm from "./loginForm";
 import LoginTemplate from "@/components/loginTemplate";
 import OAuthButton from "../register/oauthButton";

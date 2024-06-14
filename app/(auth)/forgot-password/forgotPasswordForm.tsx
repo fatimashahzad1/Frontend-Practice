@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Input from "@/components/input";
 import Link from "next/link";
 
-const LoginSchema = z.object({
+const ForgotPasswordSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
   password: z
     .string()
@@ -14,10 +14,9 @@ const LoginSchema = z.object({
     .min(8, "Password must be at least 8 characters long"),
 });
 
-const LoginForm = () => {
+const ForgotPasswordForm = () => {
   interface FormData {
     email: string;
-    password: string;
   }
 
   const {
@@ -25,7 +24,7 @@ const LoginForm = () => {
     register,
     formState: { errors },
   } = useForm<FormData>({
-    resolver: zodResolver(LoginSchema),
+    resolver: zodResolver(ForgotPasswordSchema),
   });
 
   const onSubmit = (data: FormData) => {
@@ -40,36 +39,27 @@ const LoginForm = () => {
       <Input
         register={register("email")}
         error={errors.email}
-        label="Email address*"
-        placeholder="Enter email address"
+        label="Email"
+        placeholder="Enter email"
         type="email"
         name="email"
       />
-
-      <Input
-        register={register("password")}
-        error={errors.password}
-        label="Create password*"
-        placeholder="Enter password"
-        type="password"
-        name="password"
-      />
-
-      <Link
-        href="/forgot-password"
-        className="text-primaryBlue font-medium text-base block text-right"
-      >
-        Forgot Password?
-      </Link>
 
       <button
         type="submit"
         className="bg-[#1565D8] text-white text-center py-6 text-base font-medium w-full mt-6  rounded-md"
       >
-        Login
+        Request Reset Link
       </button>
+
+      <Link
+        href="/login"
+        className="text-primaryBlue font-medium text-base block text-center my-10"
+      >
+        Back to Login
+      </Link>
     </form>
   );
 };
 
-export default LoginForm;
+export default ForgotPasswordForm;
