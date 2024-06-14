@@ -5,13 +5,14 @@ import { IoIosArrowBack } from "react-icons/io";
 interface HeaderProps {
   stepNumber: string;
   stepName: string;
+  backToLink: string;
 }
 
-const Header = ({ stepName, stepNumber }: HeaderProps) => {
+const Header = ({ stepName, stepNumber, backToLink }: HeaderProps) => {
   return (
     <div className="ml-12 mr-20 mt-16 mb-24 flex flex-row justify-between max-sm:mx-5">
       <Link
-        href="/register"
+        href={backToLink}
         className=" flex flex-row items-center gap-2 text-primaryGrey font-semibold text-base"
       >
         <IoIosArrowBack className="w-5 h-5 text-primaryGrey" />

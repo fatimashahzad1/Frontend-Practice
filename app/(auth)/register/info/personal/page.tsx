@@ -13,6 +13,7 @@ const Register = () => {
         text="For the purpose of industry regulation, your details are required."
         stepNumber="01"
         stepName="Personal Info."
+        backToLink="/account"
       >
         <RegisterForm />
         <div className="sm:min-w-[426px] flex justify-between items-center my-6">

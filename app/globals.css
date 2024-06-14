@@ -27,8 +27,13 @@ select {
   background: red;
   background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
   background-repeat: no-repeat;
-  background-position-x: 95%;
+  background-position-x: 97%;
   background-position-y: 50%;
-  margin-right: 2rem;
+  margin-right: 1rem;
   padding: 1rem;
+  padding-left: 1rem;
+}
+
+::placeholder {
+  @apply text-[#8692A6] font-medium text-sm;
 }

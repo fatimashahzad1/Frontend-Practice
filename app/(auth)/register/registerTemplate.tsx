@@ -7,6 +7,7 @@ interface RegisterTemplateProps {
   stepNumber: string;
   stepName: string;
   children: ReactNode;
+  backToLink: string;
 }
 
 const RegisterTemplate: any = ({
@@ -14,11 +15,16 @@ const RegisterTemplate: any = ({
   text,
   stepName,
   stepNumber,
+  backToLink,
   children,
 }: RegisterTemplateProps) => {
   return (
     <div className="sm:w-[53%] max-sm:w-full h-screen flex flex-col">
-      <Header stepName={stepName} stepNumber={stepNumber} />
+      <Header
+        stepName={stepName}
+        stepNumber={stepNumber}
+        backToLink={backToLink}
+      />
       <div className="xl:pl-32 lg:pl-24 md:pl-20 sm:pl-7 sm:min-w-[426px] sm:pr-56 max-sm:mx-5">
         <div className=" max-sm:flex max-sm:flex-col max-sm:justify-center items-center sm:min-w-[426px]">
           <div className="main-heading ">{heading}</div>

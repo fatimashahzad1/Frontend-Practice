@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { LegacyRef, useState } from "react";
 import {
   getCountries,
   getCountryCallingCode,
@@ -8,7 +8,7 @@ import ReactCountryFlag from "react-country-flag";
 import PropTypes from "prop-types";
 import en from "react-phone-number-input/locale/en";
 import Input from "react-phone-number-input/input";
-import { CountryCode, E164Number } from "libphonenumber-js/core";
+import { CountryCode } from "libphonenumber-js/core";
 import "react-phone-number-input/style.css";
 const CountrySelect = ({
   value,
@@ -60,15 +60,37 @@ interface PhoneNumberInputProps {
 }
 
 const PhoneNumberInput = ({ register, error, name }: PhoneNumberInputProps) => {
+  const [selectFocused, setSelectFocused] = useState(false);
   const [country, setCountry] = useState("PK");
   const [value, setValue] = useState();
 
+  const mouseDownHandler = () => {
+    console.log("down");
+    setSelectFocused(true);
+  };
+
+  const InputWithFocus = React.forwardRef((props, ref) => {
+    return (
+      <input type="text" ref={ref as LegacyRef<HTMLInputElement>} {...props} />
+    );
+  });
   return (
     <div className="flex flex-col my-6 ">
       <label htmlFor={name} className="input-label">
         Phone number
       </label>
-      <div className="flex flex-row justify-center items-center border-[1px] border-[#8692A6] pl-8 rounded-md mt-3 bg-transparent focus:border-[#1565D8] focus:outline-none focus:border-[1px] focus:shadow-input">
+      <div
+        className={`flex flex-row justify-center items-center border-[1px]  pl-8 rounded-md mt-3 bg-transparent ${
+          selectFocused
+            ? " outline-none border-[#1565D8] border-[1px] shadow-input"
+            : "border-[#8692A6]"
+        }`}
+        onMouseDown={mouseDownHandler}
+        onBlur={() => {
+          console.log("blur");
+          setSelectFocused(false);
+        }}
+      >
         <ReactCountryFlag
           className=""
           countryCode={country}
@@ -77,6 +99,7 @@ const PhoneNumberInput = ({ register, error, name }: PhoneNumberInputProps) => {
             lineHeight: "2em",
           }}
           svg
+          onMouseDown={mouseDownHandler}
         />
         <CountrySelect labels={en} value={country} onChange={setCountry} />
         <Input
@@ -86,7 +109,7 @@ const PhoneNumberInput = ({ register, error, name }: PhoneNumberInputProps) => {
           international
           inputComponent={() => {
             return (
-              <input
+              <InputWithFocus
                 type="text"
                 className="h-16 pl-9 w-full focus:outline-none bg-transparent"
                 placeholder="Enter phone number"

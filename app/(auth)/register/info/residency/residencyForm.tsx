@@ -17,7 +17,7 @@ const ResidencySchema = z.object({
     .string()
     .trim()
     .min(3, "Address must be at least 3 characters long"),
-  country: z.string(),
+  country: z.string().trim().min(1, "Country must be selected"),
 });
 
 const ResidencyForm = () => {
@@ -58,7 +58,11 @@ const ResidencyForm = () => {
         name="phoneNumber"
       />
 
-      <CountrySelect />
+      <CountrySelect
+        register={register("country")}
+        error={errors.country}
+        name="country"
+      />
 
       <button
         type="submit"
@@ -66,6 +70,7 @@ const ResidencyForm = () => {
       >
         Save & Continue
       </button>
+
       <div className="text-xs text-[#8692A6] font-normal flex justify-center items-center mt-7">
         <MdLockOutline className="w-4 h-4" />
         Your Info is safely secured

@@ -8,6 +8,7 @@ const Residency = () => {
     <div className="flex flex-row">
       <LeftPanel />
       <RegisterTemplate
+        backToLink="/register/info/personal"
         heading="Complete Your Profile!"
         text="For the purpose of industry regulation, your details are required."
         stepNumber="02"
