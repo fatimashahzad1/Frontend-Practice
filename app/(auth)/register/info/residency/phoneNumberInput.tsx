@@ -25,7 +25,7 @@ const CountrySelect = ({
   );
   return (
     <select
-      className="ml-3 h-16  focus:outline-none bg-transparent"
+      className="ml-3 h-16 focus:outline-none bg-transparent bg-red-500"
       {...rest}
       value={`${value}`}
       onChange={(event) => {
@@ -111,7 +111,7 @@ const PhoneNumberInput = ({ register, error, name }: PhoneNumberInputProps) => {
             return (
               <InputWithFocus
                 type="text"
-                className="h-16 pl-9 w-full focus:outline-none bg-transparent"
+                className="h-16 w-full focus:outline-none bg-transparent "
                 placeholder="Enter phone number"
                 {...register}
               />

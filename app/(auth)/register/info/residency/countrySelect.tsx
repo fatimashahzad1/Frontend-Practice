@@ -17,7 +17,7 @@ const CountrySelect = ({ register, error, name }: CountrySelectProps) => {
         Country of residence
       </label>
       <select
-        className={`w-full border-[1px] border-[#8692A6] py-6 px-8 rounded-md mt-3 bg-transparent focus:border-[#1565D8] focus:outline-none focus:border-[1px] focus:shadow-input`}
+        className={`country w-full border-[1px] border-[#8692A6] py-6 px-8 rounded-md mt-3 bg-transparent focus:border-[#1565D8] focus:outline-none focus:border-[1px] focus:shadow-input`}
         {...register}
       >
         <option key="Select value" value="">
