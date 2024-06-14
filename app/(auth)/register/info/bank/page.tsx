@@ -2,7 +2,7 @@
 import LeftPanel from "@/components/leftPanel";
 import React from "react";
 import RegisterTemplate from "../../registerTemplate";
-import Input from "../../input";
+import Input from "../../../../../components/input";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";

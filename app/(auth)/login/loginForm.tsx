@@ -3,26 +3,21 @@ import React from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Input from "../../../components/input";
+import Input from "@/components/input";
+import Link from "next/link";
 
-const RegisterSchema = z.object({
-  name: z.string().trim().min(3, "Name must be at least 3 characters long"),
+const LoginSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
   password: z
     .string()
     .trim()
     .min(8, "Password must be at least 8 characters long"),
-  accept: z.literal(true, {
-    invalid_type_error: "You must accept terms and conditions.",
-  }),
 });
 
-const RegisterForm = () => {
+const LoginForm = () => {
   interface FormData {
-    name: string;
     email: string;
     password: string;
-    accept: boolean;
   }
 
   const {
@@ -30,7 +25,7 @@ const RegisterForm = () => {
     register,
     formState: { errors },
   } = useForm<FormData>({
-    resolver: zodResolver(RegisterSchema),
+    resolver: zodResolver(LoginSchema),
   });
 
   const onSubmit = (data: FormData) => {
@@ -40,17 +35,8 @@ const RegisterForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="sm:min-w-[300px] md:min-w-[335px] lg:min-w-[426px]"
+      className="sm:min-w-[300px] md:min-w-[335px] lg:min-w-[426px] "
     >
-      <Input
-        register={register("name")}
-        error={errors.name}
-        label="Your fullname*"
-        placeholder="Enter full name"
-        type="text"
-        name="name"
-      />
-
       <Input
         register={register("email")}
         error={errors.email}
@@ -69,23 +55,21 @@ const RegisterForm = () => {
         name="password"
       />
 
-      <Input
-        register={register("accept")}
-        error={errors.accept}
-        label="I agree to terms & conditions"
-        placeholder="Enter password"
-        type="checkbox"
-        name="accept"
-      />
+      <Link
+        href="/login"
+        className="text-primaryBlue font-medium text-base block text-right"
+      >
+        Forgot Password?
+      </Link>
 
       <button
         type="submit"
-        className="bg-[#1565D8] text-white text-center py-6 text-base font-medium w-full mt-10 rounded-md"
+        className="bg-[#1565D8] text-white text-center py-6 text-base font-medium w-full mt-6  rounded-md"
       >
-        Register Account
+        Login
       </button>
     </form>
   );
 };
 
-export default RegisterForm;
+export default LoginForm;

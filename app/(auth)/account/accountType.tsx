@@ -7,7 +7,7 @@ const AccountType = () => {
     <div className="w-[53%] max-sm:w-full h-screen flex flex-col">
       <div className="text-style">
         Already have an account?{" "}
-        <Link href="/account" className="link">
+        <Link href="/login" className="link">
           Sign In
         </Link>
       </div>

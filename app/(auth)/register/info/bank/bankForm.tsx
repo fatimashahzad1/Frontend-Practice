@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import Input from "../../input";
+import Input from "../../../../../components/input";
 import { MdLockOutline } from "react-icons/md";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
