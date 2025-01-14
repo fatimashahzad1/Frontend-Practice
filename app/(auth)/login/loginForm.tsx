@@ -1,74 +1,76 @@
 "use client";
-import React from "react";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
+import React, { useEffect } from "react";
+import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Input from "@/components/input";
 import Link from "next/link";
+import { LoginSchema } from "@/constants/schemas";
+import {
+  DEFAULT_LOGIN_VALUES,
+  EMAIL_FIELD,
+  PASSWORD_FIELD,
+} from "@/constants/form-fields";
+import { useToast } from "@/hooks/use-toast";
+import useLogin from "@/hooks/use-login";
+import Spinner from "@/components/spinner";
 
-const LoginSchema = z.object({
-  email: z.string().email("Please enter a valid email address"),
-  password: z
-    .string()
-    .trim()
-    .min(8, "Password must be at least 8 characters long"),
-});
+const LoginFields = [EMAIL_FIELD, PASSWORD_FIELD];
 
 const LoginForm = () => {
-  interface FormData {
-    email: string;
-    password: string;
-  }
-
-  const {
-    handleSubmit,
-    register,
-    formState: { errors },
-  } = useForm<FormData>({
+  const form = useForm<LoginFormData>({
     resolver: zodResolver(LoginSchema),
+    defaultValues: DEFAULT_LOGIN_VALUES,
   });
 
-  const onSubmit = (data: FormData) => {
-    console.log("Submit", data);
+  const { login, loading, data: responseData } = useLogin();
+  const { toast } = useToast();
+
+  useEffect(() => {
+    if (responseData) {
+      const isErrorResponse = "error" in responseData; // Type narrowing
+
+      toast({
+        variant: isErrorResponse ? "destructive" : "default",
+        title: isErrorResponse ? responseData.error : "Success",
+        description: isErrorResponse
+          ? responseData.message
+          : "Login Successful.",
+      });
+    }
+  }, [responseData, toast]);
+
+  const onSubmit = (data: LoginFormData) => {
+    login(data);
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="sm:min-w-[300px] md:min-w-[335px] lg:min-w-[426px] "
-    >
-      <Input
-        register={register("email")}
-        error={errors.email}
-        label="Email address*"
-        placeholder="Enter email address"
-        type="email"
-        name="email"
-      />
+    <>
+      {loading && <Spinner />}
+      <FormProvider {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="sm:min-w-[300px] md:min-w-[335px] lg:min-w-[426px] "
+        >
+          {LoginFields.map((field) => (
+            <Input key={field.name} {...field} />
+          ))}
 
-      <Input
-        register={register("password")}
-        error={errors.password}
-        label="Create password*"
-        placeholder="Enter password"
-        type="password"
-        name="password"
-      />
+          <Link
+            href="/forgot-password"
+            className="text-primaryBlue font-medium text-base block text-right"
+          >
+            Forgot Password?
+          </Link>
 
-      <Link
-        href="/forgot-password"
-        className="text-primaryBlue font-medium text-base block text-right"
-      >
-        Forgot Password?
-      </Link>
-
-      <button
-        type="submit"
-        className="bg-[#1565D8] text-white text-center py-6 text-base font-medium w-full mt-6  rounded-md"
-      >
-        Login
-      </button>
-    </form>
+          <button
+            type="submit"
+            className="bg-[#1565D8] text-white text-center py-6 text-base font-medium w-full mt-6  rounded-md"
+          >
+            Login
+          </button>
+        </form>
+      </FormProvider>
+    </>
   );
 };
 

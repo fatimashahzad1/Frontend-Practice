@@ -7,13 +7,14 @@ import { FiBriefcase } from "react-icons/fi";
 import { TfiArrowRight } from "react-icons/tfi";
 interface AccountTypeCardProps {
   type: "business" | "individual";
+  href: string;
 }
 
-const AccountTypeCard = ({ type }: AccountTypeCardProps) => {
+const AccountTypeCard = ({ type, href }: AccountTypeCardProps) => {
   const [hovered, setHovered] = useState(false);
   return (
     <Link
-      href="/account"
+      href={href}
       className=" h-[108px] max-sm:max-w-[335px] sm:w-full bg-white shadow-custom rounded-md hover:bg-hoverBlue p-7 hover:border-primaryBlue hover:border-[1px] flex flex-row justify-center items-center mb-7"
       onMouseEnter={() => {
         setHovered(true);

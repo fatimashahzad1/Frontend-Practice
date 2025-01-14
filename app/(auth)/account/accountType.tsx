@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import AccountTypeCard from "./accountTypeCard";
+import { ROUTES } from "@/constants/routes";
 
 const AccountType = () => {
   return (
@@ -17,8 +18,8 @@ const AccountType = () => {
           To begin this journey, tell us what type of account you’d be opening.
         </div>
 
-        <AccountTypeCard type="individual" />
-        <AccountTypeCard type="business" />
+        <AccountTypeCard type="individual" href={ROUTES.registerPersonal} />
+        <AccountTypeCard type="business" href={ROUTES.account} />
       </div>
     </div>
   );
