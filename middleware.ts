@@ -7,13 +7,13 @@ export function middleware(request: NextRequest) {
   const token = request.cookies.get("access_token")?.value;
 
   // Redirect to login if no token and user is on the home page
-  if (!token && currentPath === "/") {
+  if (!token && currentPath === ROUTES.root) {
     return NextResponse.redirect(new URL(ROUTES.login, request.url));
   }
 
   // If token exists, redirect to dashboard (settingsAnalytics) from home page or public routes
   if (token) {
-    if (currentPath === "/") {
+    if (currentPath === ROUTES.root) {
       return NextResponse.redirect(
         new URL(ROUTES.settingsAnalytics, request.url)
       );

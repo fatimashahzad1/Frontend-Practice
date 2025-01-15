@@ -6,7 +6,7 @@ import BankForm from "./bankForm";
 
 const Bank = () => {
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row h-screen">
       <LeftPanel />
       <RegisterTemplate
         heading="Complete Your Profile!"

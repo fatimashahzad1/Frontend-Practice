@@ -1,4 +1,3 @@
-import LoginForm from "@/app/(auth)/login/loginForm";
 import React, { ReactNode } from "react";
 
 interface LoginTemplateProps {

@@ -6,6 +6,7 @@ export const ROUTES = {
   registerResidential: "/register/info/residency",
   registerBank: "/register/info/bank",
   settingsAnalytics: "/settings/analytics",
+  verification: "/verification",
 };
 
 export const PUBLIC_ROUTES = [
@@ -14,5 +15,6 @@ export const PUBLIC_ROUTES = [
   ROUTES.registerResidential,
   ROUTES.registerBank,
   ROUTES.login,
+  ROUTES.verification,
 ];
 export const PRIVATE_ROUTES = [ROUTES.settingsAnalytics];

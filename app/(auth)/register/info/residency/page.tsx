@@ -5,7 +5,7 @@ import ResidencyForm from "./residencyForm";
 
 const Residency = () => {
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row h-screen">
       <LeftPanel />
       <RegisterTemplate
         backToLink="/register/info/personal"

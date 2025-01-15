@@ -3,16 +3,20 @@ import { useState } from "react";
 
 const useRegister = () => {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [data, setData] = useState<LoginFormData | ErrorResponse | null>(null);
+  const [error, setError] = useState<ErrorResponse | null>(null);
+  const [data, setData] = useState<RegisterResponse | null>(null);
 
   const register = async (userData: LoginFormData) => {
     setLoading(true);
     setError(null);
 
     try {
-      const result = await postClient(`auth/login`, userData);
-      setData(result);
+      const result = await postClient(`auth/register`, userData);
+      if (result?.error) {
+        setError(result);
+      } else {
+        setData(result);
+      }
     } catch (err: any) {
       setError(err.message);
     } finally {

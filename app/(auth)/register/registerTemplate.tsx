@@ -19,7 +19,7 @@ const RegisterTemplate: any = ({
   children,
 }: RegisterTemplateProps) => {
   return (
-    <div className="sm:w-[53%] max-sm:w-full h-screen flex flex-col">
+    <div className="sm:w-[53%] max-sm:w-full flex flex-col">
       <Header
         stepName={stepName}
         stepNumber={stepNumber}

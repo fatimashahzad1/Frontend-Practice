@@ -10,6 +10,8 @@ import { useRegistration } from "@/contexts/registration-context";
 import useRegister from "@/hooks/use-register";
 import Spinner from "@/components/spinner";
 import { useToast } from "@/hooks/use-toast";
+import { ROUTES } from "@/constants/routes";
+import { useRouter } from "next/navigation";
 
 const BankForm = () => {
   const { formData } = useRegistration();
@@ -17,22 +19,27 @@ const BankForm = () => {
     resolver: zodResolver(BankSchema),
     defaultValues: formData,
   });
-  const { register, loading, data: responseData } = useRegister();
+  const { register, loading, data: responseData, error } = useRegister();
   const { toast } = useToast();
+  const router = useRouter();
 
   useEffect(() => {
     if (responseData) {
-      const isErrorResponse = "error" in responseData; // Type narrowing
-
       toast({
-        variant: isErrorResponse ? "destructive" : "default",
-        title: isErrorResponse ? "Error" : "Success",
-        description: isErrorResponse
-          ? "Failed to Register"
-          : "Successfully Registered",
+        variant: "default",
+        title: responseData.success,
+        description: responseData.message,
+      });
+      router.push(ROUTES.login);
+    }
+    if (error) {
+      toast({
+        variant: "destructive",
+        title: error.error,
+        description: error.message,
       });
     }
-  }, [responseData, toast]);
+  }, [responseData, toast, error]);
 
   const onSubmit = (data: BankFormData) => {
     register({ ...formData, ...data });

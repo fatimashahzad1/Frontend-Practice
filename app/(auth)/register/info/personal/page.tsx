@@ -6,7 +6,7 @@ import OAuthButton from "../../oauthButton";
 
 const Register = () => {
   return (
-    <div className="flex flex-row">
+    <div className="flex flex-row ">
       <LeftPanel />
       <RegisterTemplate
         heading="Register Individual Account!"

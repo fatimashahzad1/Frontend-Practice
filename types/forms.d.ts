@@ -34,9 +34,3 @@ interface ForgetPasswordFormData {
   email: string;
   password: string;
 }
-
-interface ErrorResponse {
-  error: string;
-  message: string[];
-  statusCode: number;
-}
