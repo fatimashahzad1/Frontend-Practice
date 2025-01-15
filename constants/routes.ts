@@ -7,6 +7,8 @@ export const ROUTES = {
   registerBank: "/register/info/bank",
   settingsAnalytics: "/settings/analytics",
   verification: "/verification",
+  forgotPassword: "/forgot-password",
+  resetPassword: "/reset-password",
 };
 
 export const PUBLIC_ROUTES = [
@@ -16,5 +18,7 @@ export const PUBLIC_ROUTES = [
   ROUTES.registerBank,
   ROUTES.login,
   ROUTES.verification,
+  ROUTES.forgotPassword,
+  ROUTES.resetPassword,
 ];
 export const PRIVATE_ROUTES = [ROUTES.settingsAnalytics];

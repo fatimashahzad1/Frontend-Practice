@@ -5,7 +5,7 @@ const OAuthButton = () => {
   return (
     <button
       type="submit"
-      className="flex flex-row justify-center gap-16 py-6 shadow-google sm:min-w-[300px] md:min-w-[335px] lg:min-w-[426px] w-full rounded-md mb-[75px]"
+      className="flex flex-row justify-center gap-16 py-6 shadow-google sm:min-w-[300px] w-full rounded-md mb-[75px]"
     >
       <FcGoogle className="w-6 h-6" />
       Register with Google

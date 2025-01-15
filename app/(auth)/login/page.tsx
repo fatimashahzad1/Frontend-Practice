@@ -10,7 +10,7 @@ const Login = () => {
       <LeftPanel />
       <LoginTemplate text="Please sign in to continue" heading="Login">
         <LoginForm />
-        <div className="sm:min-w-[300px] md:min-w-[335px] lg:min-w-[426px] flex justify-between items-center my-6">
+        <div className="sm:min-w-[300px]  flex justify-between items-center my-6">
           <hr className=" w-full border-[#F5F5F5] border-[1px] mr-8" />
           Or
           <hr className="w-full border-[#F5F5F5] border-[1px] ml-8" />

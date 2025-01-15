@@ -38,3 +38,22 @@ export const LoginSchema = z.object({
 export const ForgotPasswordSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
 });
+
+export const ResetPasswordSchema = z
+  .object({
+    password: z
+      .string()
+      .trim()
+      .min(8, "Password must be at least 8 characters long"),
+    confirmPassword: z
+      .string()
+      .trim()
+      .min(8, "Confirm Password must be at least 8 characters long"),
+  })
+  .refine(
+    (data) => data.password === data.confirmPassword, // Validation logic
+    {
+      message: "Confirmation password does not match the password", // Error message
+      path: ["confirmPassword"],
+    }
+  );

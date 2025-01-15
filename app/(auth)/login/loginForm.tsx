@@ -49,7 +49,7 @@ const LoginForm = () => {
       <FormProvider {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="sm:min-w-[300px] md:min-w-[335px] lg:min-w-[426px] "
+          className="sm:min-w-[300px] "
         >
           {LoginFields.map((field) => (
             <Input key={field.name} {...field} />

@@ -2,6 +2,7 @@ export const enum FORM_FIELD_NAMES {
   NAME = "name",
   EMAIL = "email",
   PASSWORD = "password",
+  CONFIRM_PASSWORD = "confirmPassword",
   ACCEPT = "acceptTerms",
   BANK_NO = "bankNo",
   ADDRESS = "address",
@@ -29,6 +30,14 @@ export const PASSWORD_FIELD: FormField = {
   name: FORM_FIELD_NAMES.PASSWORD,
   label: "Create password*",
   placeholder: "Enter password",
+  type: "password",
+  maxLength: 20,
+};
+
+export const CONFIRM_PASSWORD_FIELD: FormField = {
+  name: FORM_FIELD_NAMES.CONFIRM_PASSWORD,
+  label: "Confirm password*",
+  placeholder: "Enter confirm password",
   type: "password",
   maxLength: 20,
 };
@@ -62,4 +71,9 @@ export const DEFAULT_LOGIN_VALUES = {
 
 export const DEFAULT_FORGET_PASSWORD_VALUES = {
   email: "",
+};
+
+export const DEFAULT_RESET_PASSWORD_VALUES = {
+  password: "",
+  confirmPassword: "",
 };

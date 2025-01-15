@@ -32,5 +32,9 @@ interface LoginFormData {
 
 interface ForgetPasswordFormData {
   email: string;
+}
+
+interface ResetPasswordFormData {
   password: string;
+  confirmPassword: string;
 }
