@@ -11,19 +11,15 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL(ROUTES.login, request.url));
   }
 
-  // If token exists, redirect to dashboard (settingsAnalytics) from home page or public routes
+  // If token exists, redirect to dashboard (feed) from home page or public routes
   if (token) {
     if (currentPath === ROUTES.root) {
-      return NextResponse.redirect(
-        new URL(ROUTES.settingsAnalytics, request.url)
-      );
+      return NextResponse.redirect(new URL(ROUTES.feed, request.url));
     }
 
     // If user is on a public route, redirect them to the dashboard
     if (PUBLIC_ROUTES.includes(currentPath)) {
-      return NextResponse.redirect(
-        new URL(ROUTES.settingsAnalytics, request.url)
-      );
+      return NextResponse.redirect(new URL(ROUTES.feed, request.url));
     }
 
     // If token exists, user can access private routes, so just proceed

@@ -21,6 +21,8 @@ const config = {
       colors: {
         primaryBlue: "#1565d8",
         primaryGrey: "#8692a6",
+        text: "#212121",
+        textGrey: "#151B32",
         hoverBlue: "#F5F9FF",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

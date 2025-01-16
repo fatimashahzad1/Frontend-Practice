@@ -2,7 +2,7 @@ import Navbar from "@/components/dashboard/navbar";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="flex sm:flex-row max-sm:flex-col">
+    <div className="flex flex-col ">
       <Navbar />
       {children}
     </div>
