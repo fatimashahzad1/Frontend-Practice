@@ -1,5 +1,5 @@
-import LeftPanel from "@/components/leftPanel";
-import LoginTemplate from "@/components/loginTemplate";
+import LeftPanel from "@/components/auth/leftPanel";
+import LoginTemplate from "@/components/auth/loginTemplate";
 import React from "react";
 import ResetPasswordForm from "./resetPasswordForm";
 

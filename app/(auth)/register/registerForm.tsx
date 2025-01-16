@@ -2,7 +2,7 @@
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Input from "../../../components/input";
+import Input from "../../../components/auth/input";
 import { RegisterSchema } from "@/constants/schemas";
 import {
   EMAIL_FIELD,

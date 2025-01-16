@@ -1,10 +1,10 @@
 interface ErrorResponse {
   error: string;
-  message: string[];
+  message: string[] | string;
   statusCode: number;
 }
 
-interface VerificationResponse {
+interface SuccessResponse {
   message: string;
   success?: string;
   statusCode?: string;

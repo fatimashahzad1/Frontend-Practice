@@ -1,4 +1,4 @@
-import LeftPanel from "@/components/leftPanel";
+import LeftPanel from "@/components/auth/leftPanel";
 import React from "react";
 import RegisterTemplate from "../../registerTemplate";
 import RegisterForm from "../../registerForm";

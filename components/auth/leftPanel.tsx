@@ -17,7 +17,7 @@ const LeftPanel = () => {
         alt=""
         className="max-w-[28px] ml-[82px] mt-[236px]"
       />
-      <p className="mt-10 max-w-[473px] h-[190px] overflow-y-hidden text-ellipsis font-normal text-xl ml-[82px] mr-[111px] text-white">
+      <p className="mt-10 max-w-[473px] h-[190px] overflow-hidden text-ellipsis font-normal text-xl ml-[82px] mr-[111px] text-white scroll-x-">
         The passage experienced a surge in popularity during the 1960s when
         Letraset used it on their dry-transfer sheets, and again during the 90s
         as desktop publishers bundled the text with their software.

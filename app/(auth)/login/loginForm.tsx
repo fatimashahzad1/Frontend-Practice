@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Input from "@/components/input";
+import Input from "@/components/auth/input";
 import Link from "next/link";
 import { LoginSchema } from "@/constants/schemas";
 import {
@@ -12,7 +12,7 @@ import {
 } from "@/constants/form-fields";
 import { useToast } from "@/hooks/use-toast";
 import useLogin from "@/hooks/use-login";
-import Spinner from "@/components/spinner";
+import Spinner from "@/components/icons/spinner";
 
 const LoginFields = [EMAIL_FIELD, PASSWORD_FIELD];
 

@@ -9,6 +9,7 @@ export const ROUTES = {
   verification: "/verification",
   forgotPassword: "/forgot-password",
   resetPassword: "/reset-password",
+  feed: "/feed",
 };
 
 export const PUBLIC_ROUTES = [

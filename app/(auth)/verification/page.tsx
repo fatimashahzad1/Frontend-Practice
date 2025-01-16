@@ -1,8 +1,8 @@
 "use client";
 import { useEffect } from "react";
 
-import LeftPanel from "@/components/leftPanel";
-import LoginTemplate from "@/components/loginTemplate";
+import LeftPanel from "@/components/auth/leftPanel";
+import LoginTemplate from "@/components/auth/loginTemplate";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ROUTES } from "@/constants/routes";
 import useVerification from "@/hooks/use-verification";

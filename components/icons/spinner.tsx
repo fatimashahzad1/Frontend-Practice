@@ -12,10 +12,7 @@ const Spinner: React.FC<SpinnerProps> = ({
   color = "white",
 }) => {
   return (
-    <div
-      className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-      style={{ width: "100vw", height: "100%" }}
-    >
+    <div className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 h-screen">
       <svg
         aria-hidden="true"
         className="inline animate-spin"

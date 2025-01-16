@@ -4,7 +4,7 @@ import { useCallback, useMemo, useState } from "react";
 const useVerification = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<ErrorResponse | null>(null);
-  const [data, setData] = useState<VerificationResponse>({
+  const [data, setData] = useState<SuccessResponse>({
     message: "Verifying...",
   });
 
@@ -18,6 +18,7 @@ const useVerification = () => {
         message: ["Token is Required!"],
         statusCode: 400,
       });
+      return;
     }
 
     try {
