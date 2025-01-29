@@ -21,6 +21,8 @@ const config = {
       colors: {
         primaryBlue: "#1565d8",
         primaryGrey: "#8692a6",
+        backgroundGrey: "#EEF4FD",
+        pinkRed: "#EE4878",
         text: "#212121",
         textGrey: "#151B32",
         hoverBlue: "#F5F9FF",
@@ -30,7 +32,7 @@ const config = {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
-          DEFAULT: "hsl(var(--primary))",
+          DEFAULT: "var(--primary)",
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {

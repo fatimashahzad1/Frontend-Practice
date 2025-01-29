@@ -13,7 +13,7 @@ const useLogin = () => {
     setError(null);
 
     try {
-      const result = await postClient(`auth/login`, userData);
+      const result = await postClient({ url: `auth/login`, data: userData });
       setData(result);
     } catch (err: any) {
       setError(err.message);

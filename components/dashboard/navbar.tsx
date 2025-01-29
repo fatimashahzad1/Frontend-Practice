@@ -11,6 +11,13 @@ import { usePathname, useRouter } from "next/navigation";
 export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
+
+  const getName = () => {
+    const name = pathname.split("/")[1];
+    console.log({ pathname, name, a: pathname.split("/") });
+    return name[0]?.toUpperCase() + name.substring(1);
+  };
+
   return (
     <header className="flex h-20 w-full shrink-0 items-center px-4 md:px-8 justify-between">
       {/* for Mobile */}
@@ -84,7 +91,7 @@ export default function Navbar() {
         <span className="sr-only">Acme Inc</span>
       </Link>
       {/* for Desktop */}
-      <p className="lg:hidden text-lg text-text">Feed</p>
+      <p className="lg:hidden text-lg text-text">{getName()}</p>
       <nav className="ml-auto hidden lg:flex gap-6">
         <NavbarLink
           href={ROUTES.feed}
