@@ -1,5 +1,6 @@
 "use client";
 import { PeopleCard } from "@/components/dashboard/people/people-card";
+import Spinner from "@/components/icons/spinner";
 import usePeople from "@/hooks/use-people";
 import React from "react";
 
@@ -17,7 +18,8 @@ const People = () => {
   console.log({ people, loading, error });
 
   return (
-    <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 bg-backgroundGrey p-8 justify-center items-center gap-6">
+    <div className="grid flex-1 gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 bg-backgroundGrey p-8 justify-center items-center gap-6">
+      {loading && <Spinner />}
       {people?.map((user, index) => (
         <PeopleCard
           key={index}
@@ -26,7 +28,7 @@ const People = () => {
           actionTitle={user.isFollowedByCurrentUser ? "Unfollow" : "Follow"}
           actionButtonClasses={
             user.isFollowedByCurrentUser
-              ? "border-pinkRed text-pinkRed hover:text-pinkRed "
+              ? "border-pinkRed text-pinkRed hover:text-pinkRed"
               : "border-primaryBlue text-primaryBlue hover:text-primaryBlue"
           }
           action={() => {

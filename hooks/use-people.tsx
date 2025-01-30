@@ -54,7 +54,7 @@ const usePeople = () => {
     data: people,
     error,
     isLoading,
-  } = useQuery<getAllPeopleResponse>({
+  } = useQuery<GetAllPeopleResponse>({
     queryKey: ["people"],
     queryFn: fetchAllPeople,
   });
