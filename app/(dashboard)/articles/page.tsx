@@ -5,8 +5,9 @@ import Spinner from "@/components/icons/spinner";
 import { ShieldOff } from "lucide-react";
 import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_PAGE } from "@/constants";
 import useGetAllArticles from "@/hooks/use-get-all-articles";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
+import { ROUTES } from "@/constants/routes";
 
 const Articles = () => {
   const searchParams = useSearchParams();
@@ -14,6 +15,8 @@ const Articles = () => {
   const limit = Number(searchParams.get("limit")) || PAGINATION_DEFAULT_LIMIT;
 
   const { data, isPending } = useGetAllArticles({ page, limit });
+  const router = useRouter();
+
   const pagesPerPage = Math.ceil((data?.pagination?.total_count ?? 0) / limit);
 
   const getDescription = (article: Article) => {
@@ -44,7 +47,9 @@ const Articles = () => {
               actionButtonClasses={
                 "border-primaryBlue text-primaryBlue hover:text-primaryBlue"
               }
-              action={() => {}}
+              action={() => {
+                router.push(`${ROUTES.articles}/${article.id}`);
+              }}
               actionDisabled={false}
             />
           ))}
