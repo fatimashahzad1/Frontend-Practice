@@ -1,4 +1,6 @@
+import { ROUTES } from "@/constants/routes";
 import { postClient } from "@/utils/client";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const useLogin = () => {
@@ -7,6 +9,8 @@ const useLogin = () => {
   const [data, setData] = useState<RegisterFormData | ErrorResponse | null>(
     null
   );
+  const router = useRouter();
+  router.push(ROUTES.feed);
 
   const login = async (userData: LoginFormData) => {
     setLoading(true);

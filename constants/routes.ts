@@ -11,11 +11,14 @@ export const ROUTES = {
   forgotPassword: "/forgot-password",
   resetPassword: "/reset-password",
   feed: "/feed",
-  chats: "/chats",
   jobs: "/jobs",
   events: "/events",
   articles: "/articles",
   people: "/people",
+  chatsList: "/chats/list",
+  chatsCall: "/chats/call",
+  chats: "/chats",
+  chatsContacts: "/chats/contacts",
 };
 
 export const PUBLIC_ROUTES = [

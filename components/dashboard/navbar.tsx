@@ -18,6 +18,7 @@ export default function Navbar() {
     return name[0]?.toUpperCase() + name.substring(1);
   };
 
+  if (pathname.includes(ROUTES.chats)) return null;
   return (
     <header className="flex h-20 w-full shrink-0 items-center px-4 md:px-8 justify-between">
       {/* for Mobile */}
