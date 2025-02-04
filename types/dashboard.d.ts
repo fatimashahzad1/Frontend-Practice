@@ -23,3 +23,27 @@ interface Article {
   estimatedTime: string;
   creator: { name: string };
 }
+
+interface Chats {
+  id: number;
+  messages: ChatMessage[];
+  users: ChatUser[];
+}
+
+interface ChatMessage {
+  content: string;
+  createdAt: Date;
+}
+
+interface ChatUser {
+  name: string;
+}
+
+interface Message {
+  id: number;
+  content: string;
+  createdAt: string;
+  isMine: boolean;
+  senderId: number;
+  senderName: fatima;
+}
