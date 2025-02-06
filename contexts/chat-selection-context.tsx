@@ -3,7 +3,15 @@
 import { useToast } from "@/hooks/use-toast";
 import { getToken } from "@/lib/get-token";
 import { getClient, postClient } from "@/utils/client";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  FetchNextPageOptions,
+  InfiniteData,
+  InfiniteQueryObserverResult,
+  useInfiniteQuery,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import {
   createContext,
   useContext,
@@ -22,12 +30,30 @@ interface SendMessageProps {
 interface ChatSelectionContextType {
   selectedChat: number | null;
   setSelectedChat: (id: number | null) => void;
+  chatsIsLoading: boolean;
   chats: Chats[] | null;
   searchString: string;
   setSearchString: (searchString: string) => void;
   searchedChats: Chats[] | null;
-  selectedChatMessages: Message[] | undefined;
+  selectedChatMessages:
+    | InfiniteData<{ messages: any; nextCursor: any }, unknown>
+    | undefined;
+  selectedChatMessagesIsLoading: boolean;
   sendMessage: ({ chatId, message }: SendMessageProps) => void;
+  fetchNextPage: (options?: FetchNextPageOptions) => Promise<
+    InfiniteQueryObserverResult<
+      InfiniteData<
+        {
+          messages: any;
+          nextCursor: any;
+        },
+        unknown
+      >,
+      Error
+    >
+  >;
+  hasNextPage: boolean;
+  isFetchingNextPage: boolean;
 }
 
 // Create the context with a default value
@@ -36,26 +62,54 @@ const ChatSelectionContext = createContext<
 >(undefined);
 
 // Fetch all people
-const fetchAllChats = async () => {
+const fetchAllChats = async (toast: any) => {
   const token = await getToken();
   if (!token) throw new Error("Token is Missing");
 
   const result = await getClient("chat/all", token);
-  if (result?.error)
-    throw new Error(result?.message || "Failed to fetch people");
+  console.log({ result });
+  if (result?.statusCode >= 400) {
+    toast({
+      title: "Error",
+      description: "Failed to fetch chats",
+      variant: "destructive",
+    });
+  }
 
   return result;
 };
 
 // Fetch all messages of a selected chat
-const fetchSelectedChatMessages = async (chatId: number | null) => {
+const fetchSelectedChatMessages = async ({
+  chatId,
+  pageParam,
+  toast,
+}: {
+  chatId: number | null;
+  pageParam: number | null;
+  toast: any;
+}) => {
+  if (!chatId) return { messages: [], nextCursor: null };
+
   const token = await getToken();
   if (!token) throw new Error("Token is Missing");
+  const cursorParam = pageParam ? `&cursor=${pageParam}` : ""; // Use cursor for pagination
+  const result = await getClient(
+    `chat/messages/${chatId}?take=10${cursorParam}`, // Fetch 10 messages at a time
+    token
+  );
 
-  const result = await getClient(`chat/messages/${chatId}`, token);
-  if (result?.error)
-    throw new Error(result?.message || "Failed to fetch messages");
-  return result || [];
+  if (result?.statusCode > 400)
+    toast({
+      title: "Error",
+      description: "Failed to fetch messages",
+      variant: "destructive",
+    });
+
+  return {
+    messages: result?.messages || [],
+    nextCursor: result?.nextCursor || null, // Ensure API returns a cursor
+  };
 };
 
 // send a message
@@ -90,20 +144,34 @@ export function ChatSelectionProvider({
 
   const {
     data: chatsData,
-    error: chatsError,
+    isError: chatsError,
     isLoading: chatsIsLoading,
   } = useQuery<Chats[]>({
     queryKey: ["chats"],
-    queryFn: () => fetchAllChats(),
+    queryFn: () => fetchAllChats(toast),
   });
+  console.log({ chatsError });
+  if (chatsError) {
+    console.log("erorrrrrrrrrrrrrrrrrr=", chatsError);
+    toast({
+      variant: "destructive",
+      title: "Error",
+      description: "Failed to fetch chats.",
+    });
+  }
 
   const {
     data: selectedChatMessages,
-    error: selectedChatError,
-    isLoading: selectedChatIsLoading,
-  } = useQuery<Message[]>({
-    queryKey: ["messages", selectedChat], // Add searchQuery to trigger refetch
-    queryFn: () => fetchSelectedChatMessages(selectedChat),
+    isLoading: selectedChatMessagesIsLoading,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery({
+    queryKey: ["messages", selectedChat],
+    queryFn: ({ pageParam = null }) =>
+      fetchSelectedChatMessages({ chatId: selectedChat, pageParam, toast }),
+    initialPageParam: null,
+    getNextPageParam: (lastPage) => lastPage?.nextCursor || null, // Extract cursor
     enabled: Boolean(selectedChat), // Avoid unnecessary calls on empty search
   });
 
@@ -131,8 +199,8 @@ export function ChatSelectionProvider({
       queryClient.invalidateQueries({ queryKey: ["messages", selectedChat] });
       toast({
         variant: "default",
-        title: result.success,
-        description: result.message,
+        title: "Success",
+        description: "Message sent Successfully",
       });
     },
     onError: (err: any) => {
@@ -148,22 +216,32 @@ export function ChatSelectionProvider({
     () => ({
       selectedChat,
       setSelectedChat,
+      chatsIsLoading,
       chats,
       searchString,
       setSearchString,
       searchedChats,
       selectedChatMessages,
+      selectedChatMessagesIsLoading,
       sendMessage: sendMessage.mutate,
+      fetchNextPage,
+      hasNextPage,
+      isFetchingNextPage,
     }),
     [
       selectedChat,
       setSelectedChat,
+      chatsIsLoading,
       chats,
       searchString,
       setSearchString,
       searchedChats,
       selectedChatMessages,
+      selectedChatMessagesIsLoading,
       sendMessage,
+      fetchNextPage,
+      hasNextPage,
+      isFetchingNextPage,
     ]
   );
 

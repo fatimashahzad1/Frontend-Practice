@@ -10,7 +10,6 @@ const useLogin = () => {
     null
   );
   const router = useRouter();
-  router.push(ROUTES.feed);
 
   const login = async (userData: LoginFormData) => {
     setLoading(true);
@@ -19,6 +18,7 @@ const useLogin = () => {
     try {
       const result = await postClient({ url: `auth/login`, data: userData });
       setData(result);
+      router.push(ROUTES.feed);
     } catch (err: any) {
       setError(err.message);
     } finally {

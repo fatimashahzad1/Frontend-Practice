@@ -1,39 +1,104 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Search, Send } from "lucide-react";
 import { useChatSelection } from "@/contexts/chat-selection-context";
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
+import Spinner from "@/components/icons/spinner";
 
 export default function Chats() {
   const {
     selectedChat,
     setSelectedChat,
+    chatsIsLoading,
     searchString,
     setSearchString,
     searchedChats,
     selectedChatMessages,
+
+    selectedChatMessagesIsLoading,
     sendMessage,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
   } = useChatSelection();
   const [message, setMessage] = useState("");
-  console.log({ searchedChats });
-  console.log({ selectedChatMessages });
+  const chatContainerRef = useRef<HTMLDivElement>(null); // Reference to the chat container div
+  const lastMessageRef = useRef<HTMLDivElement>(null);
+  const firstMessageRef = useRef<HTMLDivElement>(null); // Reference to the first message in the list
+
+  useEffect(() => {
+    if (chatContainerRef.current && lastMessageRef.current) {
+      // Scroll to the last message whenever messages are updated
+      lastMessageRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "end", // Align to the bottom of the container
+      });
+    }
+  }, [selectedChatMessages]);
+
+  useEffect(() => {
+    if (!chatContainerRef.current || !firstMessageRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && hasNextPage && !isFetchingNextPage) {
+            fetchNextPage();
+          }
+        });
+      },
+      {
+        root: chatContainerRef.current,
+
+        threshold: 0.1, // Allow partial visibility to trigger
+      }
+    );
+
+    observer.observe(firstMessageRef.current);
+
+    return () => observer.disconnect();
+  }, [
+    firstMessageRef,
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+    selectedChatMessages,
+  ]);
+
+  useEffect(() => {
+    const chatContainer = chatContainerRef.current;
+    if (!chatContainer || !firstMessageRef.current) return;
+    const checkVisibility = () => {
+      const rect = firstMessageRef?.current?.getBoundingClientRect();
+      const containerRect = chatContainer.getBoundingClientRect();
+      // Check if the element is inside the visible portion of chatContainer
+      const isVisible =
+        rect &&
+        rect.top >= containerRect.top &&
+        rect.bottom <= containerRect.bottom;
+
+      if (isVisible && hasNextPage && !isFetchingNextPage) {
+        fetchNextPage();
+      }
+    };
+    chatContainer.addEventListener("scroll", checkVisibility);
+    chatContainer.addEventListener("resize", checkVisibility);
+
+    return () => {
+      chatContainer.removeEventListener("scroll", checkVisibility);
+      chatContainer.removeEventListener("resize", checkVisibility);
+    };
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage, selectedChatMessages]);
 
   const handleSendMessage = () => {
     if (selectedChat) {
-      console.log("here mesage==", message);
       sendMessage({ chatId: selectedChat, message });
+      setMessage("");
     }
-    // if (message.trim() === "" || !selectedChat) return;
-    // mockMessages[selectedChat].push({
-    //   id: Date.now(),
-    //   text: message,
-    //   sender: "me",
-    // });
-    // setMessage("");
   };
 
   return (
@@ -60,6 +125,11 @@ export default function Chats() {
           />
         </div>
         <div className="space-y-2">
+          {chatsIsLoading && (
+            <p className="w-full text-center">
+              Loading <Spinner onlySpinner width="20px" height="10px" />
+            </p>
+          )}
           {searchedChats?.map((chat: Chats) => (
             <Card
               key={chat.id}
@@ -92,6 +162,9 @@ export default function Chats() {
               </div>
             </Card>
           ))}
+          {!chatsIsLoading && searchedChats?.length === 0 && (
+            <p className="w-full text-center">No chats found</p>
+          )}
         </div>
       </div>
 
@@ -116,24 +189,34 @@ export default function Chats() {
         </div>
 
         {/* Messages */}
-        <div className="flex-1 flex flex-col py-4 px-8 overflow-y-auto bg-white ">
-          {selectedChatMessages ? (
-            selectedChatMessages?.map((msg) => (
-              <div
-                key={msg.id}
-                className={`mb-8 p-2 max-w-[75%] rounded-lg flex flex-col ${
-                  msg.isMine
-                    ? "bg-[#1565D8] text-white self-end"
-                    : "bg-[#EEF4FD] text-black self-start"
-                }`}
-              >
-                {msg.content}
-                <span className="text-xs self-end">{msg.createdAt}</span>
-              </div>
-            ))
-          ) : (
-            <p className="text-center text-gray-500">No messages yet.</p>
+        <div
+          className="flex-1 flex flex-col-reverse py-4 px-8 overflow-y-auto bg-white "
+          ref={chatContainerRef}
+        >
+          {!selectedChatMessages && selectedChatMessagesIsLoading && (
+            <p className="w-full text-center">
+              Loading <Spinner onlySpinner width="20px" height="10px" />
+            </p>
           )}
+          {selectedChatMessages?.pages?.flatMap((page, pageIndex: number) => (
+            <div key={"messages-" + pageIndex} className="flex flex-col">
+              {page?.messages?.map((msg: Message, index: number) => (
+                <div
+                  key={msg.id}
+                  className={`mb-8 p-2 max-w-[75%] rounded-lg flex flex-col ${
+                    msg.isMine
+                      ? "bg-[#1565D8] text-white self-end"
+                      : "bg-[#EEF4FD] text-black self-start"
+                  }`}
+                  ref={index === 0 && pageIndex === 0 ? firstMessageRef : null} // Set ref for the last message
+                >
+                  {msg.content}
+                  <span className="text-xs self-end">{msg.createdAt}</span>
+                </div>
+              ))}
+            </div>
+          ))}
+          <div className="hidden" ref={lastMessageRef}></div>
         </div>
 
         {/* Input Box */}
