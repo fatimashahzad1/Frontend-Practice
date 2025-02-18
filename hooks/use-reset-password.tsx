@@ -21,10 +21,10 @@ const useResetPassword = () => {
       setError(null);
 
       try {
-        const result = await postClient(
-          `auth/password/reset?token=${token}`,
-          userData
-        );
+        const result = await postClient({
+          url: `auth/password/reset?token=${token}`,
+          data: userData,
+        });
         if (result?.error) {
           setError(result);
         } else {

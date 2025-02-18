@@ -9,7 +9,7 @@ const ResetPassword = () => {
       <LeftPanel />
       <LoginTemplate
         text="Please enter the email you would like your password reset information sent to "
-        heading="Forgot Password?"
+        heading="Reset Password?"
       >
         <ResetPasswordForm />
       </LoginTemplate>
