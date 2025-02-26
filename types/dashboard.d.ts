@@ -48,3 +48,12 @@ interface Message {
     senderName: fatima;
     chatId: number;
 }
+
+interface Post {
+    id: number;
+    creatorImgUrl: string;
+    creatorName: string;
+    lastEdited: string;
+    postImgUrl: string;
+    postDescription: string;
+}
