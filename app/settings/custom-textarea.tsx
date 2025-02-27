@@ -1,4 +1,5 @@
-import React from 'react';
+'use client';
+
 import {
   FormControl,
   FormField,
@@ -6,27 +7,28 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-const SettingsInput = ({
+import { Textarea } from '@/components/ui/textarea';
+
+export function CustomTextarea({
   control,
   label,
   placeholder,
   name,
-  maxLength = 20,
-}: SettingsInputProps) => {
+  maxLength = 500,
+}: SettingsInputProps) {
   return (
     <FormField
       control={control}
       name={name}
       render={({ field }) => (
-        <FormItem className="space-y-2 w-max-[277px] mt-7">
-          <FormLabel className="text-base font-semibold ">{label}</FormLabel>
+        <FormItem>
+          <FormLabel>{label}</FormLabel>
           <FormControl>
-            <Input
+            <Textarea
+              maxLength={maxLength}
               placeholder={placeholder}
               {...field}
-              maxLength={maxLength}
-              className="ml-1 border-[1px] setting-input px-8 py-7"
+              className="setting-input px-8 py-7"
             />
           </FormControl>
           <FormMessage />
@@ -34,6 +36,4 @@ const SettingsInput = ({
       )}
     />
   );
-};
-
-export default SettingsInput;
+}

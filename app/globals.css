@@ -110,4 +110,7 @@ select.country {
   body {
     @apply bg-background text-foreground;
   }
+  .setting-input {
+    @apply ml-1 border-[1px] focus-visible:ring-0 focus-visible:ring-offset-0 border-[#C3C3E4] rounded-[10px];
+  }
 }

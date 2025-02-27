@@ -1,9 +1,10 @@
 type FormField = {
   name: FORM_FIELD_NAMES;
-  type: string;
+  type?: string;
   placeholder: string;
   label: string;
   maxLength?: number;
+  multiline?: boolean;
 };
 
 interface PersonalFormData {

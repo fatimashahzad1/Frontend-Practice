@@ -12,112 +12,110 @@ import React from 'react';
 import SideCollectionItem from './side-collection-item';
 
 const LeftContainer = ({ type }: { type: string }) => {
-    return (
-        <div className='col-span-3 pl-[30px] pt-[30px] flex flex-col gap-4'>
-            {/* profile image */}
-            {type === DASHBOARD_SIMILAR_PAGES.FEED && (
-                <div className='flex flex-col items-center justify-center space-x-4 bg-white h-[188px] rounded-2xl'>
-                    <Image
-                        src={user.imageUrl}
-                        alt='user profile'
-                        className=' object-cover rounded-2xl'
-                        width={80}
-                        height={80}
-                    />
+  return (
+    <div className='max-md:hidden col-span-3 pl-[30px] pt-[30px] flex flex-col gap-4'>
+      {/* profile image */}
+      {type === DASHBOARD_SIMILAR_PAGES.FEED && (
+        <div className='flex flex-col items-center justify-center space-x-4 bg-white h-[188px] rounded-2xl'>
+          <Image
+            src={user.imageUrl}
+            alt='user profile'
+            className=' object-cover rounded-2xl'
+            width={80}
+            height={80}
+          />
 
-                    <h1 className='text-lg font-semibold'>{user.name}</h1>
-                    <p className='text-sm text-gray-500'>{user.email}</p>
-                </div>
-            )}
-
-            {/* Add friends section */}
-            <div className='flex flex-col items-center justify-center bg-white p-7 rounded-2xl'>
-                <div className='w-full flex justify-between items-center'>
-                    <h1 className='text-lg font-bold'>Add Friends</h1>
-                    <Link
-                        href={ROUTES.people}
-                        className='text-[#1565D8] text-sm font-medium underline'
-                    >
-                        See All
-                    </Link>
-                </div>
-                <div className='flex flex-row gap-2 flex-wrap'>
-                    {friends.map((friend, index) => (
-                        <div
-                            className='flex flex-col items-center justify-between mt-4 border-[#5F9CF3] border-[0.4px] px-4 pt-3 w-[70px] rounded-sm'
-                            key={index}
-                        >
-                            <Image
-                                src={friend.imgUrl}
-                                alt='friend'
-                                className='rounded-full'
-                                width={40}
-                                height={40}
-                            />
-                            <h1 className='text-sm font-semibold'>
-                                {friend.name}
-                            </h1>
-
-                            <div className='relative top-4 w-[22px] h-[22px] bg-[#1565D8] rounded-full flex items-center justify-center shadow-md'>
-                                <Plus className='text-white' size={11} />
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-
-            {/* Contributors */}
-            <div className='bg-white py-5 px-4 rounded-2xl'>
-                <h1 className='text-lg font-bold'>Contributors</h1>
-                <div className='flex items-center w-[156px]'>
-                    {avatars.slice(0, 4).map((src, index) => (
-                        <Avatar
-                            key={index}
-                            className='-ml-4 first:ml-0 border-none w-10 h-10'
-                        >
-                            <AvatarImage
-                                src={src}
-                                alt='Avatar'
-                                className='-ml-4 first:ml-0 border-2 rounded-full'
-                                style={{ borderColor: '#5F9CF3' }}
-                            />
-                            {/* <AvatarFallback>U</AvatarFallback> */}
-                        </Avatar>
-                    ))}
-                    {avatars.length > 4 && (
-                        <p className='-ml-4 first:ml-0 w-10 h-10 rounded-full bg-white border-2 border-[#5F9CF3] justify-center flex items-center'>
-                            +{avatars.length - 4}
-                        </p>
-                    )}
-                </div>
-            </div>
-
-            {/* Event Planner */}
-            {type === DASHBOARD_SIMILAR_PAGES.EVENTS && (
-                <div className='px-4 py-5 bg-white flex flex-col gap-5 rounded-2xl'>
-                    <h1 className='text-lg font-bold'>Event Planner</h1>
-                    {eventPlanners.map((planner, index) => (
-                        <SideCollectionItem
-                            key={`planner=${index}`}
-                            text1={planner.name}
-                            text2={planner.rating}
-                            imageUrl={planner.imageUrl}
-                            type={DASHBOARD_SIMILAR_PAGES.EVENTS}
-                            rating={planner.rating}
-                            Icon={<Phone color='#1565D8' />}
-                            iconHandle={() => {}}
-                        />
-                    ))}
-                    <Button
-                        variant='outline'
-                        className='bg-[#1565D8] h-12 text-base font-medium text-white rounded-[10px]'
-                    >
-                        View All
-                    </Button>
-                </div>
-            )}
+          <h1 className='text-lg font-semibold'>{user.name}</h1>
+          <p className='text-sm text-gray-500'>{user.email}</p>
         </div>
-    );
+      )}
+
+      {/* Add friends section */}
+      <div className='flex flex-col items-center justify-center bg-white p-7 rounded-2xl'>
+        <div className='w-full flex justify-between items-center'>
+          <h1 className='text-lg font-bold'>Add Friends</h1>
+          <Link
+            href={ROUTES.people}
+            className='text-[#1565D8] text-sm font-medium underline'
+          >
+            See All
+          </Link>
+        </div>
+        <div className='flex flex-row gap-2 flex-wrap'>
+          {friends.map((friend, index) => (
+            <div
+              className='flex flex-col items-center justify-between mt-4 border-[#5F9CF3] border-[0.4px] px-4 pt-3 w-[70px] rounded-sm'
+              key={index}
+            >
+              <Image
+                src={friend.imgUrl}
+                alt='friend'
+                className='rounded-full'
+                width={40}
+                height={40}
+              />
+              <h1 className='text-sm font-semibold'>{friend.name}</h1>
+
+              <div className='relative top-4 w-[22px] h-[22px] bg-[#1565D8] rounded-full flex items-center justify-center shadow-md'>
+                <Plus className='text-white' size={11} />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Contributors */}
+      <div className='bg-white py-5 px-4 rounded-2xl'>
+        <h1 className='text-lg font-bold'>Contributors</h1>
+        <div className='flex items-center w-[156px]'>
+          {avatars.slice(0, 4).map((src, index) => (
+            <Avatar
+              key={index}
+              className='-ml-4 first:ml-0 border-none w-10 h-10'
+            >
+              <AvatarImage
+                src={src}
+                alt='Avatar'
+                className='-ml-4 first:ml-0 border-2 rounded-full'
+                style={{ borderColor: '#5F9CF3' }}
+              />
+              {/* <AvatarFallback>U</AvatarFallback> */}
+            </Avatar>
+          ))}
+          {avatars.length > 4 && (
+            <p className='-ml-4 first:ml-0 w-10 h-10 rounded-full bg-white border-2 border-[#5F9CF3] justify-center flex items-center'>
+              +{avatars.length - 4}
+            </p>
+          )}
+        </div>
+      </div>
+
+      {/* Event Planner */}
+      {type === DASHBOARD_SIMILAR_PAGES.EVENTS && (
+        <div className='px-4 py-5 bg-white flex flex-col gap-5 rounded-2xl'>
+          <h1 className='text-lg font-bold'>Event Planner</h1>
+          {eventPlanners.map((planner, index) => (
+            <SideCollectionItem
+              key={`planner=${index}`}
+              text1={planner.name}
+              text2={planner.rating}
+              imageUrl={planner.imageUrl}
+              type={DASHBOARD_SIMILAR_PAGES.EVENTS}
+              rating={planner.rating}
+              Icon={<Phone color='#1565D8' />}
+              iconHandle={() => {}}
+            />
+          ))}
+          <Button
+            variant='outline'
+            className='bg-[#1565D8] h-12 text-base font-medium text-white rounded-[10px]'
+          >
+            View All
+          </Button>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default LeftContainer;
