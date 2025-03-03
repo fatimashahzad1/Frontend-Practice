@@ -8,7 +8,6 @@ import { Search, Send } from 'lucide-react';
 import { useChatSelection } from '@/contexts/chat-selection-context';
 import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
 import Spinner from '@/components/icons/spinner';
-import { useSocket } from '@/hooks/useSocket';
 
 export default function Chats() {
     const {

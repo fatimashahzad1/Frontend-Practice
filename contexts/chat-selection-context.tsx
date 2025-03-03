@@ -1,7 +1,6 @@
 'use client';
 
 import { useToast } from '@/hooks/use-toast';
-import { useSocket } from '@/hooks/useSocket';
 import { getToken } from '@/lib/get-token';
 import { getClient, postClient } from '@/utils/client';
 import {
@@ -21,6 +20,7 @@ import {
     useMemo,
     useEffect,
 } from 'react';
+import { useSocketContext } from './socket-context';
 
 interface SendMessageProps {
     chatId: number;
@@ -145,12 +145,12 @@ export function ChatSelectionProvider({
     const [chatNewMessages, setChatNewMessages] = useState<null | Message[]>(
         null
     );
-    const { socket, messages, setMessages } = useSocket();
+    const { socket, messages, setMessages } = useSocketContext();
 
     useEffect(() => {
         if (selectedChat) {
             const newMessages = messages?.filter(
-                (message: Message) => message.chatId === selectedChat
+                (message: Message) => message?.chatId === selectedChat
             );
             setChatNewMessages(newMessages);
         }
@@ -163,6 +163,7 @@ export function ChatSelectionProvider({
     } = useQuery<Chats[]>({
         queryKey: ['chats'],
         queryFn: () => fetchAllChats(toast),
+        staleTime: 24 * 60 * 60 * 1000,
     });
     if (chatsError) {
         toast({
