@@ -50,6 +50,7 @@ interface SocketContextType {
     agoraClient: IAgoraRTCClient | null;
     setAgoraClient: Dispatch<SetStateAction<IAgoraRTCClient | null>>;
     remoteUsername: string;
+    setRemoteUsername: Dispatch<SetStateAction<string>>;
     localUserName: string;
     channelName: string | null;
     setChannelName: Dispatch<SetStateAction<string | null>>;
@@ -132,6 +133,7 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({
             socketInstance?.on('incomingCall', (messageData) => {
                 console.log('Received call:', messageData);
                 setIncomingCall(messageData);
+                setRemoteUsername(messageData.callerName);
             });
 
             socketInstance?.on(
@@ -256,6 +258,7 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({
             setAgoraClient,
             channelName,
             setChannelName,
+            setRemoteUsername,
         }),
         [
             socket,
@@ -276,6 +279,7 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({
             setAgoraClient,
             channelName,
             setChannelName,
+            setRemoteUsername,
         ]
     );
 
