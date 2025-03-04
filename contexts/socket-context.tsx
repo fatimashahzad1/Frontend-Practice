@@ -34,17 +34,6 @@ interface SocketContextType {
     acceptCall: () => void;
     rejectCall: () => void;
     leaveCall: () => void;
-    localUser: {
-        videoTrack: ICameraVideoTrack | null;
-        audioTrack: IMicrophoneAudioTrack | null;
-    };
-    setLocalUser: Dispatch<
-        SetStateAction<{
-            videoTrack: ICameraVideoTrack | null;
-            audioTrack: IMicrophoneAudioTrack | null;
-        }>
-    >;
-
     remoteUser: IAgoraRTCRemoteUser | null;
     setRemoteUser: Dispatch<SetStateAction<IAgoraRTCRemoteUser | null>>;
     agoraClient: IAgoraRTCClient | null;
@@ -52,8 +41,6 @@ interface SocketContextType {
     remoteUsername: string;
     setRemoteUsername: Dispatch<SetStateAction<string>>;
     localUserName: string;
-    channelName: string | null;
-    setChannelName: Dispatch<SetStateAction<string | null>>;
 }
 
 const SocketContext = createContext<SocketContextType | undefined>(undefined);
@@ -74,13 +61,8 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({
     const [remoteUser, setRemoteUser] = useState<null | IAgoraRTCRemoteUser>(
         null
     );
-    const [localUser, setLocalUser] = useState<{
-        videoTrack: ICameraVideoTrack | null;
-        audioTrack: IMicrophoneAudioTrack | null;
-    }>({ videoTrack: null, audioTrack: null });
     const [localUserName, setLocalUserName] = useState('');
     const [remoteUsername, setRemoteUsername] = useState('');
-    const [channelName, setChannelName] = useState<string | null>(null);
 
     useEffect(() => {
         const socketConnection = async () => {
@@ -116,22 +98,13 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({
             socketInstance?.on(
                 'getCallToken',
                 ({ token, channelName, callerId, callerName }) => {
-                    console.log(
-                        'Call token:',
-                        token,
-                        channelName,
-                        callerId,
-                        callerName
-                    );
                     joinCall(token, channelName, callerId);
-                    setChannelName(channelName);
                     setLocalUserName(callerName);
                 }
             );
 
             // Incoming call event
             socketInstance?.on('incomingCall', (messageData) => {
-                console.log('Received call:', messageData);
                 setIncomingCall(messageData);
                 setRemoteUsername(messageData.callerName);
             });
@@ -146,17 +119,7 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({
                     channelName,
                     token,
                 }) => {
-                    console.log('getReceiverToken:', {
-                        callerId,
-                        callerName,
-                        receiverId,
-                        receiverName,
-                        token,
-                        channelName,
-                    });
-
                     joinCall(token, channelName, receiverId);
-                    setChannelName(channelName);
                     setLocalUserName(receiverName);
                 }
             );
@@ -183,16 +146,10 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({
                 token,
                 uid
             );
-
-            console.log('channelName=================', channelName);
             setAgoraClient(client);
 
             const localTracks =
                 await AgoraRTC.createMicrophoneAndCameraTracks();
-            setLocalUser({
-                videoTrack: localTracks[1],
-                audioTrack: localTracks[0],
-            });
 
             await client?.publish(localTracks);
         },
@@ -200,9 +157,7 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({
     );
 
     const acceptCall = useCallback(() => {
-        console.log('IN acceptCalllllllll 111111');
         if (socket && incomingCall) {
-            console.log('IN acceptCalllllllll222222');
             socket.emit('acceptCall', {
                 callerId: incomingCall.callerId,
                 callerName: incomingCall.callerName,
@@ -221,23 +176,11 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({
     }, [socket, incomingCall]);
 
     const leaveCall = useCallback(async () => {
-        console.log('client=================', agoraClient);
-
         await agoraClient?.unpublish();
-        // Close and stop audio/video tracks
-        localUser.audioTrack?.stop();
-        localUser.audioTrack?.close();
-        localUser.videoTrack?.stop();
-        localUser.videoTrack?.close();
-        // Leave the channel
         await agoraClient?.leave();
-        setLocalUser({ videoTrack: null, audioTrack: null });
         setRemoteUser(null);
         setAgoraClient(null);
-        setChannelName(null);
-
-        console.log('user has left the call!');
-    }, [agoraClient, localUser]);
+    }, [agoraClient]);
     const value = useMemo(
         () => ({
             socket,
@@ -247,17 +190,13 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({
             incomingCall,
             acceptCall,
             rejectCall,
-            localUser,
             remoteUser,
             setRemoteUser,
             leaveCall,
             agoraClient,
             localUserName,
             remoteUsername,
-            setLocalUser,
             setAgoraClient,
-            channelName,
-            setChannelName,
             setRemoteUsername,
         }),
         [
@@ -268,17 +207,13 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({
             incomingCall,
             acceptCall,
             rejectCall,
-            localUser,
             remoteUser,
             setRemoteUser,
             leaveCall,
             agoraClient,
             localUserName,
             remoteUsername,
-            setLocalUser,
             setAgoraClient,
-            channelName,
-            setChannelName,
             setRemoteUsername,
         ]
     );
