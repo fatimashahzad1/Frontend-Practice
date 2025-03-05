@@ -13,17 +13,9 @@ import { getToken } from '@/lib/get-token';
 import AgoraRTC, {
     IAgoraRTCClient,
     IAgoraRTCRemoteUser,
-    ICameraVideoTrack,
-    IMicrophoneAudioTrack,
 } from 'agora-rtc-sdk-ng';
 
 const SOCKET_URL = 'http://localhost:3005'; // Replace with your NestJS backend URL
-
-interface Message {
-    id: string;
-    text: string;
-    sender: string;
-}
 
 interface SocketContextType {
     socket: Socket | null;

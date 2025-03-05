@@ -3,15 +3,21 @@ export const PAGINATION_DEFAULT_PAGE = 1;
 export const PAGINATION_DEFAULT_LIMIT = 8;
 
 export const enum DASHBOARD_SIMILAR_PAGES {
-  FEED = 'feed',
-  EVENTS = 'events',
-  JOBS = 'jobs',
+    FEED = 'feed',
+    EVENTS = 'events',
+    JOBS = 'jobs',
 }
 
 export const ONLINE_PRESENCE_PLATFORMS = [
-  'GitHub',
-  'Figma',
-  'Instagram',
-  'Facebook',
-  'LinkedIn',
+    'GitHub',
+    'Figma',
+    'Instagram',
+    'Facebook',
+    'LinkedIn',
 ] as const;
+
+export enum CALL_STATUS {
+    RECEIVED = 'RECEIVED',
+    REJECTED = 'REJECTED',
+    MISSED = 'MISSED',
+}

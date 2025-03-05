@@ -21,6 +21,8 @@ import {
     useEffect,
 } from 'react';
 import { useSocketContext } from './socket-context';
+import { useRouter } from 'next/navigation';
+import { ROUTES } from '@/constants/routes';
 
 interface SendMessageProps {
     chatId: number;
@@ -57,6 +59,7 @@ interface ChatSelectionContextType {
     >;
     hasNextPage: boolean;
     isFetchingNextPage: boolean;
+    createChat: ({ otherUserId }: { otherUserId: number }) => void;
 }
 
 // Create the context with a default value
@@ -130,6 +133,26 @@ const sendAMessage = async ({ chatId, message }: SendMessageProps) => {
     return result;
 };
 
+// send a message
+const createOrGetExistingChat = async ({
+    otherUserId,
+}: {
+    otherUserId: number;
+}) => {
+    const token = await getToken();
+    if (!token) throw new Error('Token is Missing');
+
+    const result = await postClient({
+        url: `chat/create`,
+        token,
+        data: { otherUserId },
+    });
+    if (result?.error)
+        throw new Error(result?.message || 'Failed to create chat');
+
+    return result;
+};
+
 // Context Provider Component
 export function ChatSelectionProvider({
     children,
@@ -146,6 +169,7 @@ export function ChatSelectionProvider({
         null
     );
     const { socket, messages, setMessages } = useSocketContext();
+    const router = useRouter();
 
     useEffect(() => {
         if (selectedChat) {
@@ -218,6 +242,9 @@ export function ChatSelectionProvider({
             queryClient.invalidateQueries({
                 queryKey: ['messages', selectedChat],
             });
+            queryClient.invalidateQueries({
+                queryKey: ['chats'],
+            });
             setMessages([]);
             toast({
                 variant: 'default',
@@ -240,6 +267,21 @@ export function ChatSelectionProvider({
         },
     });
 
+    const createChat = useMutation({
+        mutationFn: createOrGetExistingChat,
+        onSuccess: (result) => {
+            queryClient.invalidateQueries({
+                queryKey: ['chats'],
+            });
+            console.log('result===', result);
+            setSelectedChat(result.id);
+            router.push(ROUTES.chats);
+        },
+        onError: (err: any) => {
+            console.log('err==', err);
+        },
+    });
+
     const memoizedValue = useMemo(
         () => ({
             selectedChat,
@@ -257,6 +299,7 @@ export function ChatSelectionProvider({
             isFetchingNextPage,
             chatNewMessages,
             setChatNewMessages,
+            createChat: createChat.mutate,
         }),
         [
             selectedChat,
@@ -274,6 +317,7 @@ export function ChatSelectionProvider({
             isFetchingNextPage,
             chatNewMessages,
             setChatNewMessages,
+            createChat,
         ]
     );
 
