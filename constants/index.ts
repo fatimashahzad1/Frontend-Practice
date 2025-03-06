@@ -21,3 +21,19 @@ export enum CALL_STATUS {
     REJECTED = 'REJECTED',
     MISSED = 'MISSED',
 }
+
+export enum BILLING_PLANS {
+    PRO_ANNUAL = 'Pro Annual',
+    PRO_PORTFOLIO = 'Pro Portfolio',
+    SPONSORED_POST = 'Sponsored Post',
+}
+
+export enum PAYMENT_METHOD_IMAGES {
+    VISA = '/assets/visa.svg',
+    MASTER_CARD = '/assets/mastercard.svg',
+}
+
+export enum PAYMENT_METHOD {
+    VISA = 'Visa',
+    MASTER_CARD = 'MasterCard',
+}

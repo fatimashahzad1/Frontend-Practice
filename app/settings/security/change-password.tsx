@@ -24,17 +24,14 @@ const ChangePassword = () => {
         console.log(values);
     }
     return (
-        <div className="border-[#EFEFFF] border-b-2 pb-6">
-            <h2 className="text-xl font-bold text-black mt-10 mb-8">
+        <div className="border-[#EFEFFF] md:border-b-2 md:pb-6">
+            <h2 className="text-sm md:text-xl font-bold text-black mt-6 mb-3 md:mt-10 md:mb-8">
                 Password
             </h2>
             <Form {...form}>
-                <form
-                    onSubmit={form.handleSubmit(onSubmit)}
-                    className="space-y-8"
-                >
+                <form onSubmit={form.handleSubmit(onSubmit)}>
                     <div
-                        className="flex flex-row gap-5"
+                        className="flex flex-col md:flex-row gap-5"
                         style={{ marginTop: 0 }}
                     >
                         <SettingsInput
@@ -46,7 +43,7 @@ const ChangePassword = () => {
                             {...CONFIRM_PASSWORD_FIELD}
                         />
                     </div>
-                    <p className="text-base font-medium">
+                    <p className="mt-4 md:mt-7 text-sm md:text-base font-medium">
                         Can’t remember your current password?{' '}
                         <Link
                             href={ROUTES.resetPassword}
@@ -57,7 +54,7 @@ const ChangePassword = () => {
                     </p>
                     <Button
                         variant="outline"
-                        className="max-w-fit bg-[#1565D8] h-12 text-base font-medium text-white rounded-[10px] mb-8"
+                        className="mt-3 md:mt-8 max-w-fit bg-[#1565D8] h-12 text-sm md:text-base font-medium text-white rounded-[10px] md:mb-8"
                         type="submit"
                     >
                         Save Password Changes

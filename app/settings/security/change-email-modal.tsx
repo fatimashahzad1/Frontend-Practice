@@ -17,14 +17,14 @@ const ChangeEmailModal = () => {
     const [text, setText] = useState<string>(email);
     const [open, setOpen] = useState(false);
     return (
-        <div className="border-[#EFEFFF] border-b-2 pb-6">
-            <h2 className="text-xl font-bold text-black mt-14 mb-8">
+        <div className="border-[#EFEFFF] md:border-b-2 md:pb-6">
+            <h2 className="text-sm md:text-xl font-bold text-black mt-6 mb-3 md:mt-14 md:mb-8">
                 Email address
             </h2>
             <div className="flex justify-between items-center flex-wrap">
-                <p className="text-lg">
+                <p className="text-sm md:text-lg">
                     Your email address is{' '}
-                    <span className="font-bold">{text}</span>
+                    <span className="font-bold italic">{text}</span>
                 </p>
                 <Dialog open={open} onOpenChange={setOpen}>
                     <DialogTrigger asChild>

@@ -20,8 +20,8 @@ const SettingsInput = ({
             control={control}
             name={name}
             render={({ field }) => (
-                <FormItem className="space-y-2 w-max-[277px] mt-7">
-                    <FormLabel className="text-base font-semibold ">
+                <FormItem className="space-y-2 w-max-[277px] md:mt-7">
+                    <FormLabel className="text-sm md:text-base font-semibold ">
                         {label}
                     </FormLabel>
                     <FormControl>
@@ -30,7 +30,7 @@ const SettingsInput = ({
                             {...field}
                             type={type}
                             maxLength={maxLength}
-                            className="ml-1 border-[1px] setting-input px-8 py-7"
+                            className="w-full ml-0 border-[1px] setting-input px-8 py-7"
                         />
                     </FormControl>
                     <FormMessage />

@@ -15,13 +15,13 @@ const DeleteAccount = ({ postsCount }: { postsCount: number }) => {
     const [open, setOpen] = useState(false);
     return (
         <div>
-            <h2 className="text-xl font-bold text-black mt-10 mb-8">
+            <h2 className="text-sm md:text-xl font-bold text-black mt-8 md:mt-10 mb-3 md:mb-8">
                 Delete Account
             </h2>
-            <p className="text-lg text-black">
+            <p className="text-sm md:text-lg text-black">
                 Would you like to delete your account?
             </p>
-            <p className="text-lg text-black">
+            <p className="text-sm md:text-lg text-black">
                 This account contains 1388 posts. Deleting your account will
                 remove all the content associated with it.
             </p>
@@ -29,7 +29,7 @@ const DeleteAccount = ({ postsCount }: { postsCount: number }) => {
                 <DialogTrigger asChild>
                     <Button
                         variant="link"
-                        className="text-[#EE4878] hover:text-[#EE4878] px-0 mt-10"
+                        className="text-[#EE4878] hover:text-[#EE4878] px-0 py-0 mt-4 md:mt-10"
                     >
                         I want to delete my account
                     </Button>

@@ -1,14 +1,14 @@
-import React from "react";
-import Heading from "../heading";
-import GeneralForm from "./general-form";
+import React from 'react';
+import Heading from '../heading';
+import GeneralForm from './general-form';
 
 const General = () => {
-  return (
-    <div className="mt-16 ml-14 max-sm:mt-8 max-sm:ml-5 mr-4">
-      <Heading title="General" />
-      <GeneralForm />
-    </div>
-  );
+    return (
+        <div className="min-h-screen py-8 md:py-16 md:pl-14 px-5 md:pr-4 max-md:w-full md:w-[597px]">
+            <Heading title="General" />
+            <GeneralForm />
+        </div>
+    );
 };
 
 export default General;
