@@ -10,9 +10,10 @@ import { Input } from '@/components/ui/input';
 const SettingsInput = ({
     control,
     label,
-    placeholder,
+
     name,
     maxLength = 20,
+    placeholder = '',
     type = 'text',
 }: SettingsInputProps) => {
     return (

@@ -17,6 +17,9 @@ export const enum FORM_FIELD_NAMES {
     CARD_NUMBER = 'cardNumber',
     EXPIRY_DATE = 'expiryDate',
     CVV = 'cvv',
+    WEEKLY_NEWSLETTER = 'weeklyNewsletter',
+    ACCOUNT_SUMMARY = 'accountSummary',
+    WEBSITE_NOTIFICATIONS_CHECKS = 'websiteNotifications',
 }
 
 export const FULLNAME_FIELD: FormField = {
@@ -104,6 +107,12 @@ export const DEFAULT_PAYMENT_METHOD_VALUES = {
     cvv: '',
 };
 
+export const DEFAULT_NOTIFICATIONS_VALUES = {
+    weeklyNewsletter: false,
+    accountSummary: false,
+    websiteNotifications: [],
+};
+
 export const FIRST_NAME_FIELD: FormField = {
     name: FORM_FIELD_NAMES.FIRST_NAME,
     label: 'First Name*',
@@ -157,4 +166,16 @@ export const CVV_FIELD: FormField = {
     name: FORM_FIELD_NAMES.CVV,
     label: 'CVV',
     placeholder: '***',
+};
+
+export const WEEKLY_NEWSLETTTER_SWITCH_FIELD: FormFieldSwitch = {
+    name: FORM_FIELD_NAMES.WEEKLY_NEWSLETTER,
+    label: 'Weekly newsletter',
+    description: 'A small text about what the newsletters might contain.',
+};
+
+export const ACCOUNT_SUMMARY_SWITCH_FIELD: FormFieldSwitch = {
+    name: FORM_FIELD_NAMES.ACCOUNT_SUMMARY,
+    label: 'Account summary',
+    description: 'A small text about what the newsletters might contain.',
 };

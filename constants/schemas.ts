@@ -115,3 +115,11 @@ export const PaymentMethodSchema = z.object({
         .string()
         .regex(/^\d{3}$/, { message: 'CVV must be exactly 3 digits.' }),
 });
+
+export const NotificationsSchema = z.object({
+    weeklyNewsletter: z.boolean().default(false), // Switch value
+    accountSummary: z.boolean().default(false), // Switch value
+    websiteNotifications: z
+        .array(z.string())
+        .min(1, 'Select at least one preference'), // Checkbox group
+});
