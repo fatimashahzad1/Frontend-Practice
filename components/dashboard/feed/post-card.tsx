@@ -29,6 +29,7 @@ import Image from 'next/image';
 import { ArticleCard } from './article-card';
 import { useEffect } from 'react';
 import useCreatePost from '@/hooks/use-create-post';
+import WriteArticleModal from './write-article-modal';
 
 export function PostCard() {
   const { image, uploading, progress, uploadImage, removeImage } =
@@ -126,10 +127,7 @@ export function PostCard() {
                   <CalendarMinus2 height={26} />
                   <p className="text-[#1565D8] font-medium">Events</p>
                 </Button>
-                <Button className="text-[#1565D8] gap-[10px] p-0" type="button">
-                  <NotepadText height={26} />
-                  <p className="text-[#1565D8] font-medium">Write Article</p>
-                </Button>
+                <WriteArticleModal />
               </div>
             </div>
           </div>

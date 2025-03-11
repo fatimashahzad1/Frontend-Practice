@@ -7,12 +7,13 @@ import CardImage from "@/public/assets/dashboard/articleImg.png";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 type PeopleCardProps = {
-  title: string;
-  description: string;
-  actionTitle: string;
-  action: () => void;
-  actionButtonClasses: string;
-  actionDisabled: boolean;
+  readonly title: string;
+  readonly description: string;
+  readonly actionTitle: string;
+  readonly action: () => void;
+  readonly actionButtonClasses: string;
+  readonly actionDisabled: boolean;
+  readonly imageUrl?: string | null;
 };
 
 export function PeopleCard({
@@ -22,13 +23,14 @@ export function PeopleCard({
   actionTitle,
   actionButtonClasses,
   actionDisabled,
+  imageUrl,
 }: PeopleCardProps) {
   return (
     <Card className="flex flex-row sm:flex-col overflow-hidden w-full sm:w-[320px] h-[73px] sm:h-[384px] rounded-3xl self-center sm:mx-auto max-sm:justify-center max-sm:items-center max-sm:shadow-none max-sm:border-x-0 max-sm:border-t-0 max-sm:border-[#D9D9D9] max-sm:border-b-2 max-sm:rounded-none max-sm:mt-4 max-sm:px-5 max-sm:gap-3">
       <CardContent className="p-0 max-sm:flex max-sm:flex-row max-sm:items-center max-sm:w-9/12 max-sm:gap-3">
         <Image
-          src={CardImage}
-          width={0}
+          src={imageUrl ?? CardImage}
+          width={320}
           height={0}
           style={{ width: "100%", height: "200px" }}
           alt="user profile"

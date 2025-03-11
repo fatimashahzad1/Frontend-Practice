@@ -21,6 +21,7 @@ interface Article {
     title: string;
     description: string;
     estimatedTime: string;
+    articleImage?:string | null;
     creator: { name: string };
 }
 

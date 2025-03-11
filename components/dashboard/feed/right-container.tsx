@@ -27,7 +27,7 @@ const RightContainer = ({ type }: { type?: string }) => {
       {/* Upcoming Events */}
       {type === DASHBOARD_SIMILAR_PAGES.EVENTS && (
         <div className='px-4 py-5 bg-white flex flex-col gap-5 rounded-2xl'>
-          <h1 className='text-lg font-bold'>Event Planner</h1>
+          <h1 className='text-lg font-bold'>Upcoming Events</h1>
           {events.map((event, index) => (
             <SideCollectionItem
               key={`event-${index}`}

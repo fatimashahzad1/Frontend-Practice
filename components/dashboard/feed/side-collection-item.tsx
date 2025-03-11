@@ -26,7 +26,7 @@ const SideCollectionItem = ({
 }) => {
   return (
     <div className='w-full flex flex-row justify-between items-center gap-4'>
-      <div className='flex-1 flex flex-row '>
+      <div className='flex-1 flex flex-row gap-4'>
         <Avatar className={`w-14 h-14 ${avatarClasses}`}>
           <AvatarImage
             src={imageUrl}

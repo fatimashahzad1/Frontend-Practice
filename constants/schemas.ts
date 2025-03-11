@@ -148,3 +148,24 @@ export const AddPostEventSchema = z.object({
     .nullable()
     .optional(),
 });
+
+export const WriteArticleSchema = z.object({
+  title: z
+    .string()
+    .min(20, {
+      message: 'Title must be at least 20 characters.',
+    })
+    .max(255, {
+      message: 'Title must be at most 255 characters.',
+    }),
+  description: z
+    .string()
+    .min(500, {
+      message: 'Description must be at least 500 characters.',
+    })
+    .max(1000, {
+      message: 'Description must be at most 1000 characters.',
+    }),
+  estimatedTime: z.string().min(1, 'Estimated time is required'),
+  articleImage: z.string().optional(),
+});

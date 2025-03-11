@@ -50,6 +50,7 @@ const Articles = () => {
               action={() => {
                 router.push(`${ROUTES.articles}/${article.id}`);
               }}
+              imageUrl={article.articleImage}
               actionDisabled={false}
             />
           ))}

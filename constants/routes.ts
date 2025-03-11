@@ -35,4 +35,5 @@ export const PRIVATE_ROUTES = [ROUTES.settingsAnalytics];
 
 export const enum ROUTE_QUERY_KEYS {
   GET_ALL_POSTS = 'posts',
+  GET_ALL_ARTICLES = 'articles',
 }
