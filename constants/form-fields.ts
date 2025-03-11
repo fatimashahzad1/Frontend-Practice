@@ -20,6 +20,8 @@ export const enum FORM_FIELD_NAMES {
     WEEKLY_NEWSLETTER = 'weeklyNewsletter',
     ACCOUNT_SUMMARY = 'accountSummary',
     WEBSITE_NOTIFICATIONS_CHECKS = 'websiteNotifications',
+    CONTENT = 'content',
+    POST_IMAGE = 'postImage',
 }
 
 export const FULLNAME_FIELD: FormField = {

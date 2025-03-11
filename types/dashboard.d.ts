@@ -50,12 +50,11 @@ interface Message {
 }
 
 interface Post {
-    id: number;
-    creatorImgUrl: string;
-    creatorName: string;
-    lastEdited: string;
-    postImgUrl: string;
-    postDescription: string;
+    id?: number;
+    content: string;
+    author: { id: number; name: string };
+    createdAt: string;
+    postImage?: string | null;
 }
 
 interface Followers {
