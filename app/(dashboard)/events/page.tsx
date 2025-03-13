@@ -7,11 +7,11 @@ import { usePosts } from '@/hooks/use-posts';
 import React from 'react';
 
 const Events = () => {
-  const { data } = usePosts(POST_TYPE.EVENT);
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = usePosts(POST_TYPE.EVENT);
   return (
-    <div className='grid grid-cols-12 bg-[#EEF4FD]'>
+    <div className='grid grid-cols-12 bg-[#EEF4FD] h-full'>
       <LeftContainer type={DASHBOARD_SIMILAR_PAGES.EVENTS} />
-      <MainContainer posts={data} />
+      <MainContainer posts={data} fetchNextPage={fetchNextPage} hasNextPage={hasNextPage} isFetchingNextPage={isFetchingNextPage} isLoading={isLoading} />
       <RightContainer type={DASHBOARD_SIMILAR_PAGES.EVENTS} />
     </div>
   );
