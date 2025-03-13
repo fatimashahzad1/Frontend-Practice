@@ -21,7 +21,7 @@ interface Article {
     title: string;
     description: string;
     estimatedTime: string;
-    articleImage?:string | null;
+    articleImage?: string | null;
     creator: { name: string };
 }
 
@@ -53,9 +53,14 @@ interface Message {
 interface Post {
     id?: number;
     content: string;
+    title?: string;
     author: { id: number; name: string };
     createdAt: string;
     postImage?: string | null;
+    type: number | string
+    eventDate?: string | null;
+    eventTime?: string | null
+
 }
 
 interface Followers {

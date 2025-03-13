@@ -1,3 +1,5 @@
+import { POST_TYPE } from "./index";
+
 export const enum FORM_FIELD_NAMES {
   NAME = 'name',
   EMAIL = 'email',
@@ -26,6 +28,9 @@ export const enum FORM_FIELD_NAMES {
   DESCRIPTION = 'description',
   ESTIMATED_TIME = 'estimatedTime',
   ARTICLE_IMAGE = 'articleImage',
+  EVENT_DATE = 'eventDate',
+  EVENT_TIME = 'eventTime',
+  TYPE = 'type'
 }
 
 export const FULLNAME_FIELD: FormField = {
@@ -118,6 +123,12 @@ export const DEFAULT_CREATE_ARTICLE_VALUES = {
   description: '',
   estimatedTime: '',
 };
+
+export const DEFAULT_EVENT_VALUES = {
+  authorId: 60,
+  content: '',
+  type: POST_TYPE.FEED,
+}
 
 export const DEFAULT_NOTIFICATIONS_VALUES = {
   weeklyNewsletter: false,

@@ -44,14 +44,18 @@ export enum POST_TYPE {
   EVENT = 1,
   FEED = 2,
 }
+export enum POST_TYPE_NAME {
+  EVENT = "EVENT",
+  FEED = "FEED",
+}
 
 export const FEED_DAY_UNITS: {
   unit: QUnitType | OpUnitType;
   threshold: number;
   suffix: string;
 }[] = [
-  { unit: 'year', threshold: 31536000, suffix: 'y' },
-  { unit: 'day', threshold: 86400, suffix: 'd' },
-  { unit: 'hour', threshold: 3600, suffix: 'h' },
-  { unit: 'minute', threshold: 60, suffix: 'm' },
-];
+    { unit: 'year', threshold: 31536000, suffix: 'y' },
+    { unit: 'day', threshold: 86400, suffix: 'd' },
+    { unit: 'hour', threshold: 3600, suffix: 'h' },
+    { unit: 'minute', threshold: 60, suffix: 'm' },
+  ];

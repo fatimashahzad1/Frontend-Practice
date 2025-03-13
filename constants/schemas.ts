@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { ONLINE_PRESENCE_PLATFORMS } from '.';
+import dayjs from "dayjs";
 export const RegisterSchema = z.object({
   name: z.string().trim().min(3, 'Name must be at least 3 characters long'),
   email: z.string().email('Please enter a valid email address'),
@@ -125,6 +126,7 @@ export const NotificationsSchema = z.object({
 });
 
 export const AddPostEventSchema = z.object({
+
   content: z
     .string()
     .min(255, {
@@ -133,7 +135,11 @@ export const AddPostEventSchema = z.object({
     .max(500, {
       message: 'Content must be at most 500 characters.',
     }),
-
+  title: z
+    .string()
+    .min(10, { message: 'Title must be at least 10 characters.' })
+    .max(50, { message: 'Title must be at most 50 characters.' })
+    .optional(),
   type: z.number({
     message: 'Post type is required',
   }),
@@ -147,6 +153,21 @@ export const AddPostEventSchema = z.object({
     })
     .nullable()
     .optional(),
+  eventDate: z
+    .string()
+    .refine(
+      (val) => { console.log("IN REFINE+++++++++"); return !val || dayjs(val, 'MMM D, YYYY', true).isValid() },
+      { message: 'Invalid date format. Use "Jul 24, 2024".' }
+    )
+    .optional()
+    .nullable(),
+  eventTime: z
+    .string()
+    .regex(/^([01]\d|2[0-3]):([0-5]\d)$/, {
+      message: 'Invalid time format (HH:mm expected)',
+    })
+    .optional()
+    .nullable(),
 });
 
 export const WriteArticleSchema = z.object({
@@ -168,4 +189,30 @@ export const WriteArticleSchema = z.object({
     }),
   estimatedTime: z.string().min(1, 'Estimated time is required'),
   articleImage: z.string().optional(),
+});
+
+
+export const AddEventSchema = z.object({
+  title: z
+    .string()
+    .min(10, {
+      message: 'Title must be at least 10 characters.',
+    })
+    .max(50, {
+      message: 'Title must be at most 50 characters.',
+    })
+  ,
+  eventDate: z
+    .string()
+    .refine(
+      (val) => dayjs(val, 'MMM D, YYYY', true).isValid(), // Ensure it's valid
+      { message: 'Invalid date format. Use "Jul 24, 2024".' }
+    )
+  ,
+  eventTime: z
+    .string()
+    .regex(/^([01]\d|2[0-3]):([0-5]\d)$/, {
+      message: 'Invalid time format (HH:mm expected)',
+    })
+  ,
 });

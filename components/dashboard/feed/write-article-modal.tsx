@@ -82,7 +82,7 @@ const WriteArticleModal = () => {
             <DialogTitle>Create Article</DialogTitle>
           </DialogHeader>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-5'>
+            <form id="write-article-form" onSubmit={(e) => { e.preventDefault(); e.stopPropagation(); form.handleSubmit(onSubmit)() }} className='space-y-5'>
               {/* Image Upload */}
               <div className='w-full flex flex-col items-center justify-center'>
                 <label className='text-sm md:text-base font-semibold'>
