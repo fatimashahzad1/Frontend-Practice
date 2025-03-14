@@ -1,27 +1,49 @@
 'use client';
 import { Button } from '@/components/ui/button';
 import { DASHBOARD_SIMILAR_PAGES } from '@/constants';
-import { companies, contacts, events } from '@/mocks/dashboard';
+import { companies, events } from '@/mocks/dashboard';
 import { MessageSquareText, NotebookPen } from 'lucide-react';
 import React from 'react';
 import SideCollectionItem from './side-collection-item';
+import useGetAllFollowedUsers from "@/hooks/use-get-all-followed-users";
+import { useRouter } from "next/navigation";
+import { ROUTES } from "@/constants/routes";
+import { useChatSelection } from "@/contexts/chat-selection-context";
+import Spinner from "@/components/icons/spinner";
 
 const RightContainer = ({ type }: { type?: string }) => {
+  const { data, isLoading } = useGetAllFollowedUsers();
+  const { createChat } = useChatSelection();
+  const router = useRouter()
   return (
     <div className='max-md:hidden col-span-3 mt-[30px] mr-[30px] flex flex-col gap-4'>
       {/* Contacts */}
       <div className='px-4 py-5 bg-white flex flex-col gap-5 rounded-2xl'>
         <h1 className='text-lg font-bold'>Contacts</h1>
-        {contacts.map((user, index) => (
+        {isLoading && <div className='w-full text-center'>
+          <Spinner onlySpinner width='30px' />
+        </div>}
+        {data?.following?.map((user, index) => (
           <SideCollectionItem
             key={`contact-${index}`}
             text1={user.name}
-            text2={[user?.city, user?.country].filter((item) => item).join(',')}
+            text2={user.email}
             Icon={<MessageSquareText color='#1565D8' />}
-            iconHandle={() => {}}
-            imageUrl={user.imageUrl}
+            iconHandle={() => {
+              createChat({
+                otherUserId: user.id,
+              })
+            }}
+            imageUrl={user?.imageUrl}
           />
         ))}
+        <Button
+          variant='outline'
+          className='bg-[#1565D8] h-12 text-base font-medium text-white rounded-[10px]'
+          onClick={() => { router.push(ROUTES.chatsContacts) }}
+        >
+          View All
+        </Button>
       </div>
 
       {/* Upcoming Events */}
@@ -35,7 +57,7 @@ const RightContainer = ({ type }: { type?: string }) => {
               text2={event.date}
               imageUrl={event.imageUrl}
               Icon={<NotebookPen color='#1565D8' />}
-              iconHandle={() => {}}
+              iconHandle={() => { }}
               avatarClasses='rounded-none'
             />
           ))}
@@ -61,7 +83,7 @@ const RightContainer = ({ type }: { type?: string }) => {
                 .join(',')}
               imageUrl={company.imageUrl}
               Icon={<NotebookPen color='#1565D8' />}
-              iconHandle={() => {}}
+              iconHandle={() => { }}
             />
           ))}
           <Button

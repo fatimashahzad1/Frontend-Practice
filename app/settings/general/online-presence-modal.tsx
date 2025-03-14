@@ -17,26 +17,39 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from '@/components/ui/form';
 import { ONLINE_PRESENCE_PLATFORMS } from '@/constants';
 import { Plus } from 'lucide-react';
 import React, { useState } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { useForm, useFormContext } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { AddOnlinePresenceSchema } from '@/constants/schemas';
+import {
+  DEFAULT_ONLINE_PRESENCE_VALUES,
+  FORM_FIELD_NAMES,
+} from '@/constants/form-fields';
 
 const OnlinePresenceModal = () => {
-  const [onlinePresence, setOnlinePresence] = useState<OnlinePresence>({
-    platform: '',
-    url: '',
-  });
   const [open, setOpen] = useState(false);
-
   const { getValues, setValue } = useFormContext();
 
-  const addLink = (platform: string, url: string) => {
-    const existingLinks = getValues('links') || []; // Get existing links
-    console.log({ existingLinks });
-    const updatedLinks = [...existingLinks, { platform, url }]; // Append new link
-    console.log({ updatedLinks });
-    setValue('links', updatedLinks);
+  const form = useForm({
+    resolver: zodResolver(AddOnlinePresenceSchema),
+    defaultValues: DEFAULT_ONLINE_PRESENCE_VALUES,
+  });
+
+  const onSubmit = (values: z.infer<typeof AddOnlinePresenceSchema>) => {
+    const existingLinks = getValues('links') || [];
+    setValue('links', [...existingLinks, values], { shouldDirty: true }); // Update parent form
+    setOpen(false); // Close modal after submission
+    form.reset(DEFAULT_ONLINE_PRESENCE_VALUES);
   };
 
   return (
@@ -47,67 +60,89 @@ const OnlinePresenceModal = () => {
           Add
         </Button>
       </DialogTrigger>
-      <DialogContent className='sm:max-w-[425px]'>
+      <DialogContent className=''>
         <DialogHeader>
           <DialogTitle>Add Online Presence</DialogTitle>
           <DialogDescription>
             Select a platform and add the corresponding URL.
           </DialogDescription>
         </DialogHeader>
-        <div className='grid gap-4 py-4'>
-          <div className='grid grid-cols-4 items-center gap-4'>
-            <Label htmlFor='name' className='text-right'>
-              Platform
-            </Label>
-            <Select
-              onValueChange={(value) =>
-                setOnlinePresence({ platform: value, url: '' })
-              }
-            >
-              <SelectTrigger className='w-[180px]'>
-                <SelectValue placeholder='Select a platform' />
-              </SelectTrigger>
-              <SelectContent>
-                {ONLINE_PRESENCE_PLATFORMS.map((platform) => (
-                  <SelectItem key={platform} value={platform}>
-                    {platform}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-          <div className='grid grid-cols-4 items-center gap-4'>
-            <Label htmlFor='username' className='text-right'>
-              URL
-            </Label>
-            <Input
-              id='url'
-              placeholder='Enter URL'
-              value={onlinePresence.url}
-              onChange={(e) => {
-                setOnlinePresence((oldState) => ({
-                  ...oldState,
-                  url: e.target.value,
-                }));
-              }}
-              className='col-span-3'
-            />
-          </div>
-        </div>
-        <DialogFooter>
-          <Button
-            type='button'
-            variant='outline'
-            onClick={() => {
-              if (onlinePresence.url && onlinePresence.platform) {
-                addLink(onlinePresence.platform, onlinePresence.url);
-                setOpen(false);
-              }
+
+        {/* Form Wrapper */}
+        <Form {...form}>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              form.handleSubmit(onSubmit)();
             }}
+            className='grid gap-4 py-4'
           >
-            Save changes
-          </Button>
-        </DialogFooter>
+            {/* Platform Selection */}
+            <FormField
+              control={form.control}
+              name={FORM_FIELD_NAMES.PLATFORM}
+              render={({ field }) => (
+                <FormItem className=''>
+                  <Label htmlFor='platform' className='text-right'>
+                    Platform
+                  </Label>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger className='w-full h-[58px]'>
+                        <SelectValue placeholder='Select a platform' />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {ONLINE_PRESENCE_PLATFORMS.map((platform) => (
+                        <SelectItem key={platform} value={platform}>
+                          {platform}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            {/* URL Input */}
+            <FormField
+              control={form.control}
+              name={FORM_FIELD_NAMES.URL}
+              render={({ field }) => (
+                <FormItem className=''>
+                  <Label htmlFor='url' className='text-right'>
+                    URL
+                  </Label>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      id='url'
+                      placeholder='Enter URL'
+                      className='col-span-3 h-[58px]'
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            {/* Submit Button */}
+            <DialogFooter>
+              <Button
+                type='submit'
+                variant='outline'
+                disabled={form.formState.isSubmitting}
+              >
+                Save changes
+              </Button>
+            </DialogFooter>
+          </form>
+        </Form>
       </DialogContent>
     </Dialog>
   );

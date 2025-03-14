@@ -1,4 +1,4 @@
-import { POST_TYPE } from "./index";
+import { POST_TYPE } from './index';
 
 export const enum FORM_FIELD_NAMES {
   NAME = 'name',
@@ -30,7 +30,10 @@ export const enum FORM_FIELD_NAMES {
   ARTICLE_IMAGE = 'articleImage',
   EVENT_DATE = 'eventDate',
   EVENT_TIME = 'eventTime',
-  TYPE = 'type'
+  TYPE = 'type',
+  PICTURE_URL = 'pictureUrl',
+  PLATFORM = 'platform',
+  URL = 'url',
 }
 
 export const FULLNAME_FIELD: FormField = {
@@ -102,7 +105,6 @@ export const DEFAULT_RESET_PASSWORD_VALUES = {
 };
 
 export const DEFAULT_GENERAL_SETTINGS_VALUES = {
-  pictureUrl: '',
   firstName: '',
   lastName: '',
   location: '',
@@ -128,13 +130,15 @@ export const DEFAULT_EVENT_VALUES = {
   authorId: 60,
   content: '',
   type: POST_TYPE.FEED,
-}
+};
 
 export const DEFAULT_NOTIFICATIONS_VALUES = {
   weeklyNewsletter: false,
   accountSummary: false,
   websiteNotifications: [],
 };
+
+export const DEFAULT_ONLINE_PRESENCE_VALUES = { platform: '', url: '' };
 
 export const FIRST_NAME_FIELD: FormField = {
   name: FORM_FIELD_NAMES.FIRST_NAME,

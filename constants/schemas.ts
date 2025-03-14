@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { ONLINE_PRESENCE_PLATFORMS } from '.';
-import dayjs from "dayjs";
+import dayjs from 'dayjs';
 export const RegisterSchema = z.object({
   name: z.string().trim().min(3, 'Name must be at least 3 characters long'),
   email: z.string().email('Please enter a valid email address'),
@@ -61,12 +61,16 @@ export const ResetPasswordSchema = z
   );
 
 export const SettingsGeneralFormSchema = z.object({
+  id: z.number({
+    message: 'User ID is required',
+  }),
   pictureUrl: z
     .string({
       required_error: 'Picture is required',
       invalid_type_error: 'Picture URL must be a string',
     })
-    .url({ message: 'Invalid url' }),
+    .url({ message: 'Invalid URL' })
+    .optional(),
   firstName: z.string().min(2, {
     message: 'First Name must be at least 2 characters.',
   }),
@@ -126,7 +130,6 @@ export const NotificationsSchema = z.object({
 });
 
 export const AddPostEventSchema = z.object({
-
   content: z
     .string()
     .min(255, {
@@ -156,7 +159,10 @@ export const AddPostEventSchema = z.object({
   eventDate: z
     .string()
     .refine(
-      (val) => { console.log("IN REFINE+++++++++"); return !val || dayjs(val, 'MMM D, YYYY', true).isValid() },
+      (val) => {
+        console.log('IN REFINE+++++++++');
+        return !val || dayjs(val, 'MMM D, YYYY', true).isValid();
+      },
       { message: 'Invalid date format. Use "Jul 24, 2024".' }
     )
     .optional()
@@ -191,7 +197,6 @@ export const WriteArticleSchema = z.object({
   articleImage: z.string().optional(),
 });
 
-
 export const AddEventSchema = z.object({
   title: z
     .string()
@@ -200,19 +205,19 @@ export const AddEventSchema = z.object({
     })
     .max(50, {
       message: 'Title must be at most 50 characters.',
-    })
-  ,
-  eventDate: z
-    .string()
-    .refine(
-      (val) => dayjs(val, 'MMM D, YYYY', true).isValid(), // Ensure it's valid
-      { message: 'Invalid date format. Use "Jul 24, 2024".' }
-    )
-  ,
-  eventTime: z
-    .string()
-    .regex(/^([01]\d|2[0-3]):([0-5]\d)$/, {
-      message: 'Invalid time format (HH:mm expected)',
-    })
-  ,
+    }),
+  eventDate: z.string().refine(
+    (val) => dayjs(val, 'MMM D, YYYY', true).isValid(), // Ensure it's valid
+    { message: 'Invalid date format. Use "Jul 24, 2024".' }
+  ),
+  eventTime: z.string().regex(/^([01]\d|2[0-3]):([0-5]\d)$/, {
+    message: 'Invalid time format (HH:mm expected)',
+  }),
+});
+
+export const AddOnlinePresenceSchema = z.object({
+  platform: z.enum(ONLINE_PRESENCE_PLATFORMS, {
+    message: 'Invalid platform selected',
+  }),
+  url: z.string().url({ message: 'Invalid URL format' }),
 });

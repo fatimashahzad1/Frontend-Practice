@@ -22,8 +22,10 @@ const useVerification = () => {
     }
 
     try {
-      const result = await patchClient(`auth/verification?token=${token}`, {
-        isVerified: true,
+      const result = await patchClient({
+        url: `auth/verification?token=${token}`, data: {
+          isVerified: true,
+        }
       });
       if (result?.error) {
         setError(result);

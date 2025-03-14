@@ -103,7 +103,16 @@ export function useUploadImage() {
       uploadComplete,
       uploadImage,
       removeImage,
+      setImage,
     }),
-    [image, uploading, progress, uploadComplete, uploadImage, removeImage]
+    [
+      image,
+      uploading,
+      progress,
+      uploadComplete,
+      uploadImage,
+      removeImage,
+      setImage,
+    ]
   );
 }

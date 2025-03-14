@@ -27,19 +27,19 @@ const SideCollectionItem = ({
   return (
     <div className='w-full flex flex-row justify-between items-center gap-4'>
       <div className='flex-1 flex flex-row gap-4'>
-        <Avatar className={`w-14 h-14 ${avatarClasses}`}>
+        <Avatar className={`w-14 h-14 bg-gray-300  justify-center items-center ${avatarClasses}`}>
           <AvatarImage
             src={imageUrl}
             alt='Avatar'
             style={{ borderColor: '#5F9CF3' }}
           />
-          <AvatarFallback>{text1}</AvatarFallback>
+          <AvatarFallback className="w-full text-center">{text1.charAt(0).toUpperCase()}</AvatarFallback>
         </Avatar>
         <div className='w-full min-w=[49px] overflow-hidden'>
           <p className='font-medium text-base  overflow-hidden text-ellipsis'>
             {text1}
           </p>
-          <div className='flex flex-row justify-start items-center gap-1'>
+          <div className='flex flex-row justify-start items-center gap-1 w-auto'>
             <p className='text-xs font-normal overflow-hidden text-ellipsis'>
               {text2}
             </p>
@@ -59,7 +59,7 @@ const SideCollectionItem = ({
       <Button
         variant='default'
         size='icon'
-        className='flex-1'
+        className=''
         onClick={iconHandle}
       >
         {Icon}
