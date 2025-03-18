@@ -7,7 +7,12 @@ export const RegisterSchema = z.object({
   password: z
     .string()
     .trim()
-    .min(8, 'Password must be at least 8 characters long'),
+    .min(8, 'Password must be at least 8 characters long')
+    .max(32, 'Password cannot exceed 32 characters')
+    .regex(
+      /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,32}$/,
+      'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'
+    ),
   acceptTerms: z.literal(true, {
     invalid_type_error: 'You must accept terms and conditions.',
   }),
@@ -34,7 +39,12 @@ export const LoginSchema = z.object({
   password: z
     .string()
     .trim()
-    .min(8, 'Password must be at least 8 characters long'),
+    .min(8, 'Password must be at least 8 characters long')
+    .max(32, 'Password cannot exceed 32 characters')
+    .regex(
+      /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,32}$/,
+      'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'
+    ),
 });
 
 export const ForgotPasswordSchema = z.object({
@@ -46,11 +56,21 @@ export const ResetPasswordSchema = z
     password: z
       .string()
       .trim()
-      .min(8, 'Password must be at least 8 characters long'),
+      .min(8, 'Password must be at least 8 characters long')
+      .max(32, 'Password cannot exceed 32 characters')
+      .regex(
+        /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,32}$/,
+        'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'
+      ),
     confirmPassword: z
       .string()
       .trim()
-      .min(8, 'Confirm Password must be at least 8 characters long'),
+      .min(8, 'Confirm Password must be at least 8 characters long')
+      .max(32, 'Password cannot exceed 32 characters')
+      .regex(
+        /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,32}$/,
+        'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character'
+      ),
   })
   .refine(
     (data) => data.password === data.confirmPassword, // Validation logic
@@ -69,8 +89,7 @@ export const SettingsGeneralFormSchema = z.object({
       required_error: 'Picture is required',
       invalid_type_error: 'Picture URL must be a string',
     })
-    .url({ message: 'Invalid URL' })
-    .optional(),
+    .url({ message: 'Invalid URL' }),
   firstName: z.string().min(2, {
     message: 'First Name must be at least 2 characters.',
   }),
@@ -91,16 +110,14 @@ export const SettingsGeneralFormSchema = z.object({
     .max(500, {
       message: 'Bio must be at most 500 characters.',
     }),
-  links: z
-    .array(
-      z.object({
-        platform: z.enum(ONLINE_PRESENCE_PLATFORMS, {
-          message: 'Invalid platform selected',
-        }),
-        url: z.string().url({ message: 'Invalid URL format' }),
-      })
-    )
-    .optional(),
+  links: z.array(
+    z.object({
+      platform: z.enum(ONLINE_PRESENCE_PLATFORMS, {
+        message: 'Invalid platform selected',
+      }),
+      url: z.string().url({ message: 'Invalid URL format' }),
+    })
+  ),
 });
 
 export const PaymentMethodSchema = z.object({
@@ -220,4 +237,8 @@ export const AddOnlinePresenceSchema = z.object({
     message: 'Invalid platform selected',
   }),
   url: z.string().url({ message: 'Invalid URL format' }),
+});
+
+export const ChangeEmailFormSchema = z.object({
+  email: z.string().email('Please enter a valid email address'),
 });

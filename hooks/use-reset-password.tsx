@@ -1,51 +1,44 @@
-import { postClient } from "@/utils/client";
-import { useCallback, useMemo, useState } from "react";
+import { postClient } from '@/utils/client';
+import { useMutation } from '@tanstack/react-query';
+import { useToast } from './use-toast';
 
 const useResetPassword = () => {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<ErrorResponse | null>(null);
-  const [data, setData] = useState<SuccessResponse | null>(null);
-
-  const resetPassword = useCallback(
-    async (userData: ResetPasswordFormData, token: string | null) => {
+  const { toast } = useToast();
+  return useMutation({
+    mutationFn: async ({
+      data,
+      token,
+    }: {
+      data: ResetPasswordFormData;
+      token: string | null;
+    }) => {
       if (!token) {
-        setError({
-          error: "Token Missing",
-          message: "Token is Required!",
-          statusCode: 400,
-        });
-
-        return;
+        throw new Error('Token is required!');
       }
-      setLoading(true);
-      setError(null);
 
-      try {
-        const result = await postClient({
-          url: `auth/password/reset?token=${token}`,
-          data: userData,
-        });
-        if (result?.error) {
-          setError(result);
-        } else {
-          setData(result);
-        }
-      } catch (err: any) {
-        setError(err.message);
-        throw err;
-      } finally {
-        setLoading(false);
-      }
+      return await postClient({
+        url: `auth/password/reset?token=${token}`,
+        data,
+      });
     },
-    []
-  );
 
-  const memoizedData = useMemo(
-    () => ({ resetPassword, data, loading, error }),
-    [data, loading, error, resetPassword]
-  );
-
-  return memoizedData;
+    onSuccess: (data) => {
+      console.log('Password reset successful!', data);
+      toast({
+        variant: 'default',
+        title: data?.success,
+        description: data?.message,
+      });
+    },
+    onError: (error) => {
+      console.error('Error resetting password', error.message);
+      toast({
+        variant: 'destructive',
+        title: 'Error',
+        description: error.message,
+      });
+    },
+  });
 };
 
 export default useResetPassword;

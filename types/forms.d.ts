@@ -52,4 +52,5 @@ interface ChangeUserDetailsFormData {
   bio?: string;
   links?: OnlinePresence[];
   pictureUrl?: string;
+  email?: string;
 }

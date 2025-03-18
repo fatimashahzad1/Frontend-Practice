@@ -35,10 +35,12 @@ import {
   DEFAULT_ONLINE_PRESENCE_VALUES,
   FORM_FIELD_NAMES,
 } from '@/constants/form-fields';
+import useUser from '@/hooks/use-user';
 
 const OnlinePresenceModal = () => {
   const [open, setOpen] = useState(false);
   const { getValues, setValue } = useFormContext();
+  const { data: user } = useUser();
 
   const form = useForm({
     resolver: zodResolver(AddOnlinePresenceSchema),
@@ -47,7 +49,16 @@ const OnlinePresenceModal = () => {
 
   const onSubmit = (values: z.infer<typeof AddOnlinePresenceSchema>) => {
     const existingLinks = getValues('links') || [];
-    setValue('links', [...existingLinks, values], { shouldDirty: true }); // Update parent form
+    setValue(
+      'links',
+      [
+        ...existingLinks,
+        { ...values, id: existingLinks.length + 1, userId: user?.id },
+      ],
+      {
+        shouldDirty: true,
+      }
+    ); // Update parent form
     setOpen(false); // Close modal after submission
     form.reset(DEFAULT_ONLINE_PRESENCE_VALUES);
   };

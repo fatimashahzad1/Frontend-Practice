@@ -1,10 +1,11 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
-import { PUBLIC_ROUTES, ROUTES } from "./constants/routes";
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+import { PUBLIC_ROUTES, ROUTES } from './constants/routes';
+import { TOKEN_COOKIE_NAME } from './constants';
 
 export function middleware(request: NextRequest) {
   const currentPath = request.nextUrl.pathname;
-  const token = request.cookies.get("access_token")?.value;
+  const token = request.cookies.get(TOKEN_COOKIE_NAME)?.value;
 
   // Redirect to login if no token and user is on the home page
   if (!token && currentPath === ROUTES.root) {
@@ -37,6 +38,6 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!_next|api|favicon\\.ico|.*\\.(?:png|jpg|jpeg|gif|svg|css|js|webp|woff|woff2|ttf|otf|eot)$).*)",
+    '/((?!_next|api|favicon\\.ico|.*\\.(?:png|jpg|jpeg|gif|svg|css|js|webp|woff|woff2|ttf|otf|eot)$).*)',
   ],
 };

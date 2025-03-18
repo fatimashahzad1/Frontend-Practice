@@ -24,9 +24,10 @@ import ProfilePicture from './profile-picture';
 import Heading from '../heading';
 import useUser from '@/hooks/use-user';
 import useChangeUserDetails from '@/hooks/use-change-user-details';
+import Spinner from '@/components/icons/spinner';
 
 const GeneralForm = () => {
-  const { data: user } = useUser();
+  const { data: user, isPending } = useUser();
   const form = useForm<z.infer<typeof SettingsGeneralFormSchema>>({
     resolver: zodResolver(SettingsGeneralFormSchema),
     defaultValues: DEFAULT_GENERAL_SETTINGS_VALUES,
@@ -50,36 +51,49 @@ const GeneralForm = () => {
 
   function onSubmit(values: z.infer<typeof SettingsGeneralFormSchema>) {
     const dirtyFields = form.formState.dirtyFields; // Contains which fields were changed
-    const allValues = form.getValues(); // Contains all form values
+    const { links, ...allValues } = form.getValues(); // Contains all form values
+    const updatedLinks =
+      dirtyFields.links && Array.isArray(links)
+        ? links.map((link) => ({
+            platform: link.platform,
+            url: link.url,
+            userId: user?.id,
+          }))
+        : undefined;
     console.log({ allValues, values });
 
     // Extract only dirty fields from allValues
     const dirtyValues = Object.keys(dirtyFields).reduce((acc, key) => {
-      const typedKey = key as keyof typeof allValues; // Ensure typedKey is valid
+      const typedKey = key as keyof typeof allValues; // Ensure type safety
+
       if (dirtyFields[typedKey] || typedKey === 'id') {
-        console.log('key=', typedKey);
-        acc[typedKey] = allValues[typedKey]; // Assign value correctly
+        acc[typedKey] = allValues[typedKey] as any; // Assign value correctly
       }
 
       return acc;
     }, {} as Partial<ChangeUserDetailsFormData>);
     dirtyValues.id = user?.id;
-
+    // If links were modified, include them
+    if (updatedLinks) {
+      dirtyValues.links = updatedLinks as any; // Explicitly cast since links might not exist in ChangeUserDetailsFormData
+    }
     console.log({ dirtyValues }); // Only changed fields
     // changeUserDetails(dirtyValues); ✅ Should now work fine// Only the changed fields
-    changeUserDetails(dirtyValues);
+    changeUserDetails({ data: dirtyValues });
   }
 
   const links = form.watch('links') || [];
   console.log({ links });
 
-  const removeLink = ({ platform, url }: OnlinePresence) => {
+  const removeLink = (id?: number) => {
     console.log('remove called');
-    const updatedLinks = links.filter(
-      (link) => link.platform !== platform && link.url !== url
-    );
-    form.setValue('links', updatedLinks);
+    const updatedLinks = links.filter((link: OnlinePresence) => link.id !== id);
+    form.setValue('links', updatedLinks, { shouldDirty: true });
   };
+
+  if (isPending) {
+    return <Spinner />;
+  }
 
   return (
     <Form {...form}>
@@ -101,7 +115,7 @@ const GeneralForm = () => {
         <OnlinePresenceModal />
 
         {/* Display Selected Link */}
-        {links.map((link, index) => {
+        {links.map((link: OnlinePresence, index) => {
           return (
             <div key={`link-${index}`} className='relative w-full h-[74px]  '>
               {ONLINE_PRESENCE_PLATFORMS_ICONS[link.platform]}
@@ -117,9 +131,7 @@ const GeneralForm = () => {
                 className='absolute right-7 top-1/2 -translate-y-1/2 text-[#202142] cursor-pointer'
                 size={18}
                 type='button'
-                onClick={() =>
-                  removeLink({ platform: link.platform, url: link.url })
-                }
+                onClick={() => removeLink(link?.id)}
               />
             </div>
           );

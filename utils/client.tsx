@@ -24,7 +24,8 @@ export const postClient = async ({
 
     if (!response.ok) {
       const errorBody = await response.json();
-      return errorBody;
+      console.log({ errorBody });
+      throw { title: errorBody.title, message: errorBody.message };
     }
 
     return await response.json();
@@ -63,6 +64,39 @@ export const patchClient = async ({
     return await response.json();
   } catch (error: any) {
     console.error('Error in patchRequest:', error.message);
+    throw error;
+  }
+};
+
+export const putClient = async ({
+  url,
+  data,
+  token,
+}: {
+  url: string;
+  data?: any;
+  token?: string;
+}) => {
+  try {
+    const newUrl = process.env.NEXT_PUBLIC_API_BASE_URL + url;
+
+    const response = await fetch(newUrl, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        ...(token && { Authorization: `Bearer ${token}` }),
+      },
+      credentials: 'include',
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      throw new Error('Request Failed');
+    }
+
+    return await response.json();
+  } catch (error: any) {
+    console.error('Error in putRequest:', error.message);
     throw error;
   }
 };
@@ -125,7 +159,7 @@ export const deleteClient = async ({
 
     return await response.json();
   } catch (error: any) {
-    console.error('Error in postRequest:', error.message);
+    console.error('Error in deleteRequest:', error.message);
     throw error;
   }
 };

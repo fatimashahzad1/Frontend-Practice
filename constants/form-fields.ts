@@ -112,6 +112,10 @@ export const DEFAULT_GENERAL_SETTINGS_VALUES = {
   bio: '',
 };
 
+export const DEFAULT_CHANGE_EMAIL_VALUES = {
+  email: '',
+};
+
 export const DEFAULT_PAYMENT_METHOD_VALUES = {
   type: 'Visa' as 'Visa' | 'MasterCard', // Default to Visa
   cardholderName: '',
@@ -138,7 +142,10 @@ export const DEFAULT_NOTIFICATIONS_VALUES = {
   websiteNotifications: [],
 };
 
-export const DEFAULT_ONLINE_PRESENCE_VALUES = { platform: '', url: '' };
+export const DEFAULT_ONLINE_PRESENCE_VALUES = {
+  platform: 'GitHub' as const,
+  url: '',
+};
 
 export const FIRST_NAME_FIELD: FormField = {
   name: FORM_FIELD_NAMES.FIRST_NAME,

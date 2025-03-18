@@ -1,5 +1,5 @@
-import { postClient } from "@/utils/client";
-import { useCallback, useMemo, useState } from "react";
+import { postClient } from '@/utils/client';
+import { useCallback, useMemo, useState } from 'react';
 
 const useForgotPassword = () => {
   const [loading, setLoading] = useState(false);
@@ -12,7 +12,10 @@ const useForgotPassword = () => {
       setError(null);
 
       try {
-        const result = await postClient(`auth/password/forgot`, userData);
+        const result = await postClient({
+          url: `auth/password/forgot`,
+          data: userData,
+        });
         if (result?.error) {
           setError(result);
         } else {

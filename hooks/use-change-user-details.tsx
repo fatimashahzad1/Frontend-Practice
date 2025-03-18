@@ -1,25 +1,36 @@
 import { getToken } from '@/lib/get-token';
-import { patchClient } from '@/utils/client';
-import { useMutation } from '@tanstack/react-query';
+import { putClient } from '@/utils/client';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useToast } from './use-toast';
+import { ROUTE_QUERY_KEYS } from '@/constants/routes';
 
 const useChangeUserDetails = () => {
   const { toast } = useToast();
+  const queryClient = useQueryClient();
   const mutation = useMutation({
-    mutationFn: async (data: ChangeUserDetailsFormData) => {
+    mutationFn: async ({
+      data,
+      reauthenticate = false,
+    }: {
+      data: ChangeUserDetailsFormData;
+      reauthenticate?: boolean;
+    }) => {
       const token = await getToken();
       const { id, ...user } = data;
       if (!token) {
         throw new Error('Token Missing');
       }
 
-      return patchClient({
-        url: `users/${id}`,
+      return putClient({
+        url: `users/${id}?reauthenticate=${reauthenticate}`,
         data: user,
         token,
       });
     },
     onSuccess: (result) => {
+      queryClient.invalidateQueries({
+        queryKey: [ROUTE_QUERY_KEYS.USER_DETAILS],
+      });
       toast({
         variant: 'default',
         title: 'Success',

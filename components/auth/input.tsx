@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { useController, useFormContext } from "react-hook-form";
+import React, { useState } from 'react';
+import { useController, useFormContext } from 'react-hook-form';
 
 interface InputProps {
   label: string;
-  placeholder: string;
-  type: string;
+  placeholder?: string;
+  type?: string;
   name: string;
   maxLength?: number;
 }
@@ -25,21 +25,21 @@ const Input = ({
     field: { onChange, value },
   } = useController({ name, control });
 
-  if (type === "checkbox") {
+  if (type === 'checkbox') {
     return (
-      <div className="flex flex-col">
-        <div className="w-full flex flex-row items-center">
+      <div className='flex flex-col'>
+        <div className='w-full flex flex-row items-center'>
           <input
-            type="checkbox"
-            className="w-5 h-5 mr-4"
+            type='checkbox'
+            className='w-5 h-5 mr-4'
             onChange={() => {
               onChange(!value);
             }}
           />
           <label
-            htmlFor="acceptTerms"
+            htmlFor='acceptTerms'
             className={` text-base font-medium w-full ${
-              error?.message ? "text-red-600" : "text-[#696F79]"
+              error?.message ? 'text-red-600' : 'text-[#696F79]'
             }`}
           >
             I agree to terms & conditions
@@ -49,16 +49,16 @@ const Input = ({
     );
   }
 
-  if (type === "password") {
+  if (type === 'password') {
     return (
-      <div className="flex flex-col my-6 ">
-        <label htmlFor={name} className="input-label">
+      <div className='flex flex-col my-6 '>
+        <label htmlFor={name} className='input-label'>
           {label}
         </label>
         <div
           className={`flex flex-row justify-between border-[1px] border-[#8692A6] rounded-md mt-3 bg-transparent ${
             passwordFocused &&
-            "border-[#1565D8] outline-none border-[1px] shadow-input"
+            'border-[#1565D8] outline-none border-[1px] shadow-input'
           }`}
           onMouseDown={() => {
             setPasswordFocused(true);
@@ -68,8 +68,8 @@ const Input = ({
           }}
         >
           <input
-            type={showPassword ? "text" : "password"}
-            className=" border-none outline-none w-full h-full py-6 pl-8 rounded-md"
+            type={showPassword ? 'text' : 'password'}
+            className=' border-none outline-none w-full h-full py-6 pl-8 rounded-md'
             placeholder={placeholder}
             maxLength={maxLength}
             onChange={(e) => {
@@ -78,37 +78,37 @@ const Input = ({
             value={value}
           />
           <button
-            type="button"
-            className="pr-8 text-xs font-normal"
+            type='button'
+            className='pr-8 text-xs font-normal'
             onClick={() => setShowPassword((old) => !old)}
           >
-            {showPassword ? "Hide" : "Show"}
+            {showPassword ? 'Hide' : 'Show'}
           </button>
         </div>
-        {error && <span className="text-red-600">{error.message}</span>}
+        {error && <span className='text-red-600'>{error.message}</span>}
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col my-6 ">
-      <label htmlFor={name} className="input-label">
+    <div className='flex flex-col my-6 '>
+      <label htmlFor={name} className='input-label'>
         {label}
       </label>
 
       <input
-        type={"text"}
-        className="border-[1px] border-[#8692A6] py-6 px-8 rounded-md mt-3 bg-transparent focus:border-[#1565D8] focus:outline-none focus:border-[1px] focus:shadow-input"
+        type={'text'}
+        className='border-[1px] border-[#8692A6] py-6 px-8 rounded-md mt-3 bg-transparent focus:border-[#1565D8] focus:outline-none focus:border-[1px] focus:shadow-input'
         placeholder={placeholder}
         onChange={(e) => {
           onChange(e.target.value);
         }}
         value={value}
-        content="<h1>gr</h1>"
+        content='<h1>gr</h1>'
         name={name}
         maxLength={maxLength}
       />
-      {error && <span className="text-red-600">{error.message}</span>}
+      {error && <span className='text-red-600'>{error.message}</span>}
     </div>
   );
 };

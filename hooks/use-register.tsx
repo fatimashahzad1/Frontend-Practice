@@ -1,34 +1,39 @@
-import { postClient } from "@/utils/client";
-import { useState } from "react";
+import { postClient } from '@/utils/client';
+import { useMutation } from '@tanstack/react-query';
+
+import { useRouter } from 'next/navigation';
+import { useToast } from './use-toast';
+import { ROUTES } from '@/constants/routes';
 
 const useRegister = () => {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<ErrorResponse | null>(null);
-  const [data, setData] = useState<RegisterResponse | null>(null);
-
-  const register = async (userData: LoginFormData) => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      const result = await postClient(`auth/register`, userData);
-      if (result?.error) {
-        setError(result);
-      } else {
-        setData(result);
-      }
-    } catch (err: any) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { toast } = useToast();
+  const router = useRouter();
+  const mutation = useMutation({
+    mutationFn: async (userData: LoginFormData) => {
+      return await postClient({ url: `auth/register`, data: userData });
+    },
+    onSuccess: (data) => {
+      toast({
+        variant: 'default',
+        title: data.success,
+        description: data.message,
+      });
+      router.push(ROUTES.login);
+    },
+    onError: (error: any) => {
+      toast({
+        variant: 'destructive',
+        title: error.error,
+        description: error.message,
+      });
+    },
+  });
 
   return {
-    register,
-    loading,
-    error,
-    data,
+    register: mutation.mutate, // Function to call for registration
+    isPending: mutation.isPending,
+    error: mutation.error,
+    data: mutation.data,
   };
 };
 

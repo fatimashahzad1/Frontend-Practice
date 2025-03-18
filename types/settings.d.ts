@@ -13,6 +13,7 @@ type SettingsSwitchProp = Pick<SettingsInputProps, 'name' | 'label'> & {
 };
 
 interface OnlinePresence {
+  id?: number;
   platform: 'GitHub' | 'Figma' | 'Instagram' | 'Facebook' | 'LinkedIn';
   url: string;
 }
@@ -31,4 +32,7 @@ type User = {
   bio: string;
   links: OnlinePresence[];
   pictureUrl: string;
+  _count: {
+    posts: number;
+  };
 };
