@@ -9,7 +9,10 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { DEFAULT_EVENT_VALUES, FORM_FIELD_NAMES } from '@/constants/form-fields';
+import {
+  DEFAULT_EVENT_VALUES,
+  FORM_FIELD_NAMES,
+} from '@/constants/form-fields';
 import { AddPostEventSchema } from '@/constants/schemas';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
@@ -25,10 +28,12 @@ import { useEffect } from 'react';
 import useCreatePost from '@/hooks/use-create-post';
 import WriteArticleModal from './write-article-modal';
 import EventModal from './event-modal';
+import useUser from '@/hooks/use-user';
 
 export function PostCard() {
   const { image, uploading, progress, uploadImage, removeImage } =
     useUploadImage();
+  const { data: user } = useUser();
 
   const { mutate: createPost } = useCreatePost();
 
@@ -54,23 +59,29 @@ export function PostCard() {
     createPost({
       ...values,
       postImage: values.postImage ?? null, // Ensure postImage is never undefined
-      ...(values?.eventDate && { eventDate: new Date(Date.parse(values.eventDate)) }),
+      ...(values?.eventDate && {
+        eventDate: new Date(Date.parse(values.eventDate)),
+      }),
     });
     removeImage();
     form.reset(DEFAULT_EVENT_VALUES);
   }
   return (
     <Card className='w-full p-4 shadow-md rounded-lg flex flex-col gap-4 my-6'>
-      <Form {...form} >
-        <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-5' id="outer-form">
-          <div className='flex items-start gap-3'>
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className='space-y-5'
+          id='outer-form'
+        >
+          <div className='flex items-start justify-center gap-3'>
             <Avatar className='w-14 h-14'>
               <AvatarImage
-                className='rounded-full min-w-14 min-h-14'
-                src='/assets/dashboard/avatar1.svg'
+                className='rounded-full min-w-14 min-h-14 object-cover'
+                src={user?.pictureUrl ?? '/assets/dashboard/defaultAvatar.jpg'}
               />
               <AvatarFallback className='w-10 h-10 flex justify-center items-center rounded-full'>
-                CN
+                {user?.name?.charAt(0).toUpperCase()}
               </AvatarFallback>
             </Avatar>
             <div className='w-full'>
@@ -123,7 +134,6 @@ export function PostCard() {
               <div className='relative w-40 h-40 self-center'>
                 <Image
                   src={image}
-                  // src="https://res.cloudinary.com/dwwten9jp/image/upload/v1741664939/blob_mxynyx.jpg"
                   alt='Uploaded'
                   className='w-full h-full object-cover rounded-lg'
                   width={402}
@@ -152,6 +162,7 @@ export function PostCard() {
                 </div>
 
                 <ArticleCard
+                  preview={true}
                   postDetails={{
                     content: form.watch(FORM_FIELD_NAMES.CONTENT),
                     title: form.watch(FORM_FIELD_NAMES.TITLE),
@@ -159,12 +170,14 @@ export function PostCard() {
                     eventTime: form.watch(FORM_FIELD_NAMES.EVENT_TIME),
                     type: form.watch(FORM_FIELD_NAMES.TYPE),
                     author: {
-                      id: 1,
-                      name: 'author name',
+                      id: user?.id ?? 0,
+                      name: user?.name ?? '',
+                      pictureUrl: user?.pictureUrl ?? '',
                     },
                     createdAt: new Date().toString(),
                     postImage: image,
                   }}
+                  userId={user?.id}
                 />
                 <Button variant='outline' type='submit'>
                   Post

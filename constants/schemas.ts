@@ -163,9 +163,6 @@ export const AddPostEventSchema = z.object({
   type: z.number({
     message: 'Post type is required',
   }),
-  authorId: z.number({
-    message: 'Author Id is required',
-  }),
   postImage: z
     .string({
       required_error: 'Picture is required',

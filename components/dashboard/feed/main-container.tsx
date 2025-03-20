@@ -8,6 +8,7 @@ import { DASHBOARD_SIMILAR_PAGES } from '@/constants';
 import Image from 'next/image';
 import { InfiniteData } from "@tanstack/react-query";
 import Spinner from "@/components/icons/spinner";
+import useUser from "@/hooks/use-user";
 
 
 type MainContainerProps = {
@@ -21,6 +22,7 @@ type MainContainerProps = {
 
 const MainContainer = ({ type, posts, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading }: MainContainerProps) => {
   const observerRef = useRef(null);
+  const { data: user } = useUser()
   useEffect(() => {
     if (!observerRef.current || !hasNextPage) return;
 
@@ -50,7 +52,7 @@ const MainContainer = ({ type, posts, fetchNextPage, hasNextPage, isFetchingNext
           )}
           {posts?.pages.map((page, pageIndex) =>
             page.map((post, index) => (
-              <ArticleCard key={index} postDetails={post} />
+              <ArticleCard key={post.id} postDetails={post} preview={false} userId={user?.id} />
             ))
           )}
         </>

@@ -13,6 +13,7 @@ type PeopleCardProps = {
   readonly actionButtonClasses: string;
   readonly actionDisabled: boolean;
   readonly imageUrl?: string | null;
+  readonly isArticle?: boolean;
 };
 
 export function PeopleCard({
@@ -23,21 +24,22 @@ export function PeopleCard({
   actionButtonClasses,
   actionDisabled,
   imageUrl,
+  isArticle = false
 }: PeopleCardProps) {
   return (
     <Card className='flex flex-row sm:flex-col overflow-hidden w-full sm:w-[320px] h-[73px] sm:h-[384px] rounded-3xl self-center sm:mx-auto max-sm:justify-center max-sm:items-center max-sm:shadow-none max-sm:border-x-0 max-sm:border-t-0 max-sm:border-[#D9D9D9] max-sm:border-b-2 max-sm:rounded-none max-sm:mt-4 max-sm:px-5 max-sm:gap-3'>
       <CardContent className='p-0 max-sm:flex max-sm:flex-row max-sm:items-center max-sm:w-9/12 max-sm:gap-3'>
         <FallbackImage
           src={imageUrl}
-          fallbackSrc='/assets/dashboard/articleImg.png'
+          fallbackSrc={isArticle ? '/assets/dashboard/articleImg.png' : '/assets/dashboard/defaultAvatar.jpg'}
           width={320}
           height={200}
           alt='user profile'
-          className='rounded-t-3xl max-sm:hidden'
+          className='rounded-t-3xl max-sm:hidden h-[200px]'
         />
         <Avatar className='sm:hidden'>
           <AvatarImage
-            src='/assets/dashboard/articleImg.png'
+            src={imageUrl ?? '/assets/dashboard/articleImg.png'}
             alt='user profile'
           />
           <AvatarFallback>CN</AvatarFallback>

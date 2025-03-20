@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import "./styles/headings.scss";
 import GlobalLayout from "@/components/layouts/global-layout";
+import ErrorBoundary from "@/components/error-boundry";
 
 export const metadata: Metadata = {
   title: "Frontend Training App",
@@ -23,7 +24,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <GlobalLayout>{children}</GlobalLayout>
+        <GlobalLayout>
+          <ErrorBoundary>{children}</ErrorBoundary></GlobalLayout>
       </body>
     </html>
   );

@@ -3,30 +3,37 @@ import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { DASHBOARD_SIMILAR_PAGES } from '@/constants';
 import { ROUTES } from '@/constants/routes';
-import { avatars, eventPlanners, friends, user } from '@/mocks/dashboard';
+import { avatars, eventPlanners, } from '@/mocks/dashboard';
 
 import { Phone, Plus } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import SideCollectionItem from './side-collection-item';
+import useUser from "@/hooks/use-user";
+import FallbackImage from "../fallback-image";
+import useGetAllUnFollowedUsers from "@/hooks/use-get-all-unfollowed-users";
+import usePeople from "@/hooks/use-people";
 
 const LeftContainer = ({ type }: { type: string }) => {
+  const { data: user } = useUser()
+  const { data: unFollowedUsers } = useGetAllUnFollowedUsers()
+  const { followPerson } = usePeople();
   return (
     <div className='max-md:hidden col-span-3 pl-[30px] pt-[30px] flex flex-col gap-4'>
       {/* profile image */}
       {type === DASHBOARD_SIMILAR_PAGES.FEED && (
         <div className='flex flex-col items-center justify-center space-x-4 bg-white h-[188px] rounded-2xl'>
-          <Image
-            src={user.imageUrl}
+          <FallbackImage
+            src={user?.pictureUrl}
+            fallbackSrc='/assets/dashboard/defaultAvatar.jpg'
             alt='user profile'
-            className=' object-cover rounded-2xl'
+            className='object-cover rounded-2xl'
             width={80}
             height={80}
           />
 
-          <h1 className='text-lg font-semibold'>{user.name}</h1>
-          <p className='text-sm text-gray-500'>{user.email}</p>
+          <h1 className='text-lg font-semibold'>{user?.name}</h1>
+          <p className='text-sm text-gray-500'>{user?.email}</p>
         </div>
       )}
 
@@ -42,23 +49,30 @@ const LeftContainer = ({ type }: { type: string }) => {
           </Link>
         </div>
         <div className='flex flex-row gap-2 flex-wrap'>
-          {friends.map((friend, index) => (
+          {unFollowedUsers?.map((user) => (
             <div
               className='flex flex-col items-center justify-between mt-4 border-[#5F9CF3] border-[0.4px] px-4 pt-3 w-[70px] rounded-sm'
-              key={index}
+              key={user.id}
             >
-              <Image
-                src={friend.imgUrl}
-                alt='friend'
-                className='rounded-full'
+              <FallbackImage
+                src={user.pictureUrl}
+                fallbackSrc='/assets/dashboard/defaultAvatar.jpg'
+                alt='user to follow'
+                className='object-cover rounded-full w-9 h-9'
+
+                objectFit='contain'
                 width={40}
                 height={40}
-              />
-              <h1 className='text-sm font-semibold'>{friend.name}</h1>
 
-              <div className='relative top-4 w-[22px] h-[22px] bg-[#1565D8] rounded-full flex items-center justify-center shadow-md'>
+
+              />
+              <h1 className='w-full h-4 text-xs font-semibold overflow-hidden text-ellipsis'>{user.name}</h1>
+
+              <Button className='p-0 relative top-4 w-[22px] h-[22px] bg-[#1565D8] rounded-full flex items-center justify-center shadow-md'
+                onClick={() => { followPerson(user.id) }}
+              >
                 <Plus className='text-white' size={11} />
-              </div>
+              </Button>
             </div>
           ))}
         </div>
@@ -103,7 +117,7 @@ const LeftContainer = ({ type }: { type: string }) => {
               type={DASHBOARD_SIMILAR_PAGES.EVENTS}
               rating={planner.rating}
               Icon={<Phone color='#1565D8' />}
-              iconHandle={() => {}}
+              iconHandle={() => { }}
             />
           ))}
           <Button

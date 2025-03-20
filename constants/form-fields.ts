@@ -131,7 +131,6 @@ export const DEFAULT_CREATE_ARTICLE_VALUES = {
 };
 
 export const DEFAULT_EVENT_VALUES = {
-  authorId: 60,
   content: '',
   type: POST_TYPE.FEED,
 };

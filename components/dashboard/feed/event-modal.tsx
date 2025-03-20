@@ -10,38 +10,58 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { CalendarIcon, CalendarMinus2 } from 'lucide-react';
-import { CREATE_ARTICLE_TITLE_FIELD, FORM_FIELD_NAMES } from '@/constants/form-fields';
+import {
+  CREATE_ARTICLE_TITLE_FIELD,
+  FORM_FIELD_NAMES,
+} from '@/constants/form-fields';
 import SettingsInput from '@/app/settings/settingsInput';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
-import { format } from "date-fns";
-import { DayPicker } from "react-day-picker";
-import "react-day-picker/dist/style.css";
-import { AddEventSchema } from "@/constants/schemas";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { POST_TYPE } from "@/constants";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import { cn } from '@/lib/utils';
+import { format } from 'date-fns';
+import { DayPicker } from 'react-day-picker';
+import 'react-day-picker/dist/style.css';
+import { AddEventSchema } from '@/constants/schemas';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { POST_TYPE } from '@/constants';
 
 const EventModal = () => {
   const [open, setOpen] = useState(false);
-  const { setValue } = useFormContext()
+  const { setValue } = useFormContext();
 
   const form = useForm<z.infer<typeof AddEventSchema>>({
     resolver: zodResolver(AddEventSchema),
     defaultValues: {
-      title: "",
-      eventDate: "",
-      eventTime: ""
+      title: '',
+      eventDate: '',
+      eventTime: '',
     },
   });
 
   function onSubmit(values: z.infer<typeof AddEventSchema>) {
-    setValue(FORM_FIELD_NAMES.TITLE, form.getValues(FORM_FIELD_NAMES.TITLE))
-    setValue(FORM_FIELD_NAMES.EVENT_DATE, form.getValues(FORM_FIELD_NAMES.EVENT_DATE))
-    setValue(FORM_FIELD_NAMES.EVENT_TIME, form.getValues(FORM_FIELD_NAMES.EVENT_TIME))
-    setValue(FORM_FIELD_NAMES.TYPE, POST_TYPE.EVENT)
-    setOpen(false)
+    setValue(FORM_FIELD_NAMES.TITLE, form.getValues(FORM_FIELD_NAMES.TITLE));
+    setValue(
+      FORM_FIELD_NAMES.EVENT_DATE,
+      form.getValues(FORM_FIELD_NAMES.EVENT_DATE)
+    );
+    setValue(
+      FORM_FIELD_NAMES.EVENT_TIME,
+      form.getValues(FORM_FIELD_NAMES.EVENT_TIME)
+    );
+    setValue(FORM_FIELD_NAMES.TYPE, POST_TYPE.EVENT);
+    setOpen(false);
   }
   return (
     <>
@@ -57,43 +77,59 @@ const EventModal = () => {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Create Article</DialogTitle>
+            <DialogTitle>Create Event</DialogTitle>
           </DialogHeader>
-          <Form {...form} >
-            <form onSubmit={(e) => { e.preventDefault(); e.stopPropagation(); form.handleSubmit(onSubmit)() }} className='space-y-5' >
-              <SettingsInput control={form.control} {...CREATE_ARTICLE_TITLE_FIELD} />
+          <Form {...form}>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                form.handleSubmit(onSubmit)();
+              }}
+              className='space-y-5'
+            >
+              <SettingsInput
+                control={form.control}
+                {...CREATE_ARTICLE_TITLE_FIELD}
+              />
 
               {/* Date Picker Field */}
               <FormField
                 control={form.control}
                 name={FORM_FIELD_NAMES.EVENT_DATE}
                 render={({ field }) => (
-                  <FormItem className="flex flex-col">
+                  <FormItem className='flex flex-col'>
                     <FormLabel>Event Date</FormLabel>
                     <Popover>
                       <PopoverTrigger asChild>
                         <FormControl>
                           <Button
-                            variant={"outline"}
+                            variant={'outline'}
                             className={cn(
-                              "w-full h-[58px] pl-3 text-left font-normal",
-                              !field.value && "text-muted-foreground"
+                              'w-full h-[58px] pl-3 text-left font-normal',
+                              !field.value && 'text-muted-foreground'
                             )}
                           >
                             {field.value ? (
-                              format(field.value, "MMM d, yyyy") // ✅ Ensures "Jul 24, 2024" format
+                              format(field.value, 'MMM d, yyyy') // ✅ Ensures "Jul 24, 2024" format
                             ) : (
                               <span>Pick a date</span>
                             )}
-                            <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                            <CalendarIcon className='ml-auto h-4 w-4 opacity-50' />
                           </Button>
                         </FormControl>
                       </PopoverTrigger>
-                      <PopoverContent className="w-auto p-0" align="start">
+                      <PopoverContent className='w-auto p-0' align='start'>
                         <DayPicker
-                          mode="single"
-                          selected={field.value ? new Date(field.value) : undefined}
-                          onSelect={(date) => field.onChange(date ? format(date, "MMM d, yyyy") : null)} // ✅ Saves in "Jul 24, 2024" format
+                          mode='single'
+                          selected={
+                            field.value ? new Date(field.value) : undefined
+                          }
+                          onSelect={(date) =>
+                            field.onChange(
+                              date ? format(date, 'MMM d, yyyy') : null
+                            )
+                          } // ✅ Saves in "Jul 24, 2024" format
                           fromYear={2000}
                           toYear={2050}
                         />
@@ -109,15 +145,14 @@ const EventModal = () => {
                 control={form.control}
                 name={FORM_FIELD_NAMES.EVENT_TIME}
                 render={({ field }) => (
-                  <FormItem className="flex flex-col">
+                  <FormItem className='flex flex-col'>
                     <FormLabel>Event Time</FormLabel>
                     <FormControl>
                       <input
-                        type="time"
-                        value={field.value || ""}
+                        type='time'
+                        value={field.value || ''}
                         onChange={(e) => field.onChange(e.target.value)}
-                        className="w-full h-[58px] p-2 border rounded-md"
-
+                        className='w-full h-[58px] p-2 border rounded-md'
                       />
                     </FormControl>
                     <FormMessage />
@@ -129,18 +164,20 @@ const EventModal = () => {
                 <Button
                   type='button'
                   variant='outline'
-                  onClick={() => { setOpen(false) }}
+                  onClick={() => {
+                    setOpen(false);
+                  }}
                 >
                   Cancel
                 </Button>
-                <Button type="submit" className='bg-[#1565D8] text-white' >
+                <Button type='submit' className='bg-[#1565D8] text-white'>
                   Submit
                 </Button>
               </div>
             </form>
           </Form>
         </DialogContent>
-      </Dialog >
+      </Dialog>
     </>
   );
 };

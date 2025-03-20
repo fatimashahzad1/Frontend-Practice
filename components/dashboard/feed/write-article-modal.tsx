@@ -82,7 +82,15 @@ const WriteArticleModal = () => {
             <DialogTitle>Create Article</DialogTitle>
           </DialogHeader>
           <Form {...form}>
-            <form id="write-article-form" onSubmit={(e) => { e.preventDefault(); e.stopPropagation(); form.handleSubmit(onSubmit)() }} className='space-y-5'>
+            <form
+              id='write-article-form'
+              onSubmit={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                form.handleSubmit(onSubmit)();
+              }}
+              className='space-y-5'
+            >
               {/* Image Upload */}
               <div className='w-full flex flex-col items-center justify-center'>
                 <label className='text-sm md:text-base font-semibold'>
@@ -91,8 +99,7 @@ const WriteArticleModal = () => {
                 <div className='relative w-40 h-40 mt-2 border rounded-lg flex items-center justify-center bg-gray-100'>
                   {image ? (
                     <Image
-                      //   src={image}
-                      src='https://res.cloudinary.com/dwwten9jp/image/upload/v1741684795/blob_ads6z6.jpg'
+                      src={image}
                       alt='Uploaded'
                       className='w-full h-full object-contain rounded-lg'
                       width={160}

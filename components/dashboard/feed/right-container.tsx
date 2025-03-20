@@ -18,14 +18,14 @@ const RightContainer = ({ type }: { type?: string }) => {
   return (
     <div className='max-md:hidden col-span-3 mt-[30px] mr-[30px] flex flex-col gap-4'>
       {/* Contacts */}
-      <div className='px-4 py-5 bg-white flex flex-col gap-5 rounded-2xl'>
+      {data?.following && data?.following?.length > 0 && <div className='px-4 py-5 bg-white flex flex-col gap-5 rounded-2xl'>
         <h1 className='text-lg font-bold'>Contacts</h1>
         {isLoading && <div className='w-full text-center'>
           <Spinner onlySpinner width='30px' />
         </div>}
-        {data?.following?.map((user, index) => (
+        {data?.following?.map((user) => (
           <SideCollectionItem
-            key={`contact-${index}`}
+            key={`contact-${user.id}`}
             text1={user.name}
             text2={user.email}
             Icon={<MessageSquareText color='#1565D8' />}
@@ -34,7 +34,7 @@ const RightContainer = ({ type }: { type?: string }) => {
                 otherUserId: user.id,
               })
             }}
-            imageUrl={user?.imageUrl}
+            imageUrl={user?.pictureUrl}
           />
         ))}
         <Button
@@ -44,7 +44,7 @@ const RightContainer = ({ type }: { type?: string }) => {
         >
           View All
         </Button>
-      </div>
+      </div>}
 
       {/* Upcoming Events */}
       {type === DASHBOARD_SIMILAR_PAGES.EVENTS && (

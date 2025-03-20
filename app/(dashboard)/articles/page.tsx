@@ -40,6 +40,7 @@ const Articles = () => {
         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-8 justify-center items-center gap-6">
           {data?.articles?.map((article, index) => (
             <PeopleCard
+              isArticle={true}
               key={index}
               title={article.title}
               description={getDescription(article)}

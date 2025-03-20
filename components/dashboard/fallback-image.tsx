@@ -5,7 +5,7 @@ interface FallbackImageProps {
   readonly src?: string | null;
   readonly fallbackSrc: string;
   readonly alt: string;
-  readonly className: string;
+  readonly className?: string;
   readonly width?: number;
   readonly height?: number;
   readonly layout?: string;

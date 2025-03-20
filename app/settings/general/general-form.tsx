@@ -55,10 +55,10 @@ const GeneralForm = () => {
     const updatedLinks =
       dirtyFields.links && Array.isArray(links)
         ? links.map((link) => ({
-            platform: link.platform,
-            url: link.url,
-            userId: user?.id,
-          }))
+          platform: link.platform,
+          url: link.url,
+          userId: user?.id,
+        }))
         : undefined;
     console.log({ allValues, values });
 

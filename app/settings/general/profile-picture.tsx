@@ -17,10 +17,14 @@ const ProfilePicture = () => {
   const formPictureUrl = useWatch({ name: FORM_FIELD_NAMES.PICTURE_URL });
 
   useEffect(() => {
-    if (formPictureUrl) {
+    console.log({ formPictureUrl, image })
+    if (formPictureUrl && !image) {
       setImage(formPictureUrl);
     }
-  }, [formPictureUrl, setImage]);
+    if (image) {
+      setValue(FORM_FIELD_NAMES.PICTURE_URL, image, { shouldDirty: true });
+    }
+  }, [formPictureUrl, setValue, setImage, image]);
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];

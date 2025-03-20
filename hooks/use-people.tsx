@@ -3,6 +3,7 @@ import { deleteClient, getClient, postClient } from "@/utils/client";
 import { useToast } from "./use-toast";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
+import { ROUTE_QUERY_KEYS } from "@/constants/routes";
 
 // Fetch all people
 const fetchAllPeople = async () => {
@@ -68,8 +69,10 @@ const usePeople = () => {
 
   // Fetch people with useQuery
   const { data, error, isLoading } = useQuery<GetAllPeopleResponse>({
-    queryKey: ["people"],
+    queryKey: [ROUTE_QUERY_KEYS.GET_ALL_PEOPLE],
     queryFn: fetchAllPeople,
+    staleTime: 24 * 60 * 60 * 1000,
+    retry: 2
   });
 
   const {
@@ -77,7 +80,7 @@ const usePeople = () => {
     error: searchedError,
     isLoading: searchedPeopleIsLoading,
   } = useQuery({
-    queryKey: ["people", searchString], // Add searchQuery to trigger refetch
+    queryKey: [ROUTE_QUERY_KEYS.GET_ALL_PEOPLE, searchString], // Add searchQuery to trigger refetch
     queryFn: () => fetchPeopleWithSearch(searchString),
     enabled: searchString.length >= 1, // Avoid unnecessary calls on empty search
   });
@@ -107,7 +110,8 @@ const usePeople = () => {
   const followPersonMutation = useMutation({
     mutationFn: followPersonRequest,
     onSuccess: (result) => {
-      queryClient.invalidateQueries({ queryKey: ["people"] });
+      queryClient.invalidateQueries({ queryKey: ROUTE_QUERY_KEYS.GET_ALL_UNFOLLOWED_USERS, refetchType: "active" });
+      queryClient.invalidateQueries({ queryKey: ROUTE_QUERY_KEYS.GET_ALL_PEOPLE, refetchType: "active" });
       toast({
         variant: "default",
         title: result.success,
@@ -127,7 +131,7 @@ const usePeople = () => {
   const unfollowPersonMutation = useMutation({
     mutationFn: unfollowPersonRequest,
     onSuccess: (result) => {
-      queryClient.invalidateQueries({ queryKey: ["people"] });
+      queryClient.invalidateQueries({ queryKey: [ROUTE_QUERY_KEYS.GET_ALL_PEOPLE] });
       toast({
         variant: "default",
         title: result.success,

@@ -46,6 +46,7 @@ const People = () => {
             title={user.name}
             description={user.email}
             actionTitle={user.isFollowedByCurrentUser ? "Unfollow" : "Follow"}
+            imageUrl={user.pictureUrl}
             actionButtonClasses={
               user.isFollowedByCurrentUser
                 ? "border-pinkRed text-pinkRed hover:text-pinkRed"
