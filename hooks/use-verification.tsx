@@ -1,11 +1,11 @@
-import { patchClient } from "@/utils/client";
-import { useCallback, useMemo, useState } from "react";
+import { patchClient } from '@/utils/client';
+import { useCallback, useMemo, useState } from 'react';
 
 const useVerification = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<ErrorResponse | null>(null);
   const [data, setData] = useState<SuccessResponse>({
-    message: "Verifying...",
+    message: 'Verifying...',
   });
 
   const verification = useCallback(async (token: string | null) => {
@@ -14,8 +14,8 @@ const useVerification = () => {
 
     if (!token) {
       setError({
-        error: "Token Missing",
-        message: ["Token is Required!"],
+        error: 'Token Missing',
+        message: ['Token is Required!'],
         statusCode: 400,
       });
       return;
@@ -47,7 +47,7 @@ const useVerification = () => {
       error,
       data,
     }),
-    [verification, loading, error, data],
+    [verification, loading, error, data]
   );
 
   return memoizedValues;

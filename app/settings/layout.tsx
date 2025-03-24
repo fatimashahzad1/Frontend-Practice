@@ -1,5 +1,5 @@
-import Sidebar from "./sidebar";
-import Navbar from "./navbar";
+import Sidebar from './sidebar';
+import Navbar from './navbar';
 
 const AuthenticationLayout = ({ children }: { children: React.ReactNode }) => {
   return (

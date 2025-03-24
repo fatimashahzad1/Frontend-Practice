@@ -1,12 +1,12 @@
-"use client";
-import LeftPanel from "@/components/auth/leftPanel";
-import React from "react";
-import LoginForm from "./loginForm";
-import LoginTemplate from "@/components/auth/loginTemplate";
-import OAuthButton from "../register/oauthButton";
-import { ROUTES } from "@/constants/routes";
-import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
+'use client';
+import LeftPanel from '@/components/auth/leftPanel';
+import React from 'react';
+import LoginForm from './loginForm';
+import LoginTemplate from '@/components/auth/loginTemplate';
+import OAuthButton from '../register/oauthButton';
+import { ROUTES } from '@/constants/routes';
+import { Button } from '@/components/ui/button';
+import { useRouter } from 'next/navigation';
 
 const Login = () => {
   const router = useRouter();

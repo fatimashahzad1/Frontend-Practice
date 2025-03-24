@@ -1,8 +1,8 @@
-import React from "react";
-import Heading from "../heading";
-import BillingTable from "./billing-table";
-import { Button } from "@/components/ui/button";
-import PaymentMethods from "./payment-method";
+import React from 'react';
+import Heading from '../heading';
+import BillingTable from './billing-table';
+import { Button } from '@/components/ui/button';
+import PaymentMethods from './payment-method';
 
 const Billing = () => {
   return (

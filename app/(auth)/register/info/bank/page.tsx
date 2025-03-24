@@ -1,8 +1,8 @@
-"use client";
-import LeftPanel from "@/components/auth/leftPanel";
-import React from "react";
-import RegisterTemplate from "../../registerTemplate";
-import BankForm from "./bankForm";
+'use client';
+import LeftPanel from '@/components/auth/leftPanel';
+import React from 'react';
+import RegisterTemplate from '../../registerTemplate';
+import BankForm from './bankForm';
 
 const Bank = () => {
   return (

@@ -1,10 +1,10 @@
-"use client";
-import { getClient } from "@/utils/client";
-import { useQuery } from "@tanstack/react-query";
+'use client';
+import { getClient } from '@/utils/client';
+import { useQuery } from '@tanstack/react-query';
 
 const useArticleDetail = (id: number) => {
   return useQuery<Article>({
-    queryKey: ["article-detail", id], // Include pagination params in query key
+    queryKey: ['article-detail', id], // Include pagination params in query key
     queryFn: () => getArticleDetail(id),
     throwOnError: true,
   });

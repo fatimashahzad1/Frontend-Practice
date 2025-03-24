@@ -1,13 +1,13 @@
-import Link from "next/link";
-import React from "react";
-import AccountTypeCard from "./accountTypeCard";
-import { ROUTES } from "@/constants/routes";
+import Link from 'next/link';
+import React from 'react';
+import AccountTypeCard from './accountTypeCard';
+import { ROUTES } from '@/constants/routes';
 
 const AccountType = () => {
   return (
     <div className="w-[53%] max-sm:w-full h-screen flex flex-col">
       <div className="text-style">
-        Already have an account?{" "}
+        Already have an account?{' '}
         <Link href="/login" className="link">
           Sign In
         </Link>

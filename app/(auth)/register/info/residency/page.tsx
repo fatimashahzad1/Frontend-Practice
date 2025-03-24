@@ -1,7 +1,7 @@
-import LeftPanel from "@/components/auth/leftPanel";
-import React from "react";
-import RegisterTemplate from "../../registerTemplate";
-import ResidencyForm from "./residencyForm";
+import LeftPanel from '@/components/auth/leftPanel';
+import React from 'react';
+import RegisterTemplate from '../../registerTemplate';
+import ResidencyForm from './residencyForm';
 
 const Residency = () => {
   return (

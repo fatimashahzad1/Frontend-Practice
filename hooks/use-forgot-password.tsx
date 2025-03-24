@@ -1,5 +1,5 @@
-import { postClient } from "@/utils/client";
-import { useCallback, useMemo, useState } from "react";
+import { postClient } from '@/utils/client';
+import { useCallback, useMemo, useState } from 'react';
 
 const useForgotPassword = () => {
   const [loading, setLoading] = useState(false);
@@ -28,12 +28,12 @@ const useForgotPassword = () => {
         setLoading(false);
       }
     },
-    [],
+    []
   );
 
   const memoizedData = useMemo(
     () => ({ forgotPassword, data, loading, error }),
-    [data, loading, error, forgotPassword],
+    [data, loading, error, forgotPassword]
   );
 
   return memoizedData;

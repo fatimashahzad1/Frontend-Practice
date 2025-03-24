@@ -1,9 +1,9 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import FallbackImage from "../fallback-image";
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import FallbackImage from '../fallback-image';
 
 type PeopleCardProps = {
   readonly title: string;
@@ -33,8 +33,8 @@ export function PeopleCard({
           src={imageUrl}
           fallbackSrc={
             isArticle
-              ? "/assets/dashboard/articleImg.png"
-              : "/assets/dashboard/defaultAvatar.jpg"
+              ? '/assets/dashboard/articleImg.png'
+              : '/assets/dashboard/defaultAvatar.jpg'
           }
           width={320}
           height={200}
@@ -43,7 +43,7 @@ export function PeopleCard({
         />
         <Avatar className="sm:hidden">
           <AvatarImage
-            src={imageUrl ?? "/assets/dashboard/articleImg.png"}
+            src={imageUrl ?? '/assets/dashboard/articleImg.png'}
             alt="user profile"
           />
           <AvatarFallback>CN</AvatarFallback>

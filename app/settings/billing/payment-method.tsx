@@ -1,43 +1,43 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import React, { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
+} from '@/components/ui/dialog';
+import { Label } from '@/components/ui/label';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Plus, X } from "lucide-react";
-import { useForm } from "react-hook-form";
-import { PaymentMethodSchema } from "@/constants/schemas";
-import { zodResolver } from "@hookform/resolvers/zod";
+} from '@/components/ui/select';
+import { Plus, X } from 'lucide-react';
+import { useForm } from 'react-hook-form';
+import { PaymentMethodSchema } from '@/constants/schemas';
+import { zodResolver } from '@hookform/resolvers/zod';
 import {
   CARD_HOLDER_NAME_FIELD,
   CARD_NUMBER_FIELD,
   CVV_FIELD,
   DEFAULT_PAYMENT_METHOD_VALUES,
   EXPIRY_DATE_FIELD,
-} from "@/constants/form-fields";
-import { z } from "zod";
-import { Form } from "@/components/ui/form";
-import SettingsInput from "../settingsInput";
-import Image from "next/image";
-import { PAYMENT_METHOD, PAYMENT_METHOD_IMAGES } from "@/constants";
+} from '@/constants/form-fields';
+import { z } from 'zod';
+import { Form } from '@/components/ui/form';
+import SettingsInput from '../settingsInput';
+import Image from 'next/image';
+import { PAYMENT_METHOD, PAYMENT_METHOD_IMAGES } from '@/constants';
 
 interface PaymentMethod {
   id: number;
-  type: "Visa" | "MasterCard";
+  type: 'Visa' | 'MasterCard';
   cardholderName: string;
   cardNumber: string;
   expiryDate: string;
@@ -48,11 +48,11 @@ const PaymentMethods = () => {
   const [methods, setMethods] = useState<PaymentMethod[]>([
     {
       id: 1,
-      type: "Visa",
-      cardholderName: "John Doe",
-      cardNumber: "**** **** **** 1234",
-      expiryDate: "12/25",
-      cvv: "***",
+      type: 'Visa',
+      cardholderName: 'John Doe',
+      cardNumber: '**** **** **** 1234',
+      expiryDate: '12/25',
+      cvv: '***',
     },
   ]);
   const [isOpen, setIsOpen] = useState(false);
@@ -71,7 +71,7 @@ const PaymentMethods = () => {
         cardholderName: values.cardholderName,
         cardNumber: `**** **** **** ${values.cardNumber.slice(-4)}`,
         expiryDate: values.expiryDate,
-        cvv: "***",
+        cvv: '***',
       },
     ]);
 
@@ -148,9 +148,9 @@ const PaymentMethods = () => {
               <Label>Card Type</Label>
               <Select
                 onValueChange={(value) => {
-                  form.setValue("type", value as "Visa" | "MasterCard");
+                  form.setValue('type', value as 'Visa' | 'MasterCard');
                 }}
-                value={form.watch("type")}
+                value={form.watch('type')}
               >
                 <SelectTrigger>
                   <SelectValue placeholder="Select Card Type" />

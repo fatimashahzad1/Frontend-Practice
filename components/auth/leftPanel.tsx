@@ -1,8 +1,8 @@
-import Image from "next/image";
-import React from "react";
-import logo from "@/public/assets/bitsolLogo.png";
-import commas from "@/public/assets/commas.png";
-import check from "@/public/assets/circleCheckFull.png";
+import Image from 'next/image';
+import React from 'react';
+import logo from '@/public/assets/bitsolLogo.png';
+import commas from '@/public/assets/commas.png';
+import check from '@/public/assets/circleCheckFull.png';
 
 const LeftPanel = () => {
   return (

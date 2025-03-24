@@ -8,13 +8,13 @@ interface SettingsInputProps {
   type?: string;
 }
 
-type SettingsSwitchProp = Pick<SettingsInputProps, "name" | "label"> & {
+type SettingsSwitchProp = Pick<SettingsInputProps, 'name' | 'label'> & {
   description: string;
 };
 
 interface OnlinePresence {
   id?: number;
-  platform: "GitHub" | "Figma" | "Instagram" | "Facebook" | "LinkedIn";
+  platform: 'GitHub' | 'Figma' | 'Instagram' | 'Facebook' | 'LinkedIn';
   url: string;
 }
 

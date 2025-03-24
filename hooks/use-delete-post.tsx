@@ -1,8 +1,8 @@
-import { deleteClient } from "@/utils/client";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useToast } from "./use-toast";
-import { getToken } from "@/lib/get-token";
-import { ROUTE_QUERY_KEYS } from "@/constants/routes";
+import { deleteClient } from '@/utils/client';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useToast } from './use-toast';
+import { getToken } from '@/lib/get-token';
+import { ROUTE_QUERY_KEYS } from '@/constants/routes';
 
 const useDeletePost = (postType: number) => {
   const { toast } = useToast();
@@ -11,7 +11,7 @@ const useDeletePost = (postType: number) => {
     mutationFn: async (postId?: number) => {
       const token = await getToken();
       if (!token) {
-        throw new Error("Token is required!");
+        throw new Error('Token is required!');
       }
 
       return await deleteClient({
@@ -21,9 +21,9 @@ const useDeletePost = (postType: number) => {
     },
 
     onSuccess: async (data) => {
-      console.log("Post deleted successfully!", data);
+      console.log('Post deleted successfully!', data);
       toast({
-        variant: "default",
+        variant: 'default',
         title: data?.success,
         description: data?.message,
       });
@@ -32,10 +32,10 @@ const useDeletePost = (postType: number) => {
       });
     },
     onError: (error) => {
-      console.error("Error in Post delete", error.message);
+      console.error('Error in Post delete', error.message);
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description: error.message,
       });
     },

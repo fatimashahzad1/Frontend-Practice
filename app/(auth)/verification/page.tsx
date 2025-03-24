@@ -1,16 +1,16 @@
-"use client";
-import { useEffect } from "react";
+'use client';
+import { useEffect } from 'react';
 
-import LeftPanel from "@/components/auth/leftPanel";
-import LoginTemplate from "@/components/auth/loginTemplate";
-import { useRouter, useSearchParams } from "next/navigation";
-import { ROUTES } from "@/constants/routes";
-import useVerification from "@/hooks/use-verification";
+import LeftPanel from '@/components/auth/leftPanel';
+import LoginTemplate from '@/components/auth/loginTemplate';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { ROUTES } from '@/constants/routes';
+import useVerification from '@/hooks/use-verification';
 
 const VerificationPage = () => {
   const router = useRouter();
 
-  const token = useSearchParams().get("token");
+  const token = useSearchParams().get('token');
   const { data, error, verification } = useVerification();
 
   useEffect(() => {

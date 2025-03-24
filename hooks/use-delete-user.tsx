@@ -1,8 +1,8 @@
-import { deleteClient } from "@/utils/client";
-import { useMutation } from "@tanstack/react-query";
-import { useToast } from "./use-toast";
-import { getToken, removeToken } from "@/lib/get-token";
-import { useRouter } from "next/navigation";
+import { deleteClient } from '@/utils/client';
+import { useMutation } from '@tanstack/react-query';
+import { useToast } from './use-toast';
+import { getToken, removeToken } from '@/lib/get-token';
+import { useRouter } from 'next/navigation';
 
 const useDeleteUser = () => {
   const { toast } = useToast();
@@ -11,7 +11,7 @@ const useDeleteUser = () => {
     mutationFn: async (id?: number) => {
       const token = await getToken();
       if (!token) {
-        throw new Error("Token is required!");
+        throw new Error('Token is required!');
       }
 
       return await deleteClient({
@@ -21,21 +21,21 @@ const useDeleteUser = () => {
     },
 
     onSuccess: async (data) => {
-      console.log("User deleted successfully!", data);
+      console.log('User deleted successfully!', data);
       await removeToken();
-      router.push("/");
+      router.push('/');
 
       toast({
-        variant: "default",
+        variant: 'default',
         title: data?.success,
         description: data?.message,
       });
     },
     onError: (error) => {
-      console.error("Error in User delete", error.message);
+      console.error('Error in User delete', error.message);
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description: error.message,
       });
     },

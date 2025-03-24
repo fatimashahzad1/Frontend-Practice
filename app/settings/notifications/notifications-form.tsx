@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Button } from "@/components/ui/button";
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Button } from '@/components/ui/button';
 import {
   Form,
   FormField,
@@ -12,16 +12,16 @@ import {
   FormControl,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { WEBSITE_NOTIFICATIONS_CHECKBOX_ITEMS } from "@/constants/settings";
-import CustomSwitch from "./custom-switch";
+} from '@/components/ui/form';
+import { WEBSITE_NOTIFICATIONS_CHECKBOX_ITEMS } from '@/constants/settings';
+import CustomSwitch from './custom-switch';
 import {
   ACCOUNT_SUMMARY_SWITCH_FIELD,
   DEFAULT_NOTIFICATIONS_VALUES,
   FORM_FIELD_NAMES,
   WEEKLY_NEWSLETTTER_SWITCH_FIELD,
-} from "@/constants/form-fields";
-import { NotificationsSchema } from "@/constants/schemas";
+} from '@/constants/form-fields';
+import { NotificationsSchema } from '@/constants/schemas';
 
 export default function NotificationsForm() {
   const form = useForm<z.infer<typeof NotificationsSchema>>({
@@ -30,7 +30,7 @@ export default function NotificationsForm() {
   });
 
   function onSubmit(values: z.infer<typeof NotificationsSchema>) {
-    console.log("Form Submitted:", values);
+    console.log('Form Submitted:', values);
   }
 
   return (
@@ -69,7 +69,7 @@ export default function NotificationsForm() {
                           field.onChange(
                             checked
                               ? [...field.value, option]
-                              : field.value.filter((item) => item !== option),
+                              : field.value.filter((item) => item !== option)
                           );
                         }}
                       />

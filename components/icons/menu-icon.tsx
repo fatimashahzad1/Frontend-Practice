@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface MenuIconProps {
   width?: string;
@@ -6,8 +6,8 @@ interface MenuIconProps {
 }
 
 const MenuIcon: React.FC<MenuIconProps> = ({
-  width = "40px",
-  height = "40px",
+  width = '40px',
+  height = '40px',
 }) => {
   return (
     <svg

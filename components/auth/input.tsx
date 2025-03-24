@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useController, useFormContext } from "react-hook-form";
+import React, { useState } from 'react';
+import { useController, useFormContext } from 'react-hook-form';
 
 interface InputProps {
   label: string;
@@ -25,31 +25,33 @@ const Input = ({
     field: { onChange, value },
   } = useController({ name, control });
 
-  if (type === "checkbox") {
+  if (type === 'checkbox') {
     return (
       <div className="flex flex-col">
         <div className="w-full flex flex-row items-center">
           <input
             type="checkbox"
             className="w-5 h-5 mr-4"
+            checked={value}
             onChange={() => {
               onChange(!value);
             }}
+            name={name}
           />
           <label
-            htmlFor="acceptTerms"
+            htmlFor={name}
             className={` text-base font-medium w-full ${
-              error?.message ? "text-red-600" : "text-[#696F79]"
+              error?.message ? 'text-red-600' : 'text-[#696F79]'
             }`}
           >
-            I agree to terms & conditions
+            {label}
           </label>
         </div>
       </div>
     );
   }
 
-  if (type === "password") {
+  if (type === 'password') {
     return (
       <div className="flex flex-col my-6 ">
         <label htmlFor={name} className="input-label">
@@ -58,7 +60,7 @@ const Input = ({
         <div
           className={`flex flex-row justify-between border-[1px] border-[#8692A6] rounded-md mt-3 bg-transparent ${
             passwordFocused &&
-            "border-[#1565D8] outline-none border-[1px] shadow-input"
+            'border-primary outline-none border-[1px] shadow-input'
           }`}
           onMouseDown={() => {
             setPasswordFocused(true);
@@ -68,8 +70,8 @@ const Input = ({
           }}
         >
           <input
-            type={showPassword ? "text" : "password"}
-            className=" border-none outline-none w-full h-full py-6 pl-8 rounded-md"
+            type={showPassword ? 'text' : 'password'}
+            className="border-none outline-none w-full h-full py-6 pl-8 rounded-md"
             placeholder={placeholder}
             maxLength={maxLength}
             onChange={(e) => {
@@ -79,10 +81,10 @@ const Input = ({
           />
           <button
             type="button"
-            className="pr-8 text-xs font-normal"
+            className="pr-8 text-xs font-normal bg-white rounded-md text-primary"
             onClick={() => setShowPassword((old) => !old)}
           >
-            {showPassword ? "Hide" : "Show"}
+            {showPassword ? 'Hide' : 'Show'}
           </button>
         </div>
         {error && <span className="text-red-600">{error.message}</span>}
@@ -98,13 +100,18 @@ const Input = ({
 
       <input
         type={type}
-        className="border-[1px] border-[#8692A6] py-6 px-8 rounded-md mt-3 bg-transparent focus:border-[#1565D8] focus:outline-none focus:border-[1px] focus:shadow-input"
+        className="border-[1px] border-[#8692A6] py-6 px-8 rounded-md mt-3 bg-transparent focus:border-primary focus:outline-none focus:border-[1px] focus:shadow-input"
         placeholder={placeholder}
         onChange={(e) => {
+          if (type === 'number') {
+            onChange(
+              e.target.value === '' ? undefined : parseFloat(e.target.value)
+            );
+            return;
+          }
           onChange(e.target.value);
         }}
-        value={value}
-        content="<h1>gr</h1>"
+        value={type === 'number' && value === undefined ? '' : (value ?? '')} // Show empty string for undefined
         name={name}
         maxLength={maxLength}
       />

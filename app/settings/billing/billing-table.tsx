@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Table,
   TableBody,
@@ -7,10 +7,10 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { ordersHistory } from "@/mocks/settings";
-import dayjs from "dayjs";
-import React from "react";
+} from '@/components/ui/table';
+import { ordersHistory } from '@/mocks/settings';
+import dayjs from 'dayjs';
+import React from 'react';
 
 const BillingTable = () => {
   return (
@@ -32,7 +32,7 @@ const BillingTable = () => {
         {ordersHistory.map((order, index) => (
           <TableRow key={`billing-order-${index}`}>
             <TableCell className="w-1/3 max-sm:text-xs max-sm:font-normal text-base text-[#1A194D] md:font-medium">
-              {dayjs(order.createdAt).format("MMM. D, YYYY")}
+              {dayjs(order.createdAt).format('MMM. D, YYYY')}
             </TableCell>
             <TableCell className="w-1/3 max-sm:text-xs max-sm:font-normal text-base text-[#1A194D] md:font-medium">
               {order.type}

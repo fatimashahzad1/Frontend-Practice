@@ -1,9 +1,8 @@
-"use client";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import React from "react";
-import { IoIosArrowBack } from "react-icons/io";
+'use client';
+import { Button } from '@/components/ui/button';
+import { useRouter } from 'next/navigation';
+import React from 'react';
+import { IoIosArrowBack } from 'react-icons/io';
 
 interface HeaderProps {
   stepNumber: string;
@@ -17,6 +16,7 @@ const Header = ({ stepName, stepNumber, backToLink }: HeaderProps) => {
     <div className="ml-12 mr-20 mt-16 mb-24 flex flex-row justify-between max-sm:mx-5">
       <Button
         onClick={() => router.back()}
+        variant="link"
         className=" flex flex-row items-center gap-2 text-primaryGrey font-semibold text-base"
       >
         <IoIosArrowBack className="w-5 h-5 text-primaryGrey" />

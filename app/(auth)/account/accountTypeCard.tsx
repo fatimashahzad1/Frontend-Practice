@@ -1,12 +1,12 @@
-"use client";
-import Link from "next/link";
-import React, { useState } from "react";
-import { BsPerson } from "react-icons/bs";
-import { FiBriefcase } from "react-icons/fi";
+'use client';
+import Link from 'next/link';
+import React, { useState } from 'react';
+import { BsPerson } from 'react-icons/bs';
+import { FiBriefcase } from 'react-icons/fi';
 
-import { TfiArrowRight } from "react-icons/tfi";
+import { TfiArrowRight } from 'react-icons/tfi';
 interface AccountTypeCardProps {
-  type: "business" | "individual";
+  type: 'business' | 'individual';
   href: string;
 }
 
@@ -30,25 +30,25 @@ const AccountTypeCard = ({ type, href }: AccountTypeCardProps) => {
             : "bg-[url('/assets/Polygon2.png')]"
         } bg-contain bg-no-repeat flex justify-center items-center`}
       >
-        {type === "business" ? (
+        {type === 'business' ? (
           <FiBriefcase
-            className={`w-5 h-5 ${hovered ? "text-white" : "text-primary"}`}
+            className={`w-5 h-5 ${hovered ? 'text-white' : 'text-primary'}`}
           />
         ) : (
           <BsPerson
-            className={`w-5 h-5 ${hovered ? "text-white" : "text-primary"}`}
+            className={`w-5 h-5 ${hovered ? 'text-white' : 'text-primary'}`}
           />
         )}
       </div>
 
       <div className="flex flex-col ml-7">
         <div className="font-medium text-lg">
-          {type === "business" ? "Business" : "Individual"}
+          {type === 'business' ? 'Business' : 'Individual'}
         </div>
         <div className="font-normal text-sm text-primaryGrey">
-          {type === "business"
-            ? "Own or belong to a company, this is for you."
-            : "Personal account to manage all you activities."}
+          {type === 'business'
+            ? 'Own or belong to a company, this is for you.'
+            : 'Personal account to manage all you activities.'}
         </div>
       </div>
       <div className="w-5 h-5">

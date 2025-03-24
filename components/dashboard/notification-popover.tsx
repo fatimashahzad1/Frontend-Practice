@@ -1,10 +1,10 @@
-import React from "react";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { notifications } from "@/mocks/dashboard";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
-import Image from "next/image";
+import React from 'react';
+import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
+import { notifications } from '@/mocks/dashboard';
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import Image from 'next/image';
 
 const NotificationPopover = () => {
   dayjs.extend(relativeTime);
@@ -19,14 +19,14 @@ const NotificationPopover = () => {
             <div
               key={`notification-${index}`}
               className={`flex flex-row gap-4 px-4 border-b last:border-b-0 py-3 ${
-                item.new && "bg-[#EEF5FF]"
+                item.new && 'bg-[#EEF5FF]'
               }`}
             >
               <Avatar className="w-14 h-14">
                 <AvatarImage
                   src={item.imageUrl}
                   alt="Avatar"
-                  style={{ borderColor: "#5F9CF3" }}
+                  style={{ borderColor: '#5F9CF3' }}
                 />
                 <AvatarFallback>{item.title}</AvatarFallback>
               </Avatar>

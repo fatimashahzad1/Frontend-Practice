@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useSearchParams, useRouter } from "next/navigation";
-import React from "react";
+import { useSearchParams, useRouter } from 'next/navigation';
+import React from 'react';
 import {
   Pagination,
   PaginationContent,
@@ -10,22 +10,22 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/components/ui/pagination";
+} from '@/components/ui/pagination';
 
 const PaginationCustom = ({ totalPages = 10 }) => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const currentPage = Number(searchParams.get("page")) || 1;
+  const currentPage = Number(searchParams.get('page')) || 1;
 
   // Function to update the URL query parameter
   const updatePage = (page: number) => {
     const params = new URLSearchParams(searchParams.toString());
-    params.set("page", String(page));
+    params.set('page', String(page));
     router.push(`?${params.toString()}`);
   };
 
-  const disabledClasses = "cursor-not-allowed opacity-50";
+  const disabledClasses = 'cursor-not-allowed opacity-50';
 
   if (totalPages > 0) {
     return (
@@ -38,7 +38,7 @@ const PaginationCustom = ({ totalPages = 10 }) => {
                 e.preventDefault();
                 if (currentPage > 1) updatePage(currentPage - 1);
               }}
-              className={currentPage === 1 ? disabledClasses : "cursor-pointer"}
+              className={currentPage === 1 ? disabledClasses : 'cursor-pointer'}
             />
           </PaginationItem>
 
@@ -76,7 +76,7 @@ const PaginationCustom = ({ totalPages = 10 }) => {
                 if (currentPage < totalPages) updatePage(currentPage + 1);
               }}
               className={
-                currentPage === totalPages ? disabledClasses : "cursor-pointer"
+                currentPage === totalPages ? disabledClasses : 'cursor-pointer'
               }
             />
           </PaginationItem>

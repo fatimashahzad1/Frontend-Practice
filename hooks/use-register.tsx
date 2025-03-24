@@ -1,9 +1,9 @@
-import { postClient } from "@/utils/client";
-import { useMutation } from "@tanstack/react-query";
+import { postClient } from '@/utils/client';
+import { useMutation } from '@tanstack/react-query';
 
-import { useRouter } from "next/navigation";
-import { useToast } from "./use-toast";
-import { ROUTES } from "@/constants/routes";
+import { useRouter } from 'next/navigation';
+import { useToast } from './use-toast';
+import { ROUTES } from '@/constants/routes';
 
 const useRegister = () => {
   const { toast } = useToast();
@@ -14,7 +14,7 @@ const useRegister = () => {
     },
     onSuccess: (data) => {
       toast({
-        variant: "default",
+        variant: 'default',
         title: data.success,
         description: data.message,
       });
@@ -22,7 +22,7 @@ const useRegister = () => {
     },
     onError: (error: any) => {
       toast({
-        variant: "destructive",
+        variant: 'destructive',
         title: error.error,
         description: error.message,
       });

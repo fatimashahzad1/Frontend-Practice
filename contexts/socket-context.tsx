@@ -7,20 +7,20 @@ import {
   useEffect,
   useMemo,
   useState,
-} from "react";
-import { io, Socket } from "socket.io-client";
-import { getToken } from "@/lib/get-token";
+} from 'react';
+import { io, Socket } from 'socket.io-client';
+import { getToken } from '@/lib/get-token';
 import AgoraRTC, {
   IAgoraRTCClient,
   IAgoraRTCRemoteUser,
-} from "agora-rtc-sdk-ng";
+} from 'agora-rtc-sdk-ng';
 
-const SOCKET_URL = "http://localhost:3005"; // Replace with your NestJS backend URL
+const SOCKET_URL = 'http://localhost:3005'; // Replace with your NestJS backend URL
 
 interface SocketContextType {
   socket: Socket | null;
   messages: Message[];
-  connectionStatus: "connected" | "disconnected" | "error";
+  connectionStatus: 'connected' | 'disconnected' | 'error';
   setMessages: React.Dispatch<React.SetStateAction<Message[]>>;
   incomingCall: IncomingCall | null;
   acceptCall: () => void;
@@ -43,16 +43,16 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({
   const [socket, setSocket] = useState<Socket | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [connectionStatus, setConnectionStatus] = useState<
-    "connected" | "disconnected" | "error"
-  >("disconnected");
+    'connected' | 'disconnected' | 'error'
+  >('disconnected');
   const [incomingCall, setIncomingCall] = useState<IncomingCall | null>(null);
 
   const [agoraClient, setAgoraClient] = useState<IAgoraRTCClient | null>(null);
   const [remoteUser, setRemoteUser] = useState<null | IAgoraRTCRemoteUser>(
-    null,
+    null
   );
-  const [localUserName, setLocalUserName] = useState("");
-  const [remoteUsername, setRemoteUsername] = useState("");
+  const [localUserName, setLocalUserName] = useState('');
+  const [remoteUsername, setRemoteUsername] = useState('');
 
   useEffect(() => {
     const socketConnection = async () => {
@@ -63,44 +63,44 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({
         },
       });
 
-      socketInstance.on("connect", () => {
-        console.log("Connected to server:", socketInstance.id);
-        setConnectionStatus("connected");
+      socketInstance.on('connect', () => {
+        console.log('Connected to server:', socketInstance.id);
+        setConnectionStatus('connected');
       });
 
-      socketInstance.on("disconnect", () => {
-        console.log("Disconnected from server");
-        setConnectionStatus("disconnected");
+      socketInstance.on('disconnect', () => {
+        console.log('Disconnected from server');
+        setConnectionStatus('disconnected');
       });
 
-      socketInstance.on("connect_error", (error) => {
-        console.error("Socket connection error:", error);
-        setConnectionStatus("error");
+      socketInstance.on('connect_error', (error) => {
+        console.error('Socket connection error:', error);
+        setConnectionStatus('error');
       });
 
       // Listen for messages
-      socketInstance.on("message", (messageData: Message) => {
-        console.log("Received message:", messageData);
+      socketInstance.on('message', (messageData: Message) => {
+        console.log('Received message:', messageData);
         setMessages((prevMessages) => [...prevMessages, messageData]);
       });
 
       // Call token event for publisher
       socketInstance?.on(
-        "getCallToken",
+        'getCallToken',
         ({ token, channelName, callerId, callerName }) => {
           joinCall(token, channelName, callerId);
           setLocalUserName(callerName);
-        },
+        }
       );
 
       // Incoming call event
-      socketInstance?.on("incomingCall", (messageData) => {
+      socketInstance?.on('incomingCall', (messageData) => {
         setIncomingCall(messageData);
         setRemoteUsername(messageData.callerName);
       });
 
       socketInstance?.on(
-        "getReceiverToken",
+        'getReceiverToken',
         ({
           callerId,
           callerName,
@@ -111,7 +111,7 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({
         }) => {
           joinCall(token, channelName, receiverId);
           setLocalUserName(receiverName);
-        },
+        }
       );
 
       setSocket(socketInstance);
@@ -127,14 +127,14 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({
   const joinCall = useCallback(
     async (token: string, channelName: string, uid: number) => {
       const client = AgoraRTC.createClient({
-        mode: "rtc",
-        codec: "vp8",
+        mode: 'rtc',
+        codec: 'vp8',
       });
       await client?.join(
         process.env.NEXT_PUBLIC_AGORA_APP_ID as string,
         channelName,
         token,
-        uid,
+        uid
       );
       setAgoraClient(client);
 
@@ -142,12 +142,12 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({
 
       await client?.publish(localTracks);
     },
-    [],
+    []
   );
 
   const acceptCall = useCallback(() => {
     if (socket && incomingCall) {
-      socket.emit("acceptCall", {
+      socket.emit('acceptCall', {
         callerId: incomingCall.callerId,
         callerName: incomingCall.callerName,
         receiverId: incomingCall.receiverId,
@@ -159,7 +159,7 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const rejectCall = useCallback(() => {
     if (socket && incomingCall) {
-      socket.emit("rejectCall", { callerId: incomingCall.callerId });
+      socket.emit('rejectCall', { callerId: incomingCall.callerId });
       setIncomingCall(null);
     }
   }, [socket, incomingCall]);
@@ -204,7 +204,7 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({
       remoteUsername,
       setAgoraClient,
       setRemoteUsername,
-    ],
+    ]
   );
 
   return (
@@ -216,7 +216,7 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({
 export const useSocketContext = () => {
   const context = useContext(SocketContext);
   if (!context) {
-    throw new Error("useSocketContext must be used within a SocketProvider");
+    throw new Error('useSocketContext must be used within a SocketProvider');
   }
   return context;
 };

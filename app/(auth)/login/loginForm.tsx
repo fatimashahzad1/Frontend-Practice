@@ -1,18 +1,18 @@
-"use client";
-import React, { useEffect } from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import Input from "@/components/auth/input";
-import Link from "next/link";
-import { LoginSchema } from "@/constants/schemas";
+'use client';
+import React, { useEffect } from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import Input from '@/components/auth/input';
+import Link from 'next/link';
+import { LoginSchema } from '@/constants/schemas';
 import {
   DEFAULT_LOGIN_VALUES,
   EMAIL_FIELD,
   PASSWORD_FIELD,
-} from "@/constants/form-fields";
-import { useToast } from "@/hooks/use-toast";
-import useLogin from "@/hooks/use-login";
-import Spinner from "@/components/icons/spinner";
+} from '@/constants/form-fields';
+import { useToast } from '@/hooks/use-toast';
+import useLogin from '@/hooks/use-login';
+import Spinner from '@/components/icons/spinner';
 
 const LoginFields = [EMAIL_FIELD, PASSWORD_FIELD];
 
@@ -27,14 +27,14 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (responseData) {
-      const isErrorResponse = "error" in responseData; // Type narrowing
+      const isErrorResponse = 'error' in responseData; // Type narrowing
 
       toast({
-        variant: isErrorResponse ? "destructive" : "default",
-        title: isErrorResponse ? responseData.error : "Success",
+        variant: isErrorResponse ? 'destructive' : 'default',
+        title: isErrorResponse ? responseData.error : 'Success',
         description: isErrorResponse
           ? responseData.message
-          : "Login Successful.",
+          : 'Login Successful.',
       });
     }
   }, [responseData, toast]);

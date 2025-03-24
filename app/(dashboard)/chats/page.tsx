@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { useEffect, useRef, useState } from "react";
-import { Input } from "@/components/ui/input";
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Search, Send } from "lucide-react";
-import { useChatSelection } from "@/contexts/chat-selection-context";
-import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
-import Spinner from "@/components/icons/spinner";
+import { useEffect, useRef, useState } from 'react';
+import { Input } from '@/components/ui/input';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Search, Send } from 'lucide-react';
+import { useChatSelection } from '@/contexts/chat-selection-context';
+import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
+import Spinner from '@/components/icons/spinner';
 
 export default function Chats() {
   const {
@@ -25,7 +25,7 @@ export default function Chats() {
     isFetchingNextPage,
     chatNewMessages,
   } = useChatSelection();
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
   const chatContainerRef = useRef<HTMLDivElement>(null); // Reference to the chat container div
   const lastMessageRef = useRef<HTMLDivElement>(null);
   const firstMessageRef = useRef<HTMLDivElement>(null); // Reference to the first message in the list
@@ -36,8 +36,8 @@ export default function Chats() {
     if (chatContainerRef.current && lastMessageRef.current) {
       // Scroll to the last message whenever messages are updated
       lastMessageRef.current?.scrollIntoView({
-        behavior: "smooth",
-        block: "end", // Align to the bottom of the container
+        behavior: 'smooth',
+        block: 'end', // Align to the bottom of the container
       });
     }
   }, [selectedChatMessages]);
@@ -57,7 +57,7 @@ export default function Chats() {
         root: chatContainerRef.current,
 
         threshold: 0.1, // Allow partial visibility to trigger
-      },
+      }
     );
 
     observer.observe(firstMessageRef.current);
@@ -87,19 +87,19 @@ export default function Chats() {
         fetchNextPage();
       }
     };
-    chatContainer.addEventListener("scroll", checkVisibility);
-    chatContainer.addEventListener("resize", checkVisibility);
+    chatContainer.addEventListener('scroll', checkVisibility);
+    chatContainer.addEventListener('resize', checkVisibility);
 
     return () => {
-      chatContainer.removeEventListener("scroll", checkVisibility);
-      chatContainer.removeEventListener("resize", checkVisibility);
+      chatContainer.removeEventListener('scroll', checkVisibility);
+      chatContainer.removeEventListener('resize', checkVisibility);
     };
   }, [hasNextPage, isFetchingNextPage, fetchNextPage, selectedChatMessages]);
 
   const handleSendMessage = () => {
     if (selectedChat) {
       sendMessage({ chatId: selectedChat, message });
-      setMessage("");
+      setMessage('');
     }
   };
 
@@ -108,7 +108,7 @@ export default function Chats() {
       {/* Left Sidebar - Chat List */}
       <div
         className={`${
-          selectedChat ? "max-sm:hidden" : "max-sm:w-full"
+          selectedChat ? 'max-sm:hidden' : 'max-sm:w-full'
         } sm:w-1/3 border-r py-4 bg-[#EEF4FD] dark:bg-gray-800`}
       >
         <h2 className="max-sm:hidden mx-4 text-xl font-bold">Chats</h2>
@@ -137,8 +137,8 @@ export default function Chats() {
               key={chat.id}
               className={`px-4 py-3 flex items-center gap-3 cursor-pointer transition border-none rounded-none shadow-none ${
                 selectedChat === chat.id
-                  ? "bg-white"
-                  : "hover:bg-blue-100 bg-[#EEF4FD]"
+                  ? 'bg-white'
+                  : 'hover:bg-blue-100 bg-[#EEF4FD]'
               }`}
               onClick={() => setSelectedChat(chat.id)}
             >
@@ -173,7 +173,7 @@ export default function Chats() {
       {/* Right Panel - Chat Messages */}
       <div
         className={`${
-          selectedChat ? "max-sm:w-full" : "max-sm:hidden"
+          selectedChat ? 'max-sm:w-full' : 'max-sm:hidden'
         } sm:w-2/3 flex flex-col`}
       >
         {/* Chat Header */}
@@ -201,14 +201,14 @@ export default function Chats() {
             </p>
           )}
           {selectedChatMessages?.pages?.flatMap((page, pageIndex: number) => (
-            <div key={"messages-" + pageIndex} className="flex flex-col">
+            <div key={'messages-' + pageIndex} className="flex flex-col">
               {page?.messages?.map((msg: Message, index: number) => (
                 <div
                   key={msg.id}
                   className={`mb-8 p-2 max-w-[75%] rounded-lg flex flex-col ${
                     msg.isMine
-                      ? "bg-[#1565D8] text-white self-end"
-                      : "bg-[#EEF4FD] text-black self-start"
+                      ? 'bg-[#1565D8] text-white self-end'
+                      : 'bg-[#EEF4FD] text-black self-start'
                   }`}
                   ref={index === 0 && pageIndex === 0 ? firstMessageRef : null} // Set ref for the last message
                 >
@@ -217,14 +217,14 @@ export default function Chats() {
                 </div>
               ))}
               {chatNewMessages?.map((msg: Message, index: number) => {
-                console.log("contewnt========", msg);
+                console.log('contewnt========', msg);
                 return (
                   <div
                     key={`receiver-messages=${msg.id}`}
                     className={`mb-8 p-2 max-w-[75%] rounded-lg flex flex-col ${
                       msg.isMine
-                        ? "bg-[#1565D8] text-white self-end"
-                        : "bg-[#EEF4FD] text-black self-start"
+                        ? 'bg-[#1565D8] text-white self-end'
+                        : 'bg-[#EEF4FD] text-black self-start'
                     }`}
                   >
                     {msg.content}

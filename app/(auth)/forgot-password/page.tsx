@@ -1,7 +1,7 @@
-import LeftPanel from "@/components/auth/leftPanel";
-import LoginTemplate from "@/components/auth/loginTemplate";
-import React from "react";
-import ForgotPasswordForm from "./forgotPasswordForm";
+import LeftPanel from '@/components/auth/leftPanel';
+import LoginTemplate from '@/components/auth/loginTemplate';
+import React from 'react';
+import ForgotPasswordForm from './forgotPasswordForm';
 
 const ForgotPassword = () => {
   return (

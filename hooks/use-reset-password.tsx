@@ -1,6 +1,6 @@
-import { postClient } from "@/utils/client";
-import { useMutation } from "@tanstack/react-query";
-import { useToast } from "./use-toast";
+import { postClient } from '@/utils/client';
+import { useMutation } from '@tanstack/react-query';
+import { useToast } from './use-toast';
 
 const useResetPassword = () => {
   const { toast } = useToast();
@@ -13,7 +13,7 @@ const useResetPassword = () => {
       token: string | null;
     }) => {
       if (!token) {
-        throw new Error("Token is required!");
+        throw new Error('Token is required!');
       }
 
       return await postClient({
@@ -23,18 +23,18 @@ const useResetPassword = () => {
     },
 
     onSuccess: (data) => {
-      console.log("Password reset successful!", data);
+      console.log('Password reset successful!', data);
       toast({
-        variant: "default",
+        variant: 'default',
         title: data?.success,
         description: data?.message,
       });
     },
     onError: (error) => {
-      console.error("Error resetting password", error.message);
+      console.error('Error resetting password', error.message);
       toast({
-        variant: "destructive",
-        title: "Error",
+        variant: 'destructive',
+        title: 'Error',
         description: error.message,
       });
     },

@@ -1,34 +1,34 @@
-"use client";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+'use client';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 import {
   DEFAULT_EVENT_VALUES,
   FORM_FIELD_NAMES,
-} from "@/constants/form-fields";
-import { AddPostEventSchema } from "@/constants/schemas";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
-import { Image as ImageIcon, Trash2 } from "lucide-react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { useUploadImage } from "@/hooks/use-upload-image";
-import { cn } from "@/lib/utils";
-import { Progress } from "@/components/ui/progress";
-import Image from "next/image";
-import { ArticleCard } from "./article-card";
-import { useEffect } from "react";
-import useCreatePost from "@/hooks/use-create-post";
-import WriteArticleModal from "./write-article-modal";
-import EventModal from "./event-modal";
-import useUser from "@/hooks/use-user";
+} from '@/constants/form-fields';
+import { AddPostEventSchema } from '@/constants/schemas';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
+import { Image as ImageIcon, Trash2 } from 'lucide-react';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { useUploadImage } from '@/hooks/use-upload-image';
+import { cn } from '@/lib/utils';
+import { Progress } from '@/components/ui/progress';
+import Image from 'next/image';
+import { ArticleCard } from './article-card';
+import { useEffect } from 'react';
+import useCreatePost from '@/hooks/use-create-post';
+import WriteArticleModal from './write-article-modal';
+import EventModal from './event-modal';
+import useUser from '@/hooks/use-user';
 
 export function PostCard() {
   const { image, uploading, progress, uploadImage, removeImage } =
@@ -48,7 +48,7 @@ export function PostCard() {
   }, [image, form]);
 
   const handleFileChange = async (
-    event: React.ChangeEvent<HTMLInputElement>,
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -78,7 +78,7 @@ export function PostCard() {
             <Avatar className="w-14 h-14">
               <AvatarImage
                 className="rounded-full min-w-14 min-h-14 object-cover"
-                src={user?.pictureUrl ?? "/assets/dashboard/defaultAvatar.jpg"}
+                src={user?.pictureUrl ?? '/assets/dashboard/defaultAvatar.jpg'}
               />
               <AvatarFallback className="w-10 h-10 flex justify-center items-center rounded-full">
                 {user?.name?.charAt(0).toUpperCase()}
@@ -114,8 +114,8 @@ export function PostCard() {
                   />
                   <Button
                     className={cn(
-                      "text-[#1565D8] gap-[10px] p-0 cursor-pointer",
-                      uploading && "opacity-50 cursor-not-allowed",
+                      'text-[#1565D8] gap-[10px] p-0 cursor-pointer',
+                      uploading && 'opacity-50 cursor-not-allowed'
                     )}
                     type="button"
                   >
@@ -171,8 +171,8 @@ export function PostCard() {
                     type: form.watch(FORM_FIELD_NAMES.TYPE),
                     author: {
                       id: user?.id ?? 0,
-                      name: user?.name ?? "",
-                      pictureUrl: user?.pictureUrl ?? "",
+                      name: user?.name ?? '',
+                      pictureUrl: user?.pictureUrl ?? '',
                     },
                     createdAt: new Date().toString(),
                     postImage: image,

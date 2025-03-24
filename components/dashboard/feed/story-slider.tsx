@@ -1,10 +1,10 @@
-"use client";
-import { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Plus } from "lucide-react";
-import { storyVideos } from "@/mocks/dashboard";
-import Image from "next/image";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+'use client';
+import { useState } from 'react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Plus } from 'lucide-react';
+import { storyVideos } from '@/mocks/dashboard';
+import Image from 'next/image';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
 
 export default function StorySlider() {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);

@@ -1,19 +1,19 @@
-"use client";
-import React from "react";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Doughnut } from "react-chartjs-2";
-import ChartDataLabels from "chartjs-plugin-datalabels";
+'use client';
+import React from 'react';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Doughnut } from 'react-chartjs-2';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 
 export const data = {
-  labels: ["Text", "Images", "Documents", "Videos"],
+  labels: ['Text', 'Images', 'Documents', 'Videos'],
   datasets: [
     {
-      label: "# of Votes",
+      label: '# of Votes',
       data: [32, 25, 22, 11],
-      backgroundColor: ["#1565D8", "#5F9CF3", "#96B3FF", "#F572B9"],
-      borderColor: ["#1565D8", "#5F9CF3", "#96B3FF", "#F572B9"],
+      backgroundColor: ['#1565D8', '#5F9CF3', '#96B3FF', '#F572B9'],
+      borderColor: ['#1565D8', '#5F9CF3', '#96B3FF', '#F572B9'],
       borderWidth: 1,
       borderRadius: 100,
       spacing: 10,
@@ -23,11 +23,11 @@ export const data = {
 };
 
 const options = {
-  cutout: "80%", // Controls the thickness of the doughnut ring
+  cutout: '80%', // Controls the thickness of the doughnut ring
   responsive: true,
   plugins: {
     legend: {
-      position: "right" as const,
+      position: 'right' as const,
       labels: {
         usePointStyle: true,
         boxWidth: 8,
@@ -54,7 +54,7 @@ const options = {
 
 // Custom Plugin to Draw Text in the Center
 const centerTextPlugin = {
-  id: "centerText",
+  id: 'centerText',
   beforeDraw: (chart: any) => {
     const { width } = chart;
     const { height } = chart;
@@ -64,14 +64,14 @@ const centerTextPlugin = {
     // Set text properties
     const fontSize = (height / 100).toFixed(2);
     ctx.font = `${fontSize}em sans-serif`;
-    ctx.textBaseline = "middle";
+    ctx.textBaseline = 'middle';
 
     // Define the text
-    const text = "90";
+    const text = '90';
     const textX = Math.round((width - ctx.measureText(text).width) / 2);
     const textY = height / 2;
 
-    ctx.fillStyle = "#000"; // Text color
+    ctx.fillStyle = '#000'; // Text color
     ctx.fillText(text, textX, textY);
     ctx.save();
   },

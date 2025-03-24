@@ -1,7 +1,7 @@
-import { Button } from "@/components/ui/button";
-import { useSocketContext } from "@/contexts/socket-context";
-import { Mic, MicOff, PhoneCall, Video, VideoOff } from "lucide-react";
-import React, { useEffect, useRef, useState } from "react";
+import { Button } from '@/components/ui/button';
+import { useSocketContext } from '@/contexts/socket-context';
+import { Mic, MicOff, PhoneCall, Video, VideoOff } from 'lucide-react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const SingleVideoCall: React.FC = () => {
   const {
@@ -32,25 +32,25 @@ const SingleVideoCall: React.FC = () => {
   }, [remoteUser]);
 
   useEffect(() => {
-    agoraClient?.on("user-published", async (user, mediaType) => {
-      if (mediaType === "video") {
+    agoraClient?.on('user-published', async (user, mediaType) => {
+      if (mediaType === 'video') {
         await agoraClient.subscribe(user, mediaType);
         setRemoteUser(user);
       }
     });
 
-    agoraClient?.on("user-unpublished", async (user, mediaType) => {
-      if (mediaType === "video") {
+    agoraClient?.on('user-unpublished', async (user, mediaType) => {
+      if (mediaType === 'video') {
         setRemoteUser(null);
       }
     });
 
-    agoraClient?.on("user-left", (user, reason) => {
-      socket?.emit("leaveCall", { channelName: agoraClient.channelName });
+    agoraClient?.on('user-left', (user, reason) => {
+      socket?.emit('leaveCall', { channelName: agoraClient.channelName });
 
       // Clear video elements
-      if (localVideoRef.current) localVideoRef.current.innerHTML = "";
-      if (remoteVideoRef.current) remoteVideoRef.current.innerHTML = "";
+      if (localVideoRef.current) localVideoRef.current.innerHTML = '';
+      if (remoteVideoRef.current) remoteVideoRef.current.innerHTML = '';
 
       leaveCall();
     });

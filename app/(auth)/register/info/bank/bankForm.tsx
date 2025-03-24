@@ -1,14 +1,14 @@
-"use client";
-import React, { useEffect } from "react";
-import Input from "../../../../../components/auth/input";
-import { MdLockOutline } from "react-icons/md";
-import { FormProvider, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { BankSchema } from "@/constants/schemas";
-import { BANK_VERIFICATION_FIELD } from "@/constants/form-fields";
-import { useRegistration } from "@/contexts/registration-context";
-import useRegister from "@/hooks/use-register";
-import Spinner from "@/components/icons/spinner";
+'use client';
+import React, { useEffect } from 'react';
+import Input from '../../../../../components/auth/input';
+import { MdLockOutline } from 'react-icons/md';
+import { FormProvider, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { BankSchema } from '@/constants/schemas';
+import { BANK_VERIFICATION_FIELD } from '@/constants/form-fields';
+import { useRegistration } from '@/contexts/registration-context';
+import useRegister from '@/hooks/use-register';
+import Spinner from '@/components/icons/spinner';
 
 const BankForm = () => {
   const { formData, companyFormData } = useRegistration();
@@ -19,7 +19,7 @@ const BankForm = () => {
   const { register, isPending } = useRegister();
 
   const onSubmit = (data: BankFormData) => {
-    if (companyFormData.companyName !== "") {
+    if (companyFormData.companyName !== '') {
       register({ ...companyFormData, ...data });
     } else {
       register({ ...formData, ...data });

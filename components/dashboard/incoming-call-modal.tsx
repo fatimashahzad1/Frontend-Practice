@@ -1,4 +1,4 @@
-import { useSocketContext } from "@/contexts/socket-context";
+import { useSocketContext } from '@/contexts/socket-context';
 
 const IncomingCallModal = () => {
   const { incomingCall, acceptCall, rejectCall } = useSocketContext();

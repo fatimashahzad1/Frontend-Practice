@@ -1,8 +1,8 @@
-import { getToken } from "@/lib/get-token";
-import { putClient } from "@/utils/client";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useToast } from "./use-toast";
-import { ROUTE_QUERY_KEYS } from "@/constants/routes";
+import { getToken } from '@/lib/get-token';
+import { putClient } from '@/utils/client';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useToast } from './use-toast';
+import { ROUTE_QUERY_KEYS } from '@/constants/routes';
 
 const useChangeUserDetails = () => {
   const { toast } = useToast();
@@ -18,7 +18,7 @@ const useChangeUserDetails = () => {
       const token = await getToken();
       const { id, ...user } = data;
       if (!token) {
-        throw new Error("Token Missing");
+        throw new Error('Token Missing');
       }
 
       return putClient({
@@ -32,16 +32,16 @@ const useChangeUserDetails = () => {
         queryKey: [ROUTE_QUERY_KEYS.USER_DETAILS],
       });
       toast({
-        variant: "default",
-        title: "Success",
-        description: "Information Changed Successfully",
+        variant: 'default',
+        title: 'Success',
+        description: 'Information Changed Successfully',
       });
     },
     onError: (err: any) => {
       toast({
-        variant: "destructive",
+        variant: 'destructive',
         title: err.message,
-        description: "Failed to Update",
+        description: 'Failed to Update',
       });
     },
   });

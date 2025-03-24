@@ -1,15 +1,15 @@
-"use client";
-import React from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+'use client';
+import React from 'react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { FiMenu } from "react-icons/fi";
-import { usePathname } from "next/navigation";
-import ChatSidebar from "./chat-sidebar";
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { FiMenu } from 'react-icons/fi';
+import { usePathname } from 'next/navigation';
+import ChatSidebar from './chat-sidebar';
 
 const ChatNavbar = () => {
   const path = usePathname();
-  const name = path.split("/")[path.split("/").length - 1];
+  const name = path.split('/')[path.split('/').length - 1];
   const getCapitalized = (word: string) => {
     return word.charAt(0).toUpperCase().concat(word.substring(1));
   };

@@ -1,9 +1,9 @@
-import LeftPanel from "@/components/auth/leftPanel";
-import React from "react";
-import RegisterTemplate from "../../registerTemplate";
+import LeftPanel from '@/components/auth/leftPanel';
+import React from 'react';
+import RegisterTemplate from '../../registerTemplate';
 
-import OAuthButton from "../../oauthButton";
-import RegisterForm from "../../registerForm";
+import OAuthButton from '../../oauthButton';
+import RegisterForm from '../../registerForm';
 
 const Register = () => {
   return (

@@ -1,25 +1,25 @@
-"use client";
-import React from "react";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Doughnut } from "react-chartjs-2";
-import { Progress } from "@/components/ui/progress";
+'use client';
+import React from 'react';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Doughnut } from 'react-chartjs-2';
+import { Progress } from '@/components/ui/progress';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 // Custom Plugin to Draw Text in the Middle
 const centerTextPlugin = {
-  id: "centerText",
+  id: 'centerText',
   beforeDraw: (chart: any) => {
     const { width, height, ctx } = chart;
     ctx.restore();
 
     const fontSize = (height / 120).toFixed(2);
     ctx.font = `${fontSize}em sans-serif`;
-    ctx.textBaseline = "middle";
-    ctx.fillStyle = "#000"; // Text color
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = '#000'; // Text color
 
-    const text = "Traffic\nsources";
-    const textX = width / 2 - ctx.measureText("Traffic sources").width / 2;
+    const text = 'Traffic\nsources';
+    const textX = width / 2 - ctx.measureText('Traffic sources').width / 2;
     const textY = height / 2 + 10;
 
     ctx.fillText(text, textX, textY);
@@ -29,14 +29,14 @@ const centerTextPlugin = {
 
 // Chart Data
 const data = {
-  labels: ["Channel pages", "Direct or unknown", "Search", "External"],
+  labels: ['Channel pages', 'Direct or unknown', 'Search', 'External'],
   datasets: [
     {
       data: [37.5, 33.6, 11, 6],
-      backgroundColor: ["#1565D8", "#5F9CF3", "#96B3FF", "#DCE4FF"],
-      borderColor: ["#1565D8", "#5F9CF3", "#96B3FF", "#DCE4FF"],
+      backgroundColor: ['#1565D8', '#5F9CF3', '#96B3FF', '#DCE4FF'],
+      borderColor: ['#1565D8', '#5F9CF3', '#96B3FF', '#DCE4FF'],
       borderWidth: 0,
-      cutout: "70%", // Creates ring effect
+      cutout: '70%', // Creates ring effect
       circumference: 360, // Semi-circle
       rotation: 270, // Start from top
     },

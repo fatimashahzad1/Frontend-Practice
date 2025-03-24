@@ -1,8 +1,8 @@
-"use client";
-import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_PAGE } from "@/constants";
-import { ROUTE_QUERY_KEYS } from "@/constants/routes";
-import { getClient } from "@/utils/client";
-import { useQuery } from "@tanstack/react-query";
+'use client';
+import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_PAGE } from '@/constants';
+import { ROUTE_QUERY_KEYS } from '@/constants/routes';
+import { getClient } from '@/utils/client';
+import { useQuery } from '@tanstack/react-query';
 
 const useGetAllArticles = ({
   page,

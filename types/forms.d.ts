@@ -7,7 +7,7 @@ type FormField = {
   multiline?: boolean;
 };
 
-type FormFieldSwitch = Pick<FormField, "name" | "label"> & {
+type FormFieldSwitch = Pick<FormField, 'name' | 'label'> & {
   description: string;
 };
 
@@ -25,7 +25,7 @@ interface ResidencyFormData {
 }
 
 interface BankFormData {
-  bankNo: string;
+  bankNo: number;
 }
 
 interface CompanyPersonalFormData {

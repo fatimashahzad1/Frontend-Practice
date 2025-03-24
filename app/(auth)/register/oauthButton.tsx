@@ -1,5 +1,5 @@
-import React from "react";
-import { FcGoogle } from "react-icons/fc";
+import React from 'react';
+import { FcGoogle } from 'react-icons/fc';
 
 const OAuthButton = () => {
   return (

@@ -11,12 +11,12 @@ export const postClient = async ({
     const newUrl = process.env.NEXT_PUBLIC_API_BASE_URL + url;
 
     const options: RequestInit = {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         ...(token && { Authorization: `Bearer ${token}` }),
       },
-      credentials: "include",
+      credentials: 'include',
       ...(data && { body: JSON.stringify(data) }),
     };
 
@@ -30,7 +30,7 @@ export const postClient = async ({
 
     return await response.json();
   } catch (error: any) {
-    console.error("Error in postRequest:", error.message);
+    console.error('Error in postRequest:', error.message);
     throw error;
   }
 };
@@ -48,22 +48,22 @@ export const patchClient = async ({
     const newUrl = process.env.NEXT_PUBLIC_API_BASE_URL + url;
 
     const response = await fetch(newUrl, {
-      method: "PATCH",
+      method: 'PATCH',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         ...(token && { Authorization: `Bearer ${token}` }),
       },
-      credentials: "include",
+      credentials: 'include',
       body: JSON.stringify(data),
     });
 
     if (!response.ok) {
-      throw new Error("Request Failed");
+      throw new Error('Request Failed');
     }
 
     return await response.json();
   } catch (error: any) {
-    console.error("Error in patchRequest:", error.message);
+    console.error('Error in patchRequest:', error.message);
     throw error;
   }
 };
@@ -81,22 +81,22 @@ export const putClient = async ({
     const newUrl = process.env.NEXT_PUBLIC_API_BASE_URL + url;
 
     const response = await fetch(newUrl, {
-      method: "PUT",
+      method: 'PUT',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         ...(token && { Authorization: `Bearer ${token}` }),
       },
-      credentials: "include",
+      credentials: 'include',
       body: JSON.stringify(data),
     });
 
     if (!response.ok) {
-      throw new Error("Request Failed");
+      throw new Error('Request Failed');
     }
 
     return await response.json();
   } catch (error: any) {
-    console.error("Error in putRequest:", error.message);
+    console.error('Error in putRequest:', error.message);
     throw error;
   }
 };
@@ -107,26 +107,26 @@ export const getClient = async (url: string, token?: string) => {
 
     // Set up headers with optional Authorization token
     const headers: HeadersInit = {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     };
 
     if (token) {
-      headers["Authorization"] = `Bearer ${token}`;
+      headers['Authorization'] = `Bearer ${token}`;
     }
 
     const response = await fetch(newUrl, {
-      method: "GET",
+      method: 'GET',
       headers,
     });
 
     if (!response.ok) {
-      throw new Error("Request Failed");
+      throw new Error('Request Failed');
     }
 
     return await response.json();
   } catch (error: any) {
-    console.error("Error in getClient:", error.message);
-    throw new Error("Failed to get data");
+    console.error('Error in getClient:', error.message);
+    throw new Error('Failed to get data');
   }
 };
 
@@ -141,12 +141,12 @@ export const deleteClient = async ({
     const newUrl = process.env.NEXT_PUBLIC_API_BASE_URL + url;
 
     const options: RequestInit = {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         ...(token && { Authorization: `Bearer ${token}` }),
       },
-      credentials: "include",
+      credentials: 'include',
     };
 
     const response = await fetch(newUrl, options);
@@ -158,7 +158,7 @@ export const deleteClient = async ({
 
     return await response.json();
   } catch (error: any) {
-    console.error("Error in deleteRequest:", error.message);
+    console.error('Error in deleteRequest:', error.message);
     throw error;
   }
 };

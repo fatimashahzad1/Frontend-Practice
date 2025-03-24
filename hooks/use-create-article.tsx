@@ -1,8 +1,8 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { postClient } from "@/utils/client";
-import { getToken } from "@/lib/get-token";
-import { useToast } from "./use-toast";
-import { ROUTE_QUERY_KEYS } from "@/constants/routes";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { postClient } from '@/utils/client';
+import { getToken } from '@/lib/get-token';
+import { useToast } from './use-toast';
+import { ROUTE_QUERY_KEYS } from '@/constants/routes';
 
 const useCreateArticle = () => {
   const { toast } = useToast();
@@ -16,11 +16,11 @@ const useCreateArticle = () => {
     }) => {
       const token = await getToken();
       if (!token) {
-        throw new Error("Token is Required!");
+        throw new Error('Token is Required!');
       }
 
       const result = await postClient({
-        url: "article",
+        url: 'article',
         data: articleData,
         token,
       });
@@ -35,16 +35,16 @@ const useCreateArticle = () => {
       });
 
       toast({
-        variant: "default",
-        title: "Success",
-        description: "Article created Successfully",
+        variant: 'default',
+        title: 'Success',
+        description: 'Article created Successfully',
       });
     },
     onError: (err: any) => {
       toast({
-        variant: "destructive",
+        variant: 'destructive',
         title: err.message,
-        description: "Failed to create Article",
+        description: 'Failed to create Article',
       });
     },
   });

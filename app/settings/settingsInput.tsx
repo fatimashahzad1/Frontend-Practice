@@ -1,20 +1,20 @@
-import React from "react";
+import React from 'react';
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
 const SettingsInput = ({
   control,
   label,
 
   name,
   maxLength = 20,
-  placeholder = "",
-  type = "text",
+  placeholder = '',
+  type = 'text',
 }: SettingsInputProps) => {
   return (
     <FormField

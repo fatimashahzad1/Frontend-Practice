@@ -1,31 +1,31 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
+import React, { useState } from 'react';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { NotepadText, Upload, Trash2, ImageOff } from "lucide-react";
-import { useUploadImage } from "@/hooks/use-upload-image";
-import { WriteArticleSchema } from "@/constants/schemas";
-import { Form } from "@/components/ui/form";
+} from '@/components/ui/dialog';
+import { NotepadText, Upload, Trash2, ImageOff } from 'lucide-react';
+import { useUploadImage } from '@/hooks/use-upload-image';
+import { WriteArticleSchema } from '@/constants/schemas';
+import { Form } from '@/components/ui/form';
 import {
   CREATE_ARTICLE_DESCRIPTION_FIELD,
   CREATE_ARTICLE_ESTIMATION_FIELD,
   CREATE_ARTICLE_TITLE_FIELD,
   DEFAULT_CREATE_ARTICLE_VALUES,
   FORM_FIELD_NAMES,
-} from "@/constants/form-fields";
-import SettingsInput from "@/app/settings/settingsInput";
-import Image from "next/image";
-import useCreateArticle from "@/hooks/use-create-article";
-import { CustomTextarea } from "@/app/settings/custom-textarea";
+} from '@/constants/form-fields';
+import SettingsInput from '@/app/settings/settingsInput';
+import Image from 'next/image';
+import useCreateArticle from '@/hooks/use-create-article';
+import { CustomTextarea } from '@/app/settings/custom-textarea';
 
 const WriteArticleModal = () => {
   const [open, setOpen] = useState(false);
@@ -55,7 +55,7 @@ const WriteArticleModal = () => {
   }, [image, form]);
 
   const onSubmit = (values: z.infer<typeof WriteArticleSchema>) => {
-    console.log("Article Data:", values);
+    console.log('Article Data:', values);
     createArticle({
       title: values.title,
       description: values.description,
@@ -127,7 +127,7 @@ const WriteArticleModal = () => {
                   className="mt-2 flex items-center gap-2 p-2 border rounded-md cursor-pointer bg-gray-100 hover:bg-gray-200 transition"
                 >
                   <Upload size={18} />
-                  <span>{image ? "Change Image" : "Choose an image"}</span>
+                  <span>{image ? 'Change Image' : 'Choose an image'}</span>
                 </label>
                 <input
                   id="upload-image"

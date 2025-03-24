@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface DashboardNavbarLogoProps {
   width?: string;
@@ -6,8 +6,8 @@ interface DashboardNavbarLogoProps {
 }
 
 const DashboardNavbarLogo: React.FC<DashboardNavbarLogoProps> = ({
-  width = "70px",
-  height = "38px",
+  width = '70px',
+  height = '38px',
 }) => {
   return (
     <svg

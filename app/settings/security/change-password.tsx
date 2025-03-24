@@ -1,19 +1,19 @@
-"use client";
-import { Form } from "@/components/ui/form";
+'use client';
+import { Form } from '@/components/ui/form';
 import {
   CONFIRM_PASSWORD_FIELD,
   DEFAULT_RESET_PASSWORD_VALUES,
   PASSWORD_FIELD,
-} from "@/constants/form-fields";
-import { ResetPasswordSchema } from "@/constants/schemas";
-import { zodResolver } from "@hookform/resolvers/zod";
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import SettingsInput from "../settingsInput";
-import { Button } from "@/components/ui/button";
-import { getToken } from "@/lib/get-token";
-import useResetPassword from "@/hooks/use-reset-password";
+} from '@/constants/form-fields';
+import { ResetPasswordSchema } from '@/constants/schemas';
+import { zodResolver } from '@hookform/resolvers/zod';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import SettingsInput from '../settingsInput';
+import { Button } from '@/components/ui/button';
+import { getToken } from '@/lib/get-token';
+import useResetPassword from '@/hooks/use-reset-password';
 import {
   Dialog,
   DialogContent,
@@ -21,7 +21,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 
 const ChangePassword = () => {
   const [open, setOpen] = useState(false);
@@ -45,7 +45,7 @@ const ChangePassword = () => {
       </h2>
       <div className="flex justify-between items-center flex-wrap">
         <p className="text-sm md:text-lg">
-          Can’t remember your current password?{" "}
+          Can’t remember your current password?{' '}
         </p>
 
         <Dialog open={open} onOpenChange={setOpen}>

@@ -1,19 +1,19 @@
-"use client";
-import React from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import Input from "../../../components/auth/input";
-import { RegisterSchema } from "@/constants/schemas";
+'use client';
+import React from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import Input from '../../../components/auth/input';
+import { RegisterSchema } from '@/constants/schemas';
 import {
   EMAIL_FIELD,
   FULLNAME_FIELD,
   PASSWORD_FIELD,
   TERMS_AND_CONDITIONS_FIELD,
-} from "@/constants/form-fields";
-import { ROUTES } from "@/constants/routes";
-import { useRouter } from "next/navigation";
-import { useRegistration } from "@/contexts/registration-context";
-import { USER_TYPE } from "@/constants";
+} from '@/constants/form-fields';
+import { ROUTES } from '@/constants/routes';
+import { useRouter } from 'next/navigation';
+import { useRegistration } from '@/contexts/registration-context';
+import { USER_TYPE } from '@/constants';
 
 const RegisterFields: FormField[] = [
   FULLNAME_FIELD,
@@ -32,7 +32,7 @@ const RegisterForm = () => {
   const router = useRouter();
 
   const onSubmit = (data: PersonalFormData) => {
-    if (companyFormData.companyName !== "") {
+    if (companyFormData.companyName !== '') {
       setCompanyFormData((prevData) => ({
         ...prevData,
         ...data,

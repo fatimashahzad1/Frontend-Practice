@@ -1,15 +1,15 @@
-"use client";
-import { Button } from "@/components/ui/button";
-import { DASHBOARD_SIMILAR_PAGES } from "@/constants";
-import { companies, events } from "@/mocks/dashboard";
-import { MessageSquareText, NotebookPen } from "lucide-react";
-import React from "react";
-import SideCollectionItem from "./side-collection-item";
-import useGetAllFollowedUsers from "@/hooks/use-get-all-followed-users";
-import { useRouter } from "next/navigation";
-import { ROUTES } from "@/constants/routes";
-import { useChatSelection } from "@/contexts/chat-selection-context";
-import Spinner from "@/components/icons/spinner";
+'use client';
+import { Button } from '@/components/ui/button';
+import { DASHBOARD_SIMILAR_PAGES } from '@/constants';
+import { companies, events } from '@/mocks/dashboard';
+import { MessageSquareText, NotebookPen } from 'lucide-react';
+import React from 'react';
+import SideCollectionItem from './side-collection-item';
+import useGetAllFollowedUsers from '@/hooks/use-get-all-followed-users';
+import { useRouter } from 'next/navigation';
+import { ROUTES } from '@/constants/routes';
+import { useChatSelection } from '@/contexts/chat-selection-context';
+import Spinner from '@/components/icons/spinner';
 
 const RightContainer = ({ type }: { type?: string }) => {
   const { data, isLoading } = useGetAllFollowedUsers();
@@ -86,7 +86,7 @@ const RightContainer = ({ type }: { type?: string }) => {
               text1={company.name}
               text2={[company?.city, company?.state]
                 .filter((item) => item)
-                .join(",")}
+                .join(',')}
               imageUrl={company.imageUrl}
               Icon={<NotebookPen color="#1565D8" />}
               iconHandle={() => {}}

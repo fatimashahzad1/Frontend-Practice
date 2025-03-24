@@ -1,14 +1,14 @@
-"use client";
-import React, { useEffect, useRef } from "react";
-import StorySlider from "./story-slider";
-import { PostCard } from "./post-card";
-import { jobs } from "@/mocks/dashboard";
-import { ArticleCard } from "./article-card";
-import { DASHBOARD_SIMILAR_PAGES } from "@/constants";
-import Image from "next/image";
-import { InfiniteData } from "@tanstack/react-query";
-import Spinner from "@/components/icons/spinner";
-import useUser from "@/hooks/use-user";
+'use client';
+import React, { useEffect, useRef } from 'react';
+import StorySlider from './story-slider';
+import { PostCard } from './post-card';
+import { jobs } from '@/mocks/dashboard';
+import { ArticleCard } from './article-card';
+import { DASHBOARD_SIMILAR_PAGES } from '@/constants';
+import Image from 'next/image';
+import { InfiniteData } from '@tanstack/react-query';
+import Spinner from '@/components/icons/spinner';
+import useUser from '@/hooks/use-user';
 
 type MainContainerProps = {
   type?: string;
@@ -38,7 +38,7 @@ const MainContainer = ({
           fetchNextPage();
         }
       },
-      { threshold: 1.0 },
+      { threshold: 1.0 }
     );
 
     observer.observe(observerRef.current);
@@ -64,7 +64,7 @@ const MainContainer = ({
                 preview={false}
                 userId={user?.id}
               />
-            )),
+            ))
           )}
         </>
       )}
@@ -104,7 +104,7 @@ const MainContainer = ({
                   {job.companyName}
                 </h3>
                 <p className="max-sm:text-[10px] text-[13px]">
-                  {[job?.city, job?.state].filter((item) => item).join(",")}|{" "}
+                  {[job?.city, job?.state].filter((item) => item).join(',')}|{' '}
                   {`$${job.price}/${job.frequency}`}
                 </p>
               </div>

@@ -1,19 +1,19 @@
-"use client";
-import React from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import Input from "@/components/auth/input";
-import Link from "next/link";
-import { ResetPasswordSchema } from "@/constants/schemas";
+'use client';
+import React from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import Input from '@/components/auth/input';
+import Link from 'next/link';
+import { ResetPasswordSchema } from '@/constants/schemas';
 import {
   CONFIRM_PASSWORD_FIELD,
   DEFAULT_RESET_PASSWORD_VALUES,
   PASSWORD_FIELD,
-} from "@/constants/form-fields";
-import useResetPassword from "@/hooks/use-reset-password";
-import Spinner from "@/components/icons/spinner";
-import { useRouter, useSearchParams } from "next/navigation";
-import { ROUTES } from "@/constants/routes";
+} from '@/constants/form-fields';
+import useResetPassword from '@/hooks/use-reset-password';
+import Spinner from '@/components/icons/spinner';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { ROUTES } from '@/constants/routes';
 
 const ResetPasswordForm = () => {
   const form = useForm<ResetPasswordFormData>({
@@ -22,7 +22,7 @@ const ResetPasswordForm = () => {
   });
 
   const { mutate: resetPassword, isPending } = useResetPassword();
-  const token = useSearchParams().get("token");
+  const token = useSearchParams().get('token');
   const router = useRouter();
 
   const onSubmit = (data: ResetPasswordFormData) => {

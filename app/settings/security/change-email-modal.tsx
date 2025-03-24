@@ -1,5 +1,5 @@
-"use client";
-import { Button } from "@/components/ui/button";
+'use client';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -7,21 +7,21 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { Form } from "@/components/ui/form";
+} from '@/components/ui/dialog';
+import { Form } from '@/components/ui/form';
 
 import {
   DEFAULT_CHANGE_EMAIL_VALUES,
   EMAIL_FIELD,
-} from "@/constants/form-fields";
-import { ChangeEmailFormSchema } from "@/constants/schemas";
-import { zodResolver } from "@hookform/resolvers/zod";
-import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import SettingsInput from "../settingsInput";
-import useChangeUserDetails from "@/hooks/use-change-user-details";
-import useUser from "@/hooks/use-user";
+} from '@/constants/form-fields';
+import { ChangeEmailFormSchema } from '@/constants/schemas';
+import { zodResolver } from '@hookform/resolvers/zod';
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import SettingsInput from '../settingsInput';
+import useChangeUserDetails from '@/hooks/use-change-user-details';
+import useUser from '@/hooks/use-user';
 
 const ChangeEmailModal = () => {
   const [open, setOpen] = useState(false);
@@ -34,7 +34,7 @@ const ChangeEmailModal = () => {
   const { changeUserDetails } = useChangeUserDetails();
 
   useEffect(() => {
-    form.setValue("email", user?.email ?? "");
+    form.setValue('email', user?.email ?? '');
   }, [user, form]);
 
   function onSubmit(values: z.infer<typeof ChangeEmailFormSchema>) {
@@ -52,7 +52,7 @@ const ChangeEmailModal = () => {
       </h2>
       <div className="flex justify-between items-center flex-wrap">
         <p className="text-sm md:text-lg">
-          Your email address is{" "}
+          Your email address is{' '}
           <span className="font-bold italic">{user?.email}</span>
         </p>
         <Dialog open={open} onOpenChange={setOpen}>

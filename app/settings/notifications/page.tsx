@@ -1,6 +1,6 @@
-import React from "react";
-import Heading from "../heading";
-import NotificationForm from "./notifications-form";
+import React from 'react';
+import Heading from '../heading';
+import NotificationForm from './notifications-form';
 
 const Notifications = () => {
   return (

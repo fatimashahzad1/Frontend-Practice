@@ -1,12 +1,12 @@
-"use client";
-import React from "react";
-import Heading from "../heading";
-import ChangeEmailModal from "./change-email-modal";
-import ChangePassword from "./change-password";
-import useDeleteUser from "@/hooks/use-delete-user";
-import useUser from "@/hooks/use-user";
-import { Button } from "@/components/ui/button";
-import DeleteModal from "./delete-modal";
+'use client';
+import React from 'react';
+import Heading from '../heading';
+import ChangeEmailModal from './change-email-modal';
+import ChangePassword from './change-password';
+import useDeleteUser from '@/hooks/use-delete-user';
+import useUser from '@/hooks/use-user';
+import { Button } from '@/components/ui/button';
+import DeleteModal from './delete-modal';
 
 const Security = () => {
   const { mutate: deleteUser } = useDeleteUser();

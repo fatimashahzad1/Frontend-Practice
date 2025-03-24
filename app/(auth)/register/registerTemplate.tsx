@@ -1,5 +1,5 @@
-import React, { ReactNode } from "react";
-import Header from "./header";
+import React, { ReactNode } from 'react';
+import Header from './header';
 
 interface RegisterTemplateProps {
   heading: string;

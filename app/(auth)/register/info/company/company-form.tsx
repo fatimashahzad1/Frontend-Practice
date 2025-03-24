@@ -1,9 +1,9 @@
-"use client";
-import React from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+'use client';
+import React from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
-import { CompanyRegisterSchema } from "@/constants/schemas";
+import { CompanyRegisterSchema } from '@/constants/schemas';
 import {
   COMPANY_NAME_FIELD,
   COMPANY_SIZE_FIELD,
@@ -11,14 +11,14 @@ import {
   EMAIL_FIELD,
   PASSWORD_FIELD,
   TERMS_AND_CONDITIONS_FIELD,
-} from "@/constants/form-fields";
-import { ROUTES } from "@/constants/routes";
-import { useRouter } from "next/navigation";
-import { useRegistration } from "@/contexts/registration-context";
-import Input from "@/components/auth/input";
-import { USER_TYPE } from "@/constants";
+} from '@/constants/form-fields';
+import { ROUTES } from '@/constants/routes';
+import { useRouter } from 'next/navigation';
+import { useRegistration } from '@/contexts/registration-context';
+import Input from '@/components/auth/input';
+import { USER_TYPE } from '@/constants';
 
-const RegisterFields: FormField[] = [
+const CompanyRegisterFields: FormField[] = [
   COMPANY_NAME_FIELD,
   COMPANY_WEBSITE_FIELD,
   COMPANY_SIZE_FIELD,
@@ -50,7 +50,7 @@ const CompanyForm = () => {
         onSubmit={form.handleSubmit(onSubmit)}
         className="sm:min-w-[300px] md:min-w-[335px] lg:min-w-[426px]"
       >
-        {RegisterFields.map((field) => (
+        {CompanyRegisterFields.map((field) => (
           <Input key={field.name} {...field} />
         ))}
 

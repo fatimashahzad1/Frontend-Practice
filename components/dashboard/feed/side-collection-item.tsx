@@ -1,9 +1,9 @@
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import { DASHBOARD_SIMILAR_PAGES } from "@/constants";
-import { AvatarFallback } from "@radix-ui/react-avatar";
-import React, { ReactNode } from "react";
-import ReactStars from "react-rating-stars-component";
+import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
+import { DASHBOARD_SIMILAR_PAGES } from '@/constants';
+import { AvatarFallback } from '@radix-ui/react-avatar';
+import React, { ReactNode } from 'react';
+import ReactStars from 'react-rating-stars-component';
 
 const SideCollectionItem = ({
   imageUrl,
@@ -33,7 +33,7 @@ const SideCollectionItem = ({
           <AvatarImage
             src={imageUrl}
             alt="Avatar"
-            style={{ borderColor: "#5F9CF3" }}
+            style={{ borderColor: '#5F9CF3' }}
           />
           <AvatarFallback className="w-full text-center">
             {text1.charAt(0).toUpperCase()}

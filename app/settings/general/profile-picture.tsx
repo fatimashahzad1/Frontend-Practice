@@ -1,9 +1,9 @@
-import { Button } from "@/components/ui/button";
-import { FORM_FIELD_NAMES } from "@/constants/form-fields";
-import { useUploadImage } from "@/hooks/use-upload-image";
-import Image from "next/image";
-import React, { useEffect, useRef } from "react";
-import { useFormContext, useWatch } from "react-hook-form";
+import { Button } from '@/components/ui/button';
+import { FORM_FIELD_NAMES } from '@/constants/form-fields';
+import { useUploadImage } from '@/hooks/use-upload-image';
+import Image from 'next/image';
+import React, { useEffect, useRef } from 'react';
+import { useFormContext, useWatch } from 'react-hook-form';
 
 const ProfilePicture = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -80,7 +80,7 @@ const ProfilePicture = () => {
           onClick={() => fileInputRef.current?.click()}
           disabled={uploading}
         >
-          {uploading ? "Uploading..." : "Change Picture"}
+          {uploading ? 'Uploading...' : 'Change Picture'}
         </Button>
         <Button
           className="h-[49px] w-[178px]"
@@ -88,7 +88,7 @@ const ProfilePicture = () => {
           type="button"
           onClick={() => {
             removeImage();
-            setValue(FORM_FIELD_NAMES.PICTURE_URL, "");
+            setValue(FORM_FIELD_NAMES.PICTURE_URL, '');
           }}
           disabled={!image || uploading}
         >

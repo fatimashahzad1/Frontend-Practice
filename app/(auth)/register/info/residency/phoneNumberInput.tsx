@@ -1,16 +1,16 @@
-"use client";
-import React, { forwardRef, LegacyRef, useState } from "react";
+'use client';
+import React, { forwardRef, LegacyRef, useState } from 'react';
 
-import ReactCountryFlag from "react-country-flag";
-import PropTypes from "prop-types";
-import en from "react-phone-number-input/locale/en";
+import ReactCountryFlag from 'react-country-flag';
+import PropTypes from 'prop-types';
+import en from 'react-phone-number-input/locale/en';
 import Input, {
   getCountries,
   getCountryCallingCode,
-} from "react-phone-number-input/input";
-import { CountryCode } from "libphonenumber-js/core";
-import "react-phone-number-input/style.css";
-import { useController, useFormContext } from "react-hook-form";
+} from 'react-phone-number-input/input';
+import { CountryCode } from 'libphonenumber-js/core';
+import 'react-phone-number-input/style.css';
+import { useController, useFormContext } from 'react-hook-form';
 const CountrySelect = ({
   value,
   onChange,
@@ -58,27 +58,27 @@ const CustomInput = forwardRef(
       onChange,
       ...props
     }: { value?: string; onChange?: (val: string) => void },
-    ref: LegacyRef<HTMLInputElement>,
+    ref: LegacyRef<HTMLInputElement>
   ) => (
     <input
       type="text"
       value={value}
-      onChange={(e) => onChange && onChange("000000000")}
+      onChange={(e) => onChange && onChange('000000000')}
       ref={ref}
       {...props}
       className="h-16 w-full focus:outline-none bg-transparent"
       placeholder="Enter phone number"
     />
-  ),
+  )
 );
-CustomInput.displayName = "CustomInput";
+CustomInput.displayName = 'CustomInput';
 
 interface PhoneNumberInputProps {
   name: string;
 }
 
 const PhoneNumberInput = ({ name }: PhoneNumberInputProps) => {
-  const [country, setCountry] = useState("PK");
+  const [country, setCountry] = useState('PK');
 
   const { control } = useFormContext();
   const {
@@ -98,8 +98,8 @@ const PhoneNumberInput = ({ name }: PhoneNumberInputProps) => {
           className=""
           countryCode={country}
           style={{
-            fontSize: "2em",
-            lineHeight: "2em",
+            fontSize: '2em',
+            lineHeight: '2em',
           }}
           svg
         />

@@ -1,7 +1,7 @@
-import React from "react";
-import Heading from "../heading";
-import Recycled from "./recycled";
-import TrafficSourcesChart from "./traffic-sources-chart";
+import React from 'react';
+import Heading from '../heading';
+import Recycled from './recycled';
+import TrafficSourcesChart from './traffic-sources-chart';
 const Analytics = () => {
   return (
     <div className="min-h-screen py-8 md:py-16 md:pl-14 px-5 md:pr-4 w-full">

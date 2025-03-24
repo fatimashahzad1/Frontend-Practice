@@ -1,12 +1,12 @@
-"use client";
-import React, { ReactNode } from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { TbBoxModel2, TbBoxPadding, TbSquares } from "react-icons/tb";
-import { HiOutlineEnvelope } from "react-icons/hi2";
-import { MdLockOutline } from "react-icons/md";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
-const Sidebar = ({ className = "" }: { className?: string }) => {
+'use client';
+import React, { ReactNode } from 'react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { TbBoxModel2, TbBoxPadding, TbSquares } from 'react-icons/tb';
+import { HiOutlineEnvelope } from 'react-icons/hi2';
+import { MdLockOutline } from 'react-icons/md';
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
+const Sidebar = ({ className = '' }: { className?: string }) => {
   const path = usePathname();
   return (
     <div className={`w-[260px] bg-[#F5F9FF]  ${className}`}>
@@ -24,35 +24,35 @@ const Sidebar = ({ className = "" }: { className?: string }) => {
       </div>
       <SideBarNavItem
         label="General"
-        active={path === "/settings/general"}
+        active={path === '/settings/general'}
         path="/settings/general"
       >
         <TbBoxModel2 className="w-8 h-8" />
       </SideBarNavItem>
       <SideBarNavItem
         label="Security"
-        active={path === "/settings/security"}
+        active={path === '/settings/security'}
         path="/settings/security"
       >
         <MdLockOutline className="w-8 h-8" />
       </SideBarNavItem>
       <SideBarNavItem
         label="Notifications"
-        active={path === "/settings/notifications"}
+        active={path === '/settings/notifications'}
         path="/settings/notifications"
       >
         <HiOutlineEnvelope className="w-8 h-8" />
       </SideBarNavItem>
       <SideBarNavItem
         label="Billing"
-        active={path === "/settings/billing"}
+        active={path === '/settings/billing'}
         path="/settings/billing"
       >
         <TbSquares className="w-8 h-8" />
       </SideBarNavItem>
       <SideBarNavItem
         label="Analytics"
-        active={path === "/settings/analytics"}
+        active={path === '/settings/analytics'}
         path="/settings/analytics"
       >
         <TbBoxPadding className="w-8 h-8" />
@@ -74,8 +74,8 @@ const SideBarNavItem = ({
   children,
   path,
 }: SideBarNavItemProps) => {
-  const activeClasses = "bg-[#1565D8] text-white";
-  const nonActiveClasses = "bg-transparent text-[#62618F]";
+  const activeClasses = 'bg-[#1565D8] text-white';
+  const nonActiveClasses = 'bg-transparent text-[#62618F]';
   return (
     <Link
       href={path}

@@ -1,11 +1,11 @@
-"use client";
-import React from "react";
-import Image from "next/image";
-import CardImage from "@/public/assets/dashboard/articleImg.png";
-import { useParams } from "next/navigation";
-import useArticleDetail from "@/hooks/use-article-detail";
-import Spinner from "@/components/icons/spinner";
-import FallbackImage from "@/components/dashboard/fallback-image";
+'use client';
+import React from 'react';
+import Image from 'next/image';
+import CardImage from '@/public/assets/dashboard/articleImg.png';
+import { useParams } from 'next/navigation';
+import useArticleDetail from '@/hooks/use-article-detail';
+import Spinner from '@/components/icons/spinner';
+import FallbackImage from '@/components/dashboard/fallback-image';
 const ArticleDetail = () => {
   const { id } = useParams();
   const { data, isLoading } = useArticleDetail(+id);
@@ -30,8 +30,8 @@ const ArticleDetail = () => {
           <h1 className="text-3xl font-bold mb-4">{data?.title}</h1>
 
           <p className="text-sm text-gray-500 mb-4">
-            <strong>By:</strong> {data?.creator?.name}{" "}
-            <span className="mx-2">|</span>{" "}
+            <strong>By:</strong> {data?.creator?.name}{' '}
+            <span className="mx-2">|</span>{' '}
             <strong>Estimated Reading Time:</strong> {data?.estimatedTime}
           </p>
 

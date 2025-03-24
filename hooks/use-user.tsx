@@ -1,8 +1,8 @@
-"use client";
-import { ROUTE_QUERY_KEYS } from "@/constants/routes";
-import { getToken } from "@/lib/get-token";
-import { getClient } from "@/utils/client";
-import { useQuery } from "@tanstack/react-query";
+'use client';
+import { ROUTE_QUERY_KEYS } from '@/constants/routes';
+import { getToken } from '@/lib/get-token';
+import { getClient } from '@/utils/client';
+import { useQuery } from '@tanstack/react-query';
 
 const useUser = (userId?: number) => {
   return useQuery<User>({
@@ -17,10 +17,10 @@ const useUser = (userId?: number) => {
 const getFollowedUsers = async (userId?: number) => {
   try {
     const token = await getToken();
-    const result = await getClient(`users/detail${userId ?? ""}`, token);
+    const result = await getClient(`users/detail${userId ?? ''}`, token);
     return result;
   } catch (error) {
-    console.log("Here in hook");
+    console.log('Here in hook');
     throw error;
   }
 };

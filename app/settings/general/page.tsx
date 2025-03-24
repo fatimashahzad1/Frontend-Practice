@@ -1,6 +1,6 @@
-import React from "react";
-import Heading from "../heading";
-import GeneralForm from "./general-form";
+import React from 'react';
+import Heading from '../heading';
+import GeneralForm from './general-form';
 
 const General = () => {
   return (

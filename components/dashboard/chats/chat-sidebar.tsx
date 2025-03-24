@@ -1,10 +1,10 @@
-"use client";
-import React, { ReactNode } from "react";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
-import { List, MessageCircle, Phone, Users } from "lucide-react";
-import { ROUTES } from "@/constants/routes";
-const ChatSidebar = ({ className = "" }: { className?: string }) => {
+'use client';
+import React, { ReactNode } from 'react';
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
+import { List, MessageCircle, Phone, Users } from 'lucide-react';
+import { ROUTES } from '@/constants/routes';
+const ChatSidebar = ({ className = '' }: { className?: string }) => {
   const path = usePathname();
   return (
     <div
@@ -51,8 +51,8 @@ const ChatSideBarNavItem = ({
       href={path}
       className={
         active
-          ? "rounded-full bg-white w-9 h-9 flex justify-center items-center"
-          : "bg-transparent"
+          ? 'rounded-full bg-white w-9 h-9 flex justify-center items-center'
+          : 'bg-transparent'
       }
     >
       {children}

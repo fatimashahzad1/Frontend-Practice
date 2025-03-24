@@ -1,10 +1,10 @@
-"use client";
-import { PeopleCard } from "@/components/dashboard/people/people-card";
-import Spinner from "@/components/icons/spinner";
-import { Input } from "@/components/ui/input";
-import usePeople from "@/hooks/use-people";
-import { Search } from "lucide-react";
-import React from "react";
+'use client';
+import { PeopleCard } from '@/components/dashboard/people/people-card';
+import Spinner from '@/components/icons/spinner';
+import { Input } from '@/components/ui/input';
+import usePeople from '@/hooks/use-people';
+import { Search } from 'lucide-react';
+import React from 'react';
 
 const People = () => {
   const {
@@ -45,12 +45,12 @@ const People = () => {
             key={index}
             title={user.name}
             description={user.email}
-            actionTitle={user.isFollowedByCurrentUser ? "Unfollow" : "Follow"}
+            actionTitle={user.isFollowedByCurrentUser ? 'Unfollow' : 'Follow'}
             imageUrl={user.pictureUrl}
             actionButtonClasses={
               user.isFollowedByCurrentUser
-                ? "border-pinkRed text-pinkRed hover:text-pinkRed"
-                : "border-primary text-primary hover:text-primary"
+                ? 'border-pinkRed text-pinkRed hover:text-pinkRed'
+                : 'border-primary text-primary hover:text-primary'
             }
             action={() => {
               user.isFollowedByCurrentUser

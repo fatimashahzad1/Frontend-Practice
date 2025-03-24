@@ -1,18 +1,18 @@
-"use client";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import { DASHBOARD_SIMILAR_PAGES } from "@/constants";
-import { ROUTES } from "@/constants/routes";
-import { avatars, eventPlanners } from "@/mocks/dashboard";
+'use client';
+import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
+import { DASHBOARD_SIMILAR_PAGES } from '@/constants';
+import { ROUTES } from '@/constants/routes';
+import { avatars, eventPlanners } from '@/mocks/dashboard';
 
-import { Phone, Plus } from "lucide-react";
-import Link from "next/link";
-import React from "react";
-import SideCollectionItem from "./side-collection-item";
-import useUser from "@/hooks/use-user";
-import FallbackImage from "../fallback-image";
-import useGetAllUnFollowedUsers from "@/hooks/use-get-all-unfollowed-users";
-import usePeople from "@/hooks/use-people";
+import { Phone, Plus } from 'lucide-react';
+import Link from 'next/link';
+import React from 'react';
+import SideCollectionItem from './side-collection-item';
+import useUser from '@/hooks/use-user';
+import FallbackImage from '../fallback-image';
+import useGetAllUnFollowedUsers from '@/hooks/use-get-all-unfollowed-users';
+import usePeople from '@/hooks/use-people';
 
 const LeftContainer = ({ type }: { type: string }) => {
   const { data: user } = useUser();
@@ -93,7 +93,7 @@ const LeftContainer = ({ type }: { type: string }) => {
                 src={src}
                 alt="Avatar"
                 className="-ml-4 first:ml-0 border-2 rounded-full"
-                style={{ borderColor: "#5F9CF3" }}
+                style={{ borderColor: '#5F9CF3' }}
               />
               {/* <AvatarFallback>U</AvatarFallback> */}
             </Avatar>

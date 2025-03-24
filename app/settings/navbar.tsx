@@ -1,14 +1,14 @@
-"use client";
-import React from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import Sidebar from "./sidebar";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { FiMenu } from "react-icons/fi";
-import { usePathname } from "next/navigation";
+'use client';
+import React from 'react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import Sidebar from './sidebar';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { FiMenu } from 'react-icons/fi';
+import { usePathname } from 'next/navigation';
 
 const Navbar = () => {
   const path = usePathname();
-  const name = path.split("/")[path.split("/").length - 1];
+  const name = path.split('/')[path.split('/').length - 1];
   const getCapitalized = (word: string) => {
     return word.charAt(0).toUpperCase().concat(word.substring(1));
   };

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface SpinnerProps {
   width?: string;
@@ -8,9 +8,9 @@ interface SpinnerProps {
 }
 
 const Spinner: React.FC<SpinnerProps> = ({
-  width = "4rem",
-  height = "4rem",
-  color = "white",
+  width = '4rem',
+  height = '4rem',
+  color = 'white',
   onlySpinner = false,
 }) => {
   if (!onlySpinner)

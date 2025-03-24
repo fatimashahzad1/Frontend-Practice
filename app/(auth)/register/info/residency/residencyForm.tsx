@@ -1,20 +1,20 @@
-"use client";
-import React from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import Input from "../../../../../components/auth/input";
-import PhoneNumberInput from "./phoneNumberInput";
-import CountrySelect from "./countrySelect";
-import { MdLockOutline } from "react-icons/md";
-import { useRegistration } from "@/contexts/registration-context";
-import { ResidencySchema } from "@/constants/schemas";
-import { ROUTES } from "@/constants/routes";
-import { useRouter } from "next/navigation";
+'use client';
+import React from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import Input from '../../../../../components/auth/input';
+import PhoneNumberInput from './phoneNumberInput';
+import CountrySelect from './countrySelect';
+import { MdLockOutline } from 'react-icons/md';
+import { useRegistration } from '@/contexts/registration-context';
+import { ResidencySchema } from '@/constants/schemas';
+import { ROUTES } from '@/constants/routes';
+import { useRouter } from 'next/navigation';
 import {
   ADDRESS_VERIFICATION_FIELD,
   FORM_FIELD_NAMES,
-} from "@/constants/form-fields";
-import { USER_TYPE } from "@/constants";
+} from '@/constants/form-fields';
+import { USER_TYPE } from '@/constants';
 
 const ResidencyForm = () => {
   const { formData, setFormData, setCompanyFormData, companyFormData } =
@@ -23,13 +23,13 @@ const ResidencyForm = () => {
   const form = useForm<ResidencyFormData>({
     resolver: zodResolver(ResidencySchema),
     defaultValues:
-      companyFormData.companyName !== "" ? companyFormData : formData,
+      companyFormData.companyName !== '' ? companyFormData : formData,
   });
 
   const router = useRouter();
 
   const onSubmit = (data: ResidencyFormData) => {
-    if (companyFormData.companyName !== "") {
+    if (companyFormData.companyName !== '') {
       setCompanyFormData((prevData) => ({
         ...prevData,
         ...data,

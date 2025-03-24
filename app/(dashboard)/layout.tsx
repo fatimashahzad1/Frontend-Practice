@@ -1,8 +1,8 @@
-"use client";
-import IncomingCallModal from "@/components/dashboard/incoming-call-modal";
-import Navbar from "@/components/dashboard/navbar";
-import { ChatSelectionProvider } from "@/contexts/chat-selection-context";
-import { SocketProvider } from "@/contexts/socket-context";
+'use client';
+import IncomingCallModal from '@/components/dashboard/incoming-call-modal';
+import Navbar from '@/components/dashboard/navbar';
+import { ChatSelectionProvider } from '@/contexts/chat-selection-context';
+import { SocketProvider } from '@/contexts/socket-context';
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (

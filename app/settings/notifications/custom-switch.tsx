@@ -3,11 +3,11 @@ import {
   FormField,
   FormItem,
   FormLabel,
-} from "@/components/ui/form";
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
-import React from "react";
-import { useFormContext } from "react-hook-form";
+} from '@/components/ui/form';
+import { Label } from '@/components/ui/label';
+import { Switch } from '@/components/ui/switch';
+import React from 'react';
+import { useFormContext } from 'react-hook-form';
 
 const CustomSwitch = ({ name, label, description }: SettingsSwitchProp) => {
   const { control } = useFormContext();

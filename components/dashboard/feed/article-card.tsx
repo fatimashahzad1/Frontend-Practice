@@ -1,14 +1,14 @@
-import { Card } from "@/components/ui/card";
-import { getRelativeTime } from "@/lib/date";
-import FallbackImage from "../fallback-image";
-import dayjs from "dayjs";
-import customParseFormat from "dayjs/plugin/customParseFormat";
-import { POST_TYPE, POST_TYPE_NAME } from "@/constants";
-import DeleteModal from "@/app/settings/security/delete-modal";
+import { Card } from '@/components/ui/card';
+import { getRelativeTime } from '@/lib/date';
+import FallbackImage from '../fallback-image';
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+import { POST_TYPE, POST_TYPE_NAME } from '@/constants';
+import DeleteModal from '@/app/settings/security/delete-modal';
 
-import { Trash2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import useDeletePost from "@/hooks/use-delete-post";
+import { Trash2 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import useDeletePost from '@/hooks/use-delete-post';
 
 interface ArticleCardProps {
   readonly postDetails: Post;
@@ -26,7 +26,7 @@ export function ArticleCard({
     postDetails?.type === POST_TYPE.EVENT ||
       postDetails?.type === POST_TYPE_NAME.EVENT
       ? POST_TYPE.EVENT
-      : POST_TYPE.FEED,
+      : POST_TYPE.FEED
   );
   return (
     <Card className="w-full p-4 shadow-md rounded-lg flex flex-col gap-4 mb-4">
@@ -72,11 +72,11 @@ export function ArticleCard({
             {postDetails.title}
           </div>
           <div className="max-md:text-[10px] text-gray-700 font-semibold">
-            Timing:{" "}
+            Timing:{' '}
             <span className="font-normal">
-              {dayjs(postDetails?.eventDate).format("MMM D, YYYY")} at{" "}
-              {dayjs(postDetails?.eventTime ?? "00:00", "HH:mm").format(
-                "hh:mm A",
+              {dayjs(postDetails?.eventDate).format('MMM D, YYYY')} at{' '}
+              {dayjs(postDetails?.eventTime ?? '00:00', 'HH:mm').format(
+                'hh:mm A'
               )}
             </span>
           </div>

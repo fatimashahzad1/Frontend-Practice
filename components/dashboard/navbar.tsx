@@ -1,20 +1,20 @@
-"use client";
-import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import DashboardNavbarLogo from "../icons/dashboard-navbar-logo";
-import MenuIcon from "../icons/menu-icon";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { ROUTES } from "@/constants/routes";
-import { usePathname, useRouter } from "next/navigation";
-import NotificationPopover from "./notification-popover";
+'use client';
+import { Sheet, SheetTrigger, SheetContent } from '@/components/ui/sheet';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import DashboardNavbarLogo from '../icons/dashboard-navbar-logo';
+import MenuIcon from '../icons/menu-icon';
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
+import { ROUTES } from '@/constants/routes';
+import { usePathname, useRouter } from 'next/navigation';
+import NotificationPopover from './notification-popover';
 
 export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
 
   const getName = () => {
-    const name = pathname.split("/")[1];
+    const name = pathname.split('/')[1];
     return name[0]?.toUpperCase() + name.substring(1);
   };
 
@@ -164,7 +164,7 @@ const NavbarLink = ({
   isMobile = false,
 }: NavbarLinkProps) => {
   const ActiveTitle =
-    pathname === href ? "text-primary font-bold" : "text-textGrey font-medium";
+    pathname === href ? 'text-primary font-bold' : 'text-textGrey font-medium';
   const styleToBeApplied = isMobile
     ? `flex w-full items-center py-2 text-lg font-semibold ${ActiveTitle}`
     : `group inline-flex h-9 w-max items-center ${ActiveTitle} justify-center rounded-md bg-white px-4 py-2 text-base transition-colors hover:text-primary focus:outline-none`;

@@ -1,44 +1,44 @@
-import { getToken } from "@/lib/get-token";
-import { deleteClient, getClient, postClient } from "@/utils/client";
-import { useToast } from "./use-toast";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
-import { ROUTE_QUERY_KEYS } from "@/constants/routes";
+import { getToken } from '@/lib/get-token';
+import { deleteClient, getClient, postClient } from '@/utils/client';
+import { useToast } from './use-toast';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useEffect, useState } from 'react';
+import { ROUTE_QUERY_KEYS } from '@/constants/routes';
 
 // Fetch all people
 const fetchAllPeople = async () => {
   const token = await getToken();
-  if (!token) throw new Error("Token is Missing");
+  if (!token) throw new Error('Token is Missing');
 
-  const result = await getClient("people", token);
+  const result = await getClient('people', token);
   return result;
 };
 
 // Fetch people with search
 const fetchPeopleWithSearch = async (searchString: string) => {
   const token = await getToken();
-  if (!token) throw new Error("Token is Missing");
+  if (!token) throw new Error('Token is Missing');
 
   const result = await getClient(
     `people/search?searchString=${searchString}`,
-    token,
+    token
   );
   if (result?.error)
-    throw new Error(result?.message || "Failed to fetch people");
+    throw new Error(result?.message || 'Failed to fetch people');
   return result?.people || [];
 };
 
 // Follow person
 const followPersonRequest = async (personId: number) => {
   const token = await getToken();
-  if (!token) throw new Error("Token is Missing");
+  if (!token) throw new Error('Token is Missing');
 
   const result = await postClient({
     url: `people/follow/${personId}`,
     token,
   });
   if (result?.error)
-    throw new Error(result?.message || "Failed to follow person");
+    throw new Error(result?.message || 'Failed to follow person');
 
   return result;
 };
@@ -46,14 +46,14 @@ const followPersonRequest = async (personId: number) => {
 // Unfollow person
 const unfollowPersonRequest = async (personId: number) => {
   const token = await getToken();
-  if (!token) throw new Error("Token is Missing");
+  if (!token) throw new Error('Token is Missing');
 
   const result = await deleteClient({
     url: `people/unfollow/${personId}`,
     token,
   });
   if (result?.error)
-    throw new Error(result?.message || "Failed to unfollow person");
+    throw new Error(result?.message || 'Failed to unfollow person');
 
   return result;
 };
@@ -62,7 +62,7 @@ const usePeople = () => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const [people, setPeople] = useState<GetAllPeopleResponse>();
-  const [searchString, setSearchString] = useState<string>("");
+  const [searchString, setSearchString] = useState<string>('');
 
   // Fetch people with useQuery
   const { data, error, isLoading } = useQuery<GetAllPeopleResponse>({
@@ -109,23 +109,23 @@ const usePeople = () => {
     onSuccess: (result) => {
       queryClient.invalidateQueries({
         queryKey: ROUTE_QUERY_KEYS.GET_ALL_UNFOLLOWED_USERS,
-        refetchType: "active",
+        refetchType: 'active',
       });
       queryClient.invalidateQueries({
         queryKey: ROUTE_QUERY_KEYS.GET_ALL_PEOPLE,
-        refetchType: "active",
+        refetchType: 'active',
       });
       toast({
-        variant: "default",
+        variant: 'default',
         title: result.success,
         description: result.message,
       });
     },
     onError: (err: any) => {
       toast({
-        variant: "destructive",
+        variant: 'destructive',
         title: err.message,
-        description: "Failed to follow person",
+        description: 'Failed to follow person',
       });
     },
   });
@@ -138,16 +138,16 @@ const usePeople = () => {
         queryKey: [ROUTE_QUERY_KEYS.GET_ALL_PEOPLE],
       });
       toast({
-        variant: "default",
+        variant: 'default',
         title: result.success,
         description: result.message,
       });
     },
     onError: (err: any) => {
       toast({
-        variant: "destructive",
+        variant: 'destructive',
         title: err.message,
-        description: "Failed to unfollow person",
+        description: 'Failed to unfollow person',
       });
     },
   });

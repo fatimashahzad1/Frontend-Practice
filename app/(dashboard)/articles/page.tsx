@@ -1,18 +1,18 @@
-"use client";
-import PaginationCustom from "@/components/dashboard/pagination";
-import { PeopleCard } from "@/components/dashboard/people/people-card";
-import Spinner from "@/components/icons/spinner";
-import { ShieldOff } from "lucide-react";
-import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_PAGE } from "@/constants";
-import useGetAllArticles from "@/hooks/use-get-all-articles";
-import { useRouter, useSearchParams } from "next/navigation";
-import React from "react";
-import { ROUTES } from "@/constants/routes";
+'use client';
+import PaginationCustom from '@/components/dashboard/pagination';
+import { PeopleCard } from '@/components/dashboard/people/people-card';
+import Spinner from '@/components/icons/spinner';
+import { ShieldOff } from 'lucide-react';
+import { PAGINATION_DEFAULT_LIMIT, PAGINATION_DEFAULT_PAGE } from '@/constants';
+import useGetAllArticles from '@/hooks/use-get-all-articles';
+import { useRouter, useSearchParams } from 'next/navigation';
+import React from 'react';
+import { ROUTES } from '@/constants/routes';
 
 const Articles = () => {
   const searchParams = useSearchParams();
-  const page = Number(searchParams.get("page")) || PAGINATION_DEFAULT_PAGE;
-  const limit = Number(searchParams.get("limit")) || PAGINATION_DEFAULT_LIMIT;
+  const page = Number(searchParams.get('page')) || PAGINATION_DEFAULT_PAGE;
+  const limit = Number(searchParams.get('limit')) || PAGINATION_DEFAULT_LIMIT;
 
   const { data, isPending } = useGetAllArticles({ page, limit });
   const router = useRouter();
@@ -22,10 +22,10 @@ const Articles = () => {
   const getDescription = (article: Article) => {
     return [
       article.creator.name,
-      article?.estimatedTime ? `Est. Time: ${article.estimatedTime}` : "",
+      article?.estimatedTime ? `Est. Time: ${article.estimatedTime}` : '',
     ]
       .filter(Boolean)
-      .join(" | ");
+      .join(' | ');
   };
 
   return (
@@ -44,9 +44,9 @@ const Articles = () => {
               key={index}
               title={article.title}
               description={getDescription(article)}
-              actionTitle={"Read"}
+              actionTitle={'Read'}
               actionButtonClasses={
-                "border-primary text-primary hover:text-primary"
+                'border-primary text-primary hover:text-primary'
               }
               action={() => {
                 router.push(`${ROUTES.articles}/${article.id}`);
