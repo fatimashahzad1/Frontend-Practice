@@ -46,7 +46,7 @@ const Articles = () => {
               description={getDescription(article)}
               actionTitle={"Read"}
               actionButtonClasses={
-                "border-primaryBlue text-primaryBlue hover:text-primaryBlue"
+                "border-primary text-primary hover:text-primary"
               }
               action={() => {
                 router.push(`${ROUTES.articles}/${article.id}`);

@@ -2,51 +2,48 @@
 import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Input from "../../../components/auth/input";
-import { RegisterSchema } from "@/constants/schemas";
+
+import { CompanyRegisterSchema } from "@/constants/schemas";
 import {
+  COMPANY_NAME_FIELD,
+  COMPANY_SIZE_FIELD,
+  COMPANY_WEBSITE_FIELD,
   EMAIL_FIELD,
-  FULLNAME_FIELD,
   PASSWORD_FIELD,
   TERMS_AND_CONDITIONS_FIELD,
 } from "@/constants/form-fields";
 import { ROUTES } from "@/constants/routes";
 import { useRouter } from "next/navigation";
 import { useRegistration } from "@/contexts/registration-context";
+import Input from "@/components/auth/input";
 import { USER_TYPE } from "@/constants";
 
 const RegisterFields: FormField[] = [
-  FULLNAME_FIELD,
+  COMPANY_NAME_FIELD,
+  COMPANY_WEBSITE_FIELD,
+  COMPANY_SIZE_FIELD,
   EMAIL_FIELD,
   PASSWORD_FIELD,
   TERMS_AND_CONDITIONS_FIELD,
 ];
 
-const RegisterForm = () => {
-  const { formData, setFormData, setCompanyFormData, companyFormData } =
-    useRegistration();
-  const form = useForm<RegisterFormData>({
-    resolver: zodResolver(RegisterSchema),
-    defaultValues: formData,
+const CompanyForm = () => {
+  const { companyFormData, setCompanyFormData } = useRegistration();
+  const form = useForm<CompanyRegisterFormData>({
+    resolver: zodResolver(CompanyRegisterSchema),
+    defaultValues: companyFormData,
   });
   const router = useRouter();
 
-  const onSubmit = (data: PersonalFormData) => {
-    if (companyFormData.companyName !== "") {
-      setCompanyFormData((prevData) => ({
-        ...prevData,
-        ...data,
-        userType: USER_TYPE.COMPANY,
-      }));
-    } else {
-      setFormData((prevData) => ({
-        ...prevData,
-        ...data,
-        userType: USER_TYPE.INDIVIDUAL,
-      }));
-      router.push(ROUTES.registerResidential);
-    }
+  const onSubmit = (data: CompanyRegisterFormData) => {
+    setCompanyFormData((prevData) => ({
+      ...prevData,
+      ...data,
+      userType: USER_TYPE.COMPANY,
+    }));
+    router.push(ROUTES.registerResidential);
   };
+
   return (
     <FormProvider {...form}>
       <form
@@ -68,4 +65,4 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm;
+export default CompanyForm;

@@ -50,7 +50,7 @@ const People = () => {
             actionButtonClasses={
               user.isFollowedByCurrentUser
                 ? "border-pinkRed text-pinkRed hover:text-pinkRed"
-                : "border-primaryBlue text-primaryBlue hover:text-primaryBlue"
+                : "border-primary text-primary hover:text-primary"
             }
             action={() => {
               user.isFollowedByCurrentUser

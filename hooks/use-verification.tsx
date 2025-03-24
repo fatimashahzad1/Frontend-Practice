@@ -23,9 +23,10 @@ const useVerification = () => {
 
     try {
       const result = await patchClient({
-        url: `auth/verification?token=${token}`, data: {
+        url: `auth/verification?token=${token}`,
+        data: {
           isVerified: true,
-        }
+        },
       });
       if (result?.error) {
         setError(result);
@@ -46,7 +47,7 @@ const useVerification = () => {
       error,
       data,
     }),
-    [verification, loading, error, data]
+    [verification, loading, error, data],
   );
 
   return memoizedValues;

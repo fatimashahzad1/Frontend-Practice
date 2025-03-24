@@ -1,7 +1,7 @@
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
-import { PUBLIC_ROUTES, ROUTES } from './constants/routes';
-import { TOKEN_COOKIE_NAME } from './constants';
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { PUBLIC_ROUTES, ROUTES } from "./constants/routes";
+import { TOKEN_COOKIE_NAME } from "./constants";
 
 export function middleware(request: NextRequest) {
   const currentPath = request.nextUrl.pathname;
@@ -38,6 +38,6 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    '/((?!_next|api|favicon\\.ico|.*\\.(?:png|jpg|jpeg|gif|svg|css|js|webp|woff|woff2|ttf|otf|eot)$).*)',
+    "/((?!_next|api|favicon\\.ico|.*\\.(?:png|jpg|jpeg|gif|svg|css|js|webp|woff|woff2|ttf|otf|eot)$).*)",
   ],
 };

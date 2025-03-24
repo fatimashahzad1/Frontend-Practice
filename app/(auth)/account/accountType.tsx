@@ -19,7 +19,10 @@ const AccountType = () => {
         </div>
 
         <AccountTypeCard type="individual" href={ROUTES.registerPersonal} />
-        <AccountTypeCard type="business" href={ROUTES.account} />
+        <AccountTypeCard
+          type="business"
+          href={ROUTES.registerCompanyPersonal}
+        />
       </div>
     </div>
   );

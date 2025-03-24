@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo } from "react";
 
 const CLOUD_NAME = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
 const UPLOAD_PRESET = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
@@ -24,38 +24,38 @@ export function useUploadImage() {
 
     const uploadChunk = (start: number, end: number) => {
       const formData = new FormData();
-      formData.append('file', file.slice(start, end));
-      formData.append('cloud_name', CLOUD_NAME!);
-      formData.append('upload_preset', UPLOAD_PRESET!);
+      formData.append("file", file.slice(start, end));
+      formData.append("cloud_name", CLOUD_NAME!);
+      formData.append("upload_preset", UPLOAD_PRESET!);
 
       const contentRange = `bytes ${start}-${end - 1}/${file.size}`;
       const xhr = new XMLHttpRequest();
 
       xhr.open(
-        'POST',
-        `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/auto/upload`
+        "POST",
+        `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/auto/upload`,
       );
 
       // Set headers
-      xhr.setRequestHeader('X-Unique-Upload-Id', uniqueUploadId);
-      xhr.setRequestHeader('Content-Range', contentRange);
+      xhr.setRequestHeader("X-Unique-Upload-Id", uniqueUploadId);
+      xhr.setRequestHeader("Content-Range", contentRange);
 
       // Track upload progress
       xhr.upload.onprogress = (event) => {
-        console.log('chunk size in progress==', CHUNK_SIZE);
+        console.log("chunk size in progress==", CHUNK_SIZE);
         if (event.lengthComputable) {
           const chunkProgress = Math.round(
-            ((currentChunk * CHUNK_SIZE + event.loaded) / file.size) * 100
+            ((currentChunk * CHUNK_SIZE + event.loaded) / file.size) * 100,
           );
           setProgress(chunkProgress);
-          console.log('Upload Progress:', chunkProgress, '%');
+          console.log("Upload Progress:", chunkProgress, "%");
         }
       };
 
       xhr.onload = () => {
         if (xhr.status === 200) {
           currentChunk++;
-          console.log('complete');
+          console.log("complete");
           setProgress(Math.round((currentChunk / totalChunks) * 100));
 
           if (currentChunk < totalChunks) {
@@ -68,16 +68,16 @@ export function useUploadImage() {
 
             const response = JSON.parse(xhr.responseText);
             setImage(response.secure_url);
-            console.info('File upload complete.');
+            console.info("File upload complete.");
           }
         } else {
-          console.error('Upload failed:', xhr.responseText);
+          console.error("Upload failed:", xhr.responseText);
           setUploading(false);
         }
       };
 
       xhr.onerror = (e) => {
-        console.error('Error uploading chunk:', e);
+        console.error("Error uploading chunk:", e);
         setUploading(false);
       };
 
@@ -113,6 +113,6 @@ export function useUploadImage() {
       uploadImage,
       removeImage,
       setImage,
-    ]
+    ],
   );
 }

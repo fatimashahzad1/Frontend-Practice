@@ -1,12 +1,12 @@
-'use client';
-import React, { useEffect } from 'react';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { Button } from '@/components/ui/button';
-import { Form } from '@/components/ui/form';
-import SettingsInput from '../settingsInput';
-import { SettingsGeneralFormSchema } from '@/constants/schemas';
+"use client";
+import React, { useEffect } from "react";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { Button } from "@/components/ui/button";
+import { Form } from "@/components/ui/form";
+import SettingsInput from "../settingsInput";
+import { SettingsGeneralFormSchema } from "@/constants/schemas";
 import {
   BIO_FIELD,
   DEFAULT_GENERAL_SETTINGS_VALUES,
@@ -14,17 +14,17 @@ import {
   LAST_NAME_FIELD,
   LOCATION_FIELD,
   PROFESSION_FIELD,
-} from '@/constants/form-fields';
-import { CustomTextarea } from '../custom-textarea';
-import OnlinePresenceModal from './online-presence-modal';
-import { Input } from '@/components/ui/input';
-import { Trash2 } from 'lucide-react';
-import { ONLINE_PRESENCE_PLATFORMS_ICONS } from '@/constants/settings';
-import ProfilePicture from './profile-picture';
-import Heading from '../heading';
-import useUser from '@/hooks/use-user';
-import useChangeUserDetails from '@/hooks/use-change-user-details';
-import Spinner from '@/components/icons/spinner';
+} from "@/constants/form-fields";
+import { CustomTextarea } from "../custom-textarea";
+import OnlinePresenceModal from "./online-presence-modal";
+import { Input } from "@/components/ui/input";
+import { Trash2 } from "lucide-react";
+import { ONLINE_PRESENCE_PLATFORMS_ICONS } from "@/constants/settings";
+import ProfilePicture from "./profile-picture";
+import Heading from "../heading";
+import useUser from "@/hooks/use-user";
+import useChangeUserDetails from "@/hooks/use-change-user-details";
+import Spinner from "@/components/icons/spinner";
 
 const GeneralForm = () => {
   const { data: user, isPending } = useUser();
@@ -38,12 +38,12 @@ const GeneralForm = () => {
     if (user) {
       form.reset({
         id: user?.id ?? 0,
-        pictureUrl: user?.pictureUrl ?? '',
-        firstName: user?.firstName ?? '',
-        lastName: user?.lastName ?? '',
-        location: user?.location ?? '',
-        profession: user?.profession ?? '',
-        bio: user?.bio ?? '',
+        pictureUrl: user?.pictureUrl ?? "",
+        firstName: user?.firstName ?? "",
+        lastName: user?.lastName ?? "",
+        location: user?.location ?? "",
+        profession: user?.profession ?? "",
+        bio: user?.bio ?? "",
         links: user?.links ?? [],
       });
     }
@@ -55,10 +55,10 @@ const GeneralForm = () => {
     const updatedLinks =
       dirtyFields.links && Array.isArray(links)
         ? links.map((link) => ({
-          platform: link.platform,
-          url: link.url,
-          userId: user?.id,
-        }))
+            platform: link.platform,
+            url: link.url,
+            userId: user?.id,
+          }))
         : undefined;
     console.log({ allValues, values });
 
@@ -66,7 +66,7 @@ const GeneralForm = () => {
     const dirtyValues = Object.keys(dirtyFields).reduce((acc, key) => {
       const typedKey = key as keyof typeof allValues; // Ensure type safety
 
-      if (dirtyFields[typedKey] || typedKey === 'id') {
+      if (dirtyFields[typedKey] || typedKey === "id") {
         acc[typedKey] = allValues[typedKey] as any; // Assign value correctly
       }
 
@@ -82,13 +82,13 @@ const GeneralForm = () => {
     changeUserDetails({ data: dirtyValues });
   }
 
-  const links = form.watch('links') || [];
+  const links = form.watch("links") || [];
   console.log({ links });
 
   const removeLink = (id?: number) => {
-    console.log('remove called');
+    console.log("remove called");
     const updatedLinks = links.filter((link: OnlinePresence) => link.id !== id);
-    form.setValue('links', updatedLinks, { shouldDirty: true });
+    form.setValue("links", updatedLinks, { shouldDirty: true });
   };
 
   if (isPending) {
@@ -97,10 +97,10 @@ const GeneralForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-5'>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
         <ProfilePicture />
         <div
-          className='flex flex-col md:flex-row gap-5'
+          className="flex flex-col md:flex-row gap-5"
           style={{ marginTop: 0 }}
         >
           <SettingsInput control={form.control} {...FIRST_NAME_FIELD} />
@@ -111,26 +111,26 @@ const GeneralForm = () => {
         <CustomTextarea control={form.control} {...BIO_FIELD} />
 
         {/* Online Presense */}
-        <Heading title='Online presense' />
+        <Heading title="Online presense" />
         <OnlinePresenceModal />
 
         {/* Display Selected Link */}
         {links.map((link: OnlinePresence, index) => {
           return (
-            <div key={`link-${index}`} className='relative w-full h-[74px]  '>
+            <div key={`link-${index}`} className="relative w-full h-[74px]  ">
               {ONLINE_PRESENCE_PLATFORMS_ICONS[link.platform]}
 
               {/* Input field */}
               <Input
                 value={`${link.platform}: ${link.url}`}
                 readOnly
-                className='px-[70px] h-[74px] font-medium text-lg text-[#202142] border-[#C3C3E4] focus-visible:ring-0 focus-visible:ring-offset-0 '
+                className="px-[70px] h-[74px] font-medium text-lg text-[#202142] border-[#C3C3E4] focus-visible:ring-0 focus-visible:ring-offset-0 "
               />
 
               <Trash2
-                className='absolute right-7 top-1/2 -translate-y-1/2 text-[#202142] cursor-pointer'
+                className="absolute right-7 top-1/2 -translate-y-1/2 text-[#202142] cursor-pointer"
                 size={18}
-                type='button'
+                type="button"
                 onClick={() => removeLink(link?.id)}
               />
             </div>
@@ -138,9 +138,9 @@ const GeneralForm = () => {
         })}
 
         <Button
-          variant='outline'
-          className='w-full bg-[#1565D8] h-12 text-base font-medium text-white rounded-[10px] mb-8'
-          type='submit'
+          variant="outline"
+          className="w-full bg-[#1565D8] h-12 text-base font-medium text-white rounded-[10px] mb-8"
+          type="submit"
         >
           Update Changes
         </Button>

@@ -14,22 +14,35 @@ import {
   ADDRESS_VERIFICATION_FIELD,
   FORM_FIELD_NAMES,
 } from "@/constants/form-fields";
+import { USER_TYPE } from "@/constants";
 
 const ResidencyForm = () => {
-  const { formData, setFormData } = useRegistration();
+  const { formData, setFormData, setCompanyFormData, companyFormData } =
+    useRegistration();
 
   const form = useForm<ResidencyFormData>({
     resolver: zodResolver(ResidencySchema),
-    defaultValues: formData,
+    defaultValues:
+      companyFormData.companyName !== "" ? companyFormData : formData,
   });
 
   const router = useRouter();
 
   const onSubmit = (data: ResidencyFormData) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      ...data,
-    }));
+    if (companyFormData.companyName !== "") {
+      setCompanyFormData((prevData) => ({
+        ...prevData,
+        ...data,
+        userType: USER_TYPE.COMPANY,
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        ...data,
+        userType: USER_TYPE.INDIVIDUAL,
+      }));
+      router.push(ROUTES.registerResidential);
+    }
     router.push(ROUTES.registerBank);
   };
 

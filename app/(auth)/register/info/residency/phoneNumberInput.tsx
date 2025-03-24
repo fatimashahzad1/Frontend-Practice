@@ -58,7 +58,7 @@ const CustomInput = forwardRef(
       onChange,
       ...props
     }: { value?: string; onChange?: (val: string) => void },
-    ref: LegacyRef<HTMLInputElement>
+    ref: LegacyRef<HTMLInputElement>,
   ) => (
     <input
       type="text"
@@ -69,7 +69,7 @@ const CustomInput = forwardRef(
       className="h-16 w-full focus:outline-none bg-transparent"
       placeholder="Enter phone number"
     />
-  )
+  ),
 );
 CustomInput.displayName = "CustomInput";
 

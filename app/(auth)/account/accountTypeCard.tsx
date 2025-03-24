@@ -15,7 +15,7 @@ const AccountTypeCard = ({ type, href }: AccountTypeCardProps) => {
   return (
     <Link
       href={href}
-      className=" h-[108px] max-sm:max-w-[335px] sm:w-full bg-white shadow-custom rounded-md hover:bg-hoverBlue p-7 hover:border-primaryBlue hover:border-[1px] flex flex-row justify-center items-center mb-7"
+      className=" h-[108px] max-sm:max-w-[335px] sm:w-full bg-white shadow-custom rounded-md hover:bg-hoverBlue p-7 hover:border-primary hover:border-[1px] flex flex-row justify-center items-center mb-7"
       onMouseEnter={() => {
         setHovered(true);
       }}
@@ -32,11 +32,11 @@ const AccountTypeCard = ({ type, href }: AccountTypeCardProps) => {
       >
         {type === "business" ? (
           <FiBriefcase
-            className={`w-5 h-5 ${hovered ? "text-white" : "text-primaryBlue"}`}
+            className={`w-5 h-5 ${hovered ? "text-white" : "text-primary"}`}
           />
         ) : (
           <BsPerson
-            className={`w-5 h-5 ${hovered ? "text-white" : "text-primaryBlue"}`}
+            className={`w-5 h-5 ${hovered ? "text-white" : "text-primary"}`}
           />
         )}
       </div>
@@ -52,9 +52,7 @@ const AccountTypeCard = ({ type, href }: AccountTypeCardProps) => {
         </div>
       </div>
       <div className="w-5 h-5">
-        {hovered && (
-          <TfiArrowRight className="text-primaryBlue w-full h-full" />
-        )}
+        {hovered && <TfiArrowRight className="text-primary w-full h-full" />}
       </div>
     </Link>
   );

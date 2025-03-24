@@ -7,7 +7,7 @@ const useLogin = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [data, setData] = useState<RegisterFormData | ErrorResponse | null>(
-    null
+    null,
   );
   const router = useRouter();
 

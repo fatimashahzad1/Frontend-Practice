@@ -54,7 +54,7 @@ const ForgotPasswordForm = () => {
 
           <Link
             href="/login"
-            className="text-primaryBlue font-medium text-base block text-center my-10"
+            className="text-primary font-medium text-base block text-center my-10"
           >
             Back to Login
           </Link>

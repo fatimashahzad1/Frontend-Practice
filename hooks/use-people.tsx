@@ -11,9 +11,6 @@ const fetchAllPeople = async () => {
   if (!token) throw new Error("Token is Missing");
 
   const result = await getClient("people", token);
-  if (result?.error)
-    throw new Error(result?.message || "Failed to fetch people");
-
   return result;
 };
 
@@ -24,7 +21,7 @@ const fetchPeopleWithSearch = async (searchString: string) => {
 
   const result = await getClient(
     `people/search?searchString=${searchString}`,
-    token
+    token,
   );
   if (result?.error)
     throw new Error(result?.message || "Failed to fetch people");
@@ -72,7 +69,7 @@ const usePeople = () => {
     queryKey: [ROUTE_QUERY_KEYS.GET_ALL_PEOPLE],
     queryFn: fetchAllPeople,
     staleTime: 24 * 60 * 60 * 1000,
-    retry: 2
+    throwOnError: true,
   });
 
   const {
@@ -110,8 +107,14 @@ const usePeople = () => {
   const followPersonMutation = useMutation({
     mutationFn: followPersonRequest,
     onSuccess: (result) => {
-      queryClient.invalidateQueries({ queryKey: ROUTE_QUERY_KEYS.GET_ALL_UNFOLLOWED_USERS, refetchType: "active" });
-      queryClient.invalidateQueries({ queryKey: ROUTE_QUERY_KEYS.GET_ALL_PEOPLE, refetchType: "active" });
+      queryClient.invalidateQueries({
+        queryKey: ROUTE_QUERY_KEYS.GET_ALL_UNFOLLOWED_USERS,
+        refetchType: "active",
+      });
+      queryClient.invalidateQueries({
+        queryKey: ROUTE_QUERY_KEYS.GET_ALL_PEOPLE,
+        refetchType: "active",
+      });
       toast({
         variant: "default",
         title: result.success,
@@ -131,7 +134,9 @@ const usePeople = () => {
   const unfollowPersonMutation = useMutation({
     mutationFn: unfollowPersonRequest,
     onSuccess: (result) => {
-      queryClient.invalidateQueries({ queryKey: [ROUTE_QUERY_KEYS.GET_ALL_PEOPLE] });
+      queryClient.invalidateQueries({
+        queryKey: [ROUTE_QUERY_KEYS.GET_ALL_PEOPLE],
+      });
       toast({
         variant: "default",
         title: result.success,

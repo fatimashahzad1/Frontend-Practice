@@ -1,5 +1,5 @@
 import ChatNavbar from "@/components/dashboard/chats/chat-navbar";
-import ChatSidebar from "@/components/dashboard/chats/chat-sidebar"
+import ChatSidebar from "@/components/dashboard/chats/chat-sidebar";
 
 const AuthenticationLayout = ({ children }: { children: React.ReactNode }) => {
   return (
