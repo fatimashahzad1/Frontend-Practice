@@ -37,6 +37,8 @@ export const enum FORM_FIELD_NAMES {
   COMPANY_NAME = 'companyName',
   COMPANY_WEBSITE = 'companyWebsite',
   COMPANY_SIZE = 'companySize',
+  ROLE = 'role',
+  HOURLY_RATE = 'hourlyRate',
 }
 
 export const FULLNAME_FIELD: FormField = {
@@ -149,6 +151,12 @@ export const DEFAULT_ONLINE_PRESENCE_VALUES = {
   url: '',
 };
 
+export const DEFAULT_CREATE_JOB_VALUES = {
+  role: '',
+  location: '',
+  hourlyRate: 0,
+};
+
 export const FIRST_NAME_FIELD: FormField = {
   name: FORM_FIELD_NAMES.FIRST_NAME,
   label: 'First Name*',
@@ -257,4 +265,26 @@ export const COMPANY_SIZE_FIELD: FormField = {
   label: 'Company Size',
   type: 'number',
   placeholder: 'Enter company size',
+};
+
+export const ROLE_SIZE_FIELD: FormField = {
+  name: FORM_FIELD_NAMES.ROLE,
+  label: 'Role',
+  placeholder: 'Enter the job role',
+  type: 'text',
+  maxLength: 30,
+};
+
+export const COMPANY_LOCATION_FIELD: FormField = {
+  type: 'text',
+  name: FORM_FIELD_NAMES.LOCATION,
+  label: 'Location',
+  placeholder: 'Enter the job location',
+};
+
+export const HOURLY_RATE_FIELD: FormField = {
+  name: FORM_FIELD_NAMES.HOURLY_RATE,
+  label: 'Hourly Rate',
+  placeholder: 'Enter the hourly rate',
+  type: 'number',
 };

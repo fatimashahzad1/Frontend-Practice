@@ -68,7 +68,8 @@ const WriteArticleModal = () => {
   return (
     <>
       <Button
-        className="text-[#1565D8] gap-[10px] p-0"
+        className="text-primary gap-[10px] p-0"
+        variant="link"
         type="button"
         onClick={() => setOpen(true)}
       >

@@ -60,7 +60,7 @@ const SideCollectionItem = ({
           </div>
         </div>
       </div>
-      <Button variant="default" size="icon" className="" onClick={iconHandle}>
+      <Button variant="link" size="icon" onClick={iconHandle}>
         {Icon}
       </Button>
     </div>

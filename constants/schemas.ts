@@ -271,3 +271,15 @@ export const CompanyRegisterSchema = z.object({
     invalid_type_error: 'You must accept terms and conditions.',
   }),
 });
+
+export const CreateJobSchema = z.object({
+  role: z.string().trim().min(3, 'Role must be at least 3 characters long'),
+  location: z
+    .string()
+    .trim()
+    .min(3, 'Location must be at least 3 characters long'),
+  hourlyRate: z
+    .number({ message: 'Hourly rate is required' })
+    .min(1, 'Hourly rate must be at least $1')
+    .max(1000, 'Hourly rate cannot exceed $1000'),
+});

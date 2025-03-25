@@ -4,14 +4,13 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import DashboardNavbarLogo from '../icons/dashboard-navbar-logo';
 import MenuIcon from '../icons/menu-icon';
-import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { ROUTES } from '@/constants/routes';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import NotificationPopover from './notification-popover';
+import AvatarDropdown from '../AvatarDropdown';
 
 export default function Navbar() {
-  const pathname = usePathname();
-  const router = useRouter();
+  const pathname = usePathname() ?? '';
 
   const getName = () => {
     const name = pathname.split('/')[1];
@@ -30,60 +29,71 @@ export default function Navbar() {
           </Button>
         </SheetTrigger>
         <SheetContent side="left">
-          <Link href="#" className="mr-6 hidden lg:flex" prefetch={false}>
-            <DashboardNavbarLogo />
-            <span className="sr-only">Acme Inc</span>
-          </Link>
-          <div className="grid gap-2 py-6">
-            <NavbarLink
-              href={ROUTES.feed}
-              title="Feed"
-              prefetch={false}
-              isMobile={true}
-              pathname={pathname}
-            />
-            <NavbarLink
-              href={ROUTES.chats}
-              title="Chats"
-              prefetch={false}
-              isMobile={true}
-              pathname={pathname}
-            />
-            <NavbarLink
-              href={ROUTES.jobs}
-              title="Jobs"
-              prefetch={false}
-              isMobile={true}
-              pathname={pathname}
-            />
-            <NavbarLink
-              href={ROUTES.events}
-              title="Events"
-              prefetch={false}
-              isMobile={true}
-              pathname={pathname}
-            />
-            <NavbarLink
-              href={ROUTES.articles}
-              title="Articles"
-              prefetch={false}
-              isMobile={true}
-              pathname={pathname}
-            />
-            <NavbarLink
-              href={ROUTES.people}
-              title="People"
-              prefetch={false}
-              isMobile={true}
-              pathname={pathname}
-            />
-            <NavbarLink
-              href={ROUTES.feed}
-              title="Notifications"
-              prefetch={false}
-              isMobile={true}
-              pathname={pathname}
-            />
+          <div className="flex flex-col h-full justify-between">
+            <>
+              <Link href="#" className="mr-6 hidden lg:flex" prefetch={false}>
+                <DashboardNavbarLogo />
+                <span className="sr-only">Acme Inc</span>
+              </Link>
+              <div className="grid gap-2 py-6">
+                <NavbarLink
+                  href={ROUTES.feed}
+                  title="Feed"
+                  prefetch={false}
+                  isMobile={true}
+                  pathname={pathname}
+                />
+                <NavbarLink
+                  href={ROUTES.chats}
+                  title="Chats"
+                  prefetch={false}
+                  isMobile={true}
+                  pathname={pathname}
+                />
+                <NavbarLink
+                  href={ROUTES.jobs}
+                  title="Jobs"
+                  prefetch={false}
+                  isMobile={true}
+                  pathname={pathname}
+                />
+                <NavbarLink
+                  href={ROUTES.events}
+                  title="Events"
+                  prefetch={false}
+                  isMobile={true}
+                  pathname={pathname}
+                />
+                <NavbarLink
+                  href={ROUTES.articles}
+                  title="Articles"
+                  prefetch={false}
+                  isMobile={true}
+                  pathname={pathname}
+                />
+                <NavbarLink
+                  href={ROUTES.people}
+                  title="People"
+                  prefetch={false}
+                  isMobile={true}
+                  pathname={pathname}
+                />
+                <NavbarLink
+                  href={ROUTES.feed}
+                  title="Notifications"
+                  prefetch={false}
+                  isMobile={true}
+                  pathname={pathname}
+                />
+              </div>
+            </>
+            <Button
+              className="text-primary cursor-pointer p-0 text-lg font-semibold"
+              type="button"
+              variant="link"
+            >
+              Logout
+            </Button>
           </div>
         </SheetContent>
       </Sheet>
@@ -133,18 +143,7 @@ export default function Navbar() {
         <NotificationPopover />
       </nav>
 
-      <Avatar
-        className="rounded-lg lg:ml-8 hover:cursor-pointer"
-        onClick={() => {
-          router.push(ROUTES.settingsGeneral);
-        }}
-      >
-        <AvatarImage
-          src="https://originui.com/avatar-80-07.jpg"
-          alt="Kelly King"
-        />
-        <AvatarFallback>U</AvatarFallback>
-      </Avatar>
+      <AvatarDropdown />
     </header>
   );
 }

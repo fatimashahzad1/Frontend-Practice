@@ -29,6 +29,7 @@ import useCreatePost from '@/hooks/use-create-post';
 import WriteArticleModal from './write-article-modal';
 import EventModal from './event-modal';
 import useUser from '@/hooks/use-user';
+import CreateJobModal from './create-job-modal';
 
 export function PostCard() {
   const { image, uploading, progress, uploadImage, removeImage } =
@@ -114,7 +115,7 @@ export function PostCard() {
                   />
                   <Button
                     className={cn(
-                      'text-[#1565D8] gap-[10px] p-0 cursor-pointer',
+                      'text-primary gap-[10px] p-0 cursor-pointer bg-white',
                       uploading && 'opacity-50 cursor-not-allowed'
                     )}
                     type="button"
@@ -125,6 +126,7 @@ export function PostCard() {
                 </label>
                 <EventModal />
                 <WriteArticleModal />
+                <CreateJobModal />
               </div>
             </div>
           </div>

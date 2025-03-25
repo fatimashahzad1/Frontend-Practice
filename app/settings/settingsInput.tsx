@@ -10,7 +10,6 @@ import { Input } from '@/components/ui/input';
 const SettingsInput = ({
   control,
   label,
-
   name,
   maxLength = 20,
   placeholder = '',
@@ -32,6 +31,19 @@ const SettingsInput = ({
               type={type}
               maxLength={maxLength}
               className="w-full ml-0 border-[1px] setting-input px-8 py-7"
+              value={
+                field.value === undefined || field.value === null
+                  ? ''
+                  : field.value
+              }
+              onChange={(e) => {
+                if (type === 'number') {
+                  const value = e.target.value;
+                  field.onChange(value === '' ? '' : parseFloat(value)); // Convert to number
+                } else {
+                  field.onChange(e.target.value);
+                }
+              }}
             />
           </FormControl>
           <FormMessage />

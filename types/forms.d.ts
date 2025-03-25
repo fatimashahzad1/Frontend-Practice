@@ -67,3 +67,9 @@ interface ChangeUserDetailsFormData {
   pictureUrl?: string;
   email?: string;
 }
+
+interface CreateJobFormData {
+  location: string;
+  role: string;
+  hourlyRate: number;
+}

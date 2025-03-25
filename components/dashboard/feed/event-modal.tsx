@@ -66,7 +66,7 @@ const EventModal = () => {
   return (
     <>
       <Button
-        className="text-[#1565D8] gap-[10px] p-0"
+        className="text-primary bg-white gap-[10px] p-0"
         type="button"
         onClick={() => setOpen(true)}
       >

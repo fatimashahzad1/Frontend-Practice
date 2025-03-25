@@ -56,6 +56,7 @@ export function ArticleCard({
               <Button
                 className="text-[#1565D8] gap-[10px] p-0 cursor-pointer"
                 type="button"
+                variant="link"
               >
                 <Trash2 size={20} />
               </Button>
