@@ -63,6 +63,20 @@ interface Post {
   eventTime?: string | null;
 }
 
+interface Job {
+  id: number;
+  role: string;
+  hourlyRate: string;
+  location: string;
+  createdAt: string;
+  company: {
+    id: number;
+    name: string;
+    pictureUrl: string;
+    companyName: string;
+  };
+}
+
 interface Followers {
   id: number;
   name: string;

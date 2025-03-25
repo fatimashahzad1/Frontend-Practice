@@ -7,14 +7,18 @@ import { usePosts } from '@/hooks/use-posts';
 import React from 'react';
 
 const Feed = () => {
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
-    usePosts(POST_TYPE.FEED);
-  // bg-[#EEF4FD] bg-red-500
+  const {
+    data: posts,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    isLoading,
+  } = usePosts(POST_TYPE.FEED);
   return (
     <div className="grid grid-cols-12 bg-background">
       <LeftContainer type={DASHBOARD_SIMILAR_PAGES.FEED} />
       <MainContainer
-        posts={data}
+        posts={posts}
         fetchNextPage={fetchNextPage}
         hasNextPage={hasNextPage}
         isFetchingNextPage={isFetchingNextPage}

@@ -41,4 +41,5 @@ export const enum ROUTE_QUERY_KEYS {
   USER_DETAILS = 'user-detail',
   GET_ALL_UNFOLLOWED_USERS = 'unfollowed-users',
   GET_ALL_PEOPLE = 'people',
+  GET_ALL_JOBS = 'jobs',
 }
