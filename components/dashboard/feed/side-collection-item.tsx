@@ -36,7 +36,7 @@ const SideCollectionItem = ({
             style={{ borderColor: '#5F9CF3' }}
           />
           <AvatarFallback className="w-full text-center">
-            {text1.charAt(0).toUpperCase()}
+            {text1?.charAt(0).toUpperCase()}
           </AvatarFallback>
         </Avatar>
         <div className="w-full min-w=[49px] overflow-hidden">

@@ -1,11 +1,12 @@
 'use client';
+import { ROUTE_QUERY_KEYS } from "@/constants/routes";
 import { getToken } from '@/lib/get-token';
 import { getClient } from '@/utils/client';
 import { useQuery } from '@tanstack/react-query';
 
 const useGetAllFollowedUsers = () => {
   return useQuery<Followers>({
-    queryKey: ['followed-users'], // Include pagination params in query key
+    queryKey: [ROUTE_QUERY_KEYS.GET_ALL_FOLLOWED_USERS], // Include pagination params in query key
     queryFn: () => getFollowedUsers(),
     staleTime: 24 * 60 * 60 * 1000,
     throwOnError: true,

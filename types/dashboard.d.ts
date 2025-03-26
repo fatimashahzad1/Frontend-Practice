@@ -86,9 +86,21 @@ interface Followers {
     name: string;
     email: string;
     pictureUrl: string;
+    userType: string;
   }[];
 }
 
+interface Company {
+  id: number;
+  companyName: string;
+  companySize: number;
+  companyWebsite: string;
+  email: string;
+  location: string;
+  name: string;
+  pictureUrl: string;
+  country: string;
+}
 interface UnFollowedUser {
   address: string;
   bio: string;

@@ -33,7 +33,7 @@ class ErrorBoundary extends Component<Props, State> {
             <div className="flex justify-center mb-6">
               <AlertTriangle className="h-16 w-16 text-[#1e62e5]" />
             </div>
-            <h1 className="text-2xl font-bold text-gray-900 mb-4">
+            <h1 className="text-2xl font-bold text-gray-900 mb-4 overflow-hidden text-ellipsis text-nowrap">
               {this.state.error?.message}
             </h1>
             <p className="text-gray-600 mb-6">
