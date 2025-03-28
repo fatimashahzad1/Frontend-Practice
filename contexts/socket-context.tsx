@@ -26,13 +26,16 @@ interface SocketContextType {
   acceptCall: () => void;
   rejectCall: () => void;
   leaveCall: () => void;
-  remoteUser: IAgoraRTCRemoteUser | null;
-  setRemoteUser: Dispatch<SetStateAction<IAgoraRTCRemoteUser | null>>;
+  remoteTracks: IAgoraRTCRemoteUser | null;
+  setRemoteTracks: Dispatch<SetStateAction<IAgoraRTCRemoteUser | null>>;
   agoraClient: IAgoraRTCClient | null;
   setAgoraClient: Dispatch<SetStateAction<IAgoraRTCClient | null>>;
   remoteUsername: string;
   setRemoteUsername: Dispatch<SetStateAction<string>>;
   localUserName: string;
+  setCallType: Dispatch<SetStateAction<'AUDIO' | 'VIDEO' | null>>;
+  callType: 'AUDIO' | 'VIDEO' | null;
+  localTracks: any;
 }
 
 const SocketContext = createContext<SocketContextType | undefined>(undefined);
@@ -46,13 +49,15 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({
     'connected' | 'disconnected' | 'error'
   >('disconnected');
   const [incomingCall, setIncomingCall] = useState<IncomingCall | null>(null);
+  const [callType, setCallType] = useState<'AUDIO' | 'VIDEO' | null>(null);
 
   const [agoraClient, setAgoraClient] = useState<IAgoraRTCClient | null>(null);
-  const [remoteUser, setRemoteUser] = useState<null | IAgoraRTCRemoteUser>(
+  const [remoteTracks, setRemoteTracks] = useState<null | IAgoraRTCRemoteUser>(
     null
   );
   const [localUserName, setLocalUserName] = useState('');
   const [remoteUsername, setRemoteUsername] = useState('');
+  const [localTracks, setLocalTracks] = useState<any>();
 
   useEffect(() => {
     const socketConnection = async () => {
@@ -96,6 +101,7 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({
       // Incoming call event
       socketInstance?.on('incomingCall', (messageData) => {
         setIncomingCall(messageData);
+        setCallType(messageData.type);
         setRemoteUsername(messageData.callerName);
       });
 
@@ -108,9 +114,26 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({
           receiverName,
           channelName,
           token,
+          type,
         }) => {
           joinCall(token, channelName, receiverId);
           setLocalUserName(receiverName);
+          setCallType(type);
+        }
+      );
+
+      socketInstance?.on(
+        'callRejected',
+        async ({ receiverId, channelName, message }) => {
+          // await agoraClient?.unpublish();
+          // await agoraClient?.unsubscribe(agoraClient?.remoteUsers[0], 'audio');
+          // await agoraClient?.leave();
+          // socketInstance?.emit('leaveCall', {
+          //   channelName: agoraClient?.channelName,
+          // });
+          leaveCall();
+
+          console.log('Call rejected:', message);
         }
       );
 
@@ -139,6 +162,7 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({
       setAgoraClient(client);
 
       const localTracks = await AgoraRTC.createMicrophoneAndCameraTracks();
+      setLocalTracks(localTracks);
 
       await client?.publish(localTracks);
     },
@@ -146,30 +170,55 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({
   );
 
   const acceptCall = useCallback(() => {
-    if (socket && incomingCall) {
+    if (socket && incomingCall && callType) {
       socket.emit('acceptCall', {
         callerId: incomingCall.callerId,
         callerName: incomingCall.callerName,
         receiverId: incomingCall.receiverId,
         receiverName: incomingCall.receiverName,
+        type: callType,
+      });
+      setIncomingCall(null);
+    }
+  }, [socket, incomingCall, callType]);
+
+  const rejectCall = useCallback(() => {
+    if (socket && incomingCall) {
+      socket.emit('rejectCall', {
+        callerId: incomingCall.callerId,
+        receiverId: incomingCall.receiverId,
+        channelName: incomingCall.channelName,
+        type: incomingCall.type,
       });
       setIncomingCall(null);
     }
   }, [socket, incomingCall]);
 
-  const rejectCall = useCallback(() => {
-    if (socket && incomingCall) {
-      socket.emit('rejectCall', { callerId: incomingCall.callerId });
-      setIncomingCall(null);
-    }
-  }, [socket, incomingCall]);
-
   const leaveCall = useCallback(async () => {
-    await agoraClient?.unpublish();
-    await agoraClient?.leave();
-    setRemoteUser(null);
-    setAgoraClient(null);
-  }, [agoraClient]);
+    try {
+      if (agoraClient) {
+        console.log('Leaving call...');
+        // Unpublish local tracks
+        await agoraClient.unpublish();
+        // Stop and close local tracks
+        localTracks?.forEach((track: any) => {
+          track.stop();
+          track.close();
+        });
+        // Leave the Agora channel
+        await agoraClient.leave();
+      }
+      // Reset state
+      setRemoteTracks(null);
+      setAgoraClient(null);
+      setLocalTracks(null);
+      setCallType(null);
+      setRemoteUsername('');
+    } catch (error) {
+      console.error('Error leaving call:', error);
+    }
+  }, [agoraClient, localTracks]);
+
   const value = useMemo(
     () => ({
       socket,
@@ -179,14 +228,17 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({
       incomingCall,
       acceptCall,
       rejectCall,
-      remoteUser,
-      setRemoteUser,
+      remoteTracks,
+      setRemoteTracks,
       leaveCall,
       agoraClient,
       localUserName,
       remoteUsername,
       setAgoraClient,
       setRemoteUsername,
+      callType,
+      setCallType,
+      localTracks,
     }),
     [
       socket,
@@ -196,14 +248,17 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({
       incomingCall,
       acceptCall,
       rejectCall,
-      remoteUser,
-      setRemoteUser,
+      remoteTracks,
+      setRemoteTracks,
       leaveCall,
       agoraClient,
       localUserName,
       remoteUsername,
       setAgoraClient,
       setRemoteUsername,
+      callType,
+      setCallType,
+      localTracks,
     ]
   );
 

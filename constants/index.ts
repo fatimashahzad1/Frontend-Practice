@@ -1,3 +1,4 @@
+import { Video } from 'lucide-react';
 import { OpUnitType, QUnitType } from 'dayjs';
 
 export const TOKEN_COOKIE_NAME = 'access_token';
@@ -64,3 +65,6 @@ export const FEED_DAY_UNITS: {
   { unit: 'hour', threshold: 3600, suffix: 'h' },
   { unit: 'minute', threshold: 60, suffix: 'm' },
 ];
+
+export const VIDEO = 'VIDEO';
+export const AUDIO = 'AUDIO';

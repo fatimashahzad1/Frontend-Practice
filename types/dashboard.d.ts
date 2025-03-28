@@ -87,6 +87,7 @@ interface Followers {
     email: string;
     pictureUrl: string;
     userType: string;
+    companyName: string;
   }[];
 }
 
@@ -122,6 +123,7 @@ interface IncomingCall {
   receiverId: number;
   channelName: string;
   receiverName: string;
+  type: 'AUDIO' | 'VIDEO';
 }
 
 interface Call {
@@ -132,6 +134,7 @@ interface Call {
   status: string;
   callSend: boolean;
   callReceived: boolean;
+  callType: 'AUDIO' | 'VIDEO';
 }
 
 interface CallUser {

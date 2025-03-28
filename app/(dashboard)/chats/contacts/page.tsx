@@ -3,6 +3,7 @@ import SingleVideoCall from '@/components/dashboard/chats/single-video-call';
 import Spinner from '@/components/icons/spinner';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { AUDIO, VIDEO } from '@/constants';
 import { useChatSelection } from '@/contexts/chat-selection-context';
 import { useSocketContext } from '@/contexts/socket-context';
 import useGetAllFollowedUsers from '@/hooks/use-get-all-followed-users';
@@ -13,7 +14,7 @@ import React from 'react';
 
 const ChatContacts = () => {
   const { data, isLoading } = useGetAllFollowedUsers();
-  const { socket, setRemoteUsername } = useSocketContext();
+  const { socket, setRemoteUsername, setCallType } = useSocketContext();
   const { createChat } = useChatSelection();
   if (isLoading) {
     return <Spinner />;
@@ -40,7 +41,9 @@ const ChatContacts = () => {
             </Avatar>
             <div className="flex-1">
               <div className="flex justify-between w-full">
-                <h3 className="text-sm font-bold text-black">{user.name}</h3>
+                <h3 className="text-sm font-bold text-black">
+                  {user.name ?? user.companyName}
+                </h3>
                 <div className="flex flex-row gap-8">
                   <Button
                     variant="outline"
@@ -54,9 +57,6 @@ const ChatContacts = () => {
                   >
                     <MessageCircle height={20} />
                   </Button>
-                  <Button variant="outline" size="icon" className="h-7">
-                    <Phone height={20} />
-                  </Button>
                   <Button
                     variant="outline"
                     size="icon"
@@ -68,6 +68,26 @@ const ChatContacts = () => {
                         callerName: data.name,
                         receiverId: user.id,
                         receiverName: user.name,
+                        type: AUDIO,
+                      });
+                      setCallType(AUDIO);
+                    }}
+                  >
+                    <Phone height={20} />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="h-7"
+                    onClick={() => {
+                      setRemoteUsername(user.name);
+                      setCallType(VIDEO);
+                      socket?.emit('callUser', {
+                        callerId: data.id,
+                        callerName: data.name,
+                        receiverId: user.id,
+                        receiverName: user.name,
+                        type: VIDEO,
                       });
                     }}
                   >
